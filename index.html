@@ -1,0 +1,2471 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#02161C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Zayed Dental Clinic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@400;700;900&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  /* ━━ DARK: تيل عميق — مش أسود ومش بحري ━━ */
+  --bg1:#051A20;--bg2:#082636;--bg3:#0D3344;
+
+  --p1:#58E8F4;--p2:#28C6D4;--p3:#16AEBD;--p4:#0D8A9B;--p5:#085E6A;--p6:#053D48;
+
+  --brand-grad:linear-gradient(135deg,#58E8F4 0%,#28C6D4 42%,#0D8A9B 100%);
+  --btn-grad:linear-gradient(145deg,#20C4D2 0%,#0C829A 50%,#065060 100%);
+  --hero-grad:linear-gradient(160deg,rgba(88,232,244,.16) 0%,rgba(13,138,155,.07) 50%,transparent 100%);
+
+  --red:#FF6262;--red-l:rgba(255,98,98,.12);--red-border:rgba(255,98,98,.34);
+  --amber:#F5C842;--amber-soft:rgba(245,200,66,.13);
+  --green:#2DD49E;
+
+  --card:rgba(255,255,255,.058);
+  --card-hi:rgba(255,255,255,.100);
+  --bg:rgba(255,255,255,.034);
+  --border:rgba(88,232,244,.11);
+  --border-hi:rgba(88,232,244,.24);
+  --glass-strong:rgba(255,255,255,.11);
+  --header-bg:rgba(88,232,244,.050);
+  --field-bg:rgba(0,0,0,.22);
+  --pressed:rgba(88,232,244,.11);
+  --chip-on:rgba(40,198,212,.20);
+  --chip-off:rgba(255,255,255,.058);
+  --accent-soft:rgba(40,198,212,.10);
+
+  --text:#EAF8FA;
+  --muted:rgba(178,234,242,.64);
+  --text-soft:rgba(140,216,228,.42);
+  --clock-1:#FFFFFF;--clock-2:#82ECF5;
+
+  --radius:22px;--radius-sm:15px;--radius-xs:10px;
+
+  --shadow-sm:0 1px 4px rgba(0,0,0,.30),0 4px 18px rgba(0,0,0,.26);
+  --shadow:0 4px 14px rgba(0,0,0,.34),0 18px 42px rgba(0,0,0,.36);
+  --glow-teal:0 0 26px rgba(40,198,212,.34),0 8px 22px rgba(0,0,0,.24);
+  --glow-red:0 8px 26px rgba(255,98,98,.28);
+
+  --nav-bg:rgba(4,18,24,.92);
+  --nav-text:rgba(178,234,242,.48);
+  --link:var(--amber);
+  --glow:rgba(255,255,255,0);
+  --accent-line:linear-gradient(90deg,transparent,rgba(88,232,244,.44),transparent);
+}
+
+/* ━━ LIGHT: سماوي متوسط — حيوي ونظيف ━━ */
+[data-theme="light"]{
+  --bg1:#064250;--bg2:#0D6B7A;--bg3:#2EA3B3;
+  --p1:#2EA3B3;--p2:#2EA3B3;--p3:#3ECDD6;--p4:#0D6B7A;--p5:#064250;--p6:#064250;
+  --brand-grad:linear-gradient(135deg,#3ECDD6 0%,#2EA3B3 50%,#0D6B7A 100%);
+  --btn-grad:linear-gradient(140deg,#2EA3B3 0%,#0D6B7A 100%);
+  --red:#E5484D;--red-l:rgba(229,72,77,.14);--red-border:rgba(229,72,77,.50);
+  --amber:#FFD166;--amber-soft:rgba(255,209,102,.20);
+  --green:#5EE8B0;
+  --card:rgba(255,255,255,.10);
+  --card-hi:rgba(255,255,255,.16);
+  --bg:rgba(255,255,255,.07);
+  --border:rgba(255,255,255,.18);
+  --border-hi:rgba(255,255,255,.28);
+  --glass-strong:rgba(255,255,255,.20);
+  --header-bg:rgba(255,255,255,.10);
+  --field-bg:rgba(255,255,255,.08);
+  --pressed:rgba(255,255,255,.15);
+  --chip-on:rgba(46,163,179,.30);
+  --chip-off:rgba(255,255,255,.12);
+  --accent-soft:rgba(46,163,179,.15);
+  --text:#FFFFFF;
+  --muted:rgba(255,255,255,.85);
+  --text-soft:rgba(255,255,255,.62);
+  --clock-1:#FFFFFF;--clock-2:#9EE9F0;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.18),0 4px 14px rgba(0,0,0,.16);
+  --shadow:0 2px 20px rgba(0,0,0,.18);
+  --glow-teal:0 10px 32px rgba(46,163,179,.42);
+  --glow-red:0 10px 32px rgba(229,72,77,.32);
+  --nav-bg:rgba(13,107,122,.94);
+  --nav-text:rgba(255,255,255,.92);
+  --link:var(--amber);
+  --glow:rgba(255,255,255,0);
+}
+
+html{height:100%;background:var(--bg1)}
+
+body{
+  min-height:100%;font-family:'Cairo',sans-serif;color:var(--text);
+  background:
+    radial-gradient(ellipse 90% 42% at 50% -6%, rgba(190,240,248,.13), transparent 55%),
+    radial-gradient(ellipse 120% 55% at 50% -4%, rgba(40,198,212,.32), transparent 54%),
+    radial-gradient(ellipse 80% 50% at 110% 112%, rgba(13,138,155,.18), transparent 52%),
+    radial-gradient(ellipse 60% 44% at -8% 65%, rgba(8,56,72,.50), transparent 50%),
+    linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
+  background-attachment:fixed;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+
+[data-theme="light"] body{
+  background:
+    radial-gradient(ellipse 120% 55% at 50% -4%, rgba(232,249,252,.32), transparent 54%),
+    radial-gradient(ellipse 75% 48% at 110% 110%, rgba(58,190,205,.22), transparent 52%),
+    radial-gradient(ellipse 58% 40% at -8% 62%, rgba(15,106,120,.22), transparent 50%),
+    linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 52%,var(--bg3) 100%);
+}
+button{font-family:'Cairo',sans-serif}
+input,textarea,select{font-family:'Cairo',sans-serif}
+.page{display:none;min-height:100vh;flex-direction:column;position:relative;z-index:1;width:100%;max-width:520px;margin:0 auto;animation:pageIn .34s cubic-bezier(.22,1,.36,1)}
+.page.show{display:flex}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px) scale(.994)}to{opacity:1;transform:none}}
+.background{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.blob{position:absolute;border-radius:50%;will-change:transform}
+.blob1{
+  width:520px;height:520px;top:-170px;right:-150px;
+  background:radial-gradient(circle,rgba(40,198,212,.26) 0%,rgba(13,138,155,.08) 60%,transparent 100%);
+  filter:blur(65px);
+  animation:float1 13s ease-in-out infinite;
+}
+.blob2{
+  width:440px;height:440px;bottom:-140px;left:-110px;
+  background:radial-gradient(circle,rgba(5,30,44,.70) 0%,rgba(8,38,54,.35) 55%,transparent 100%);
+  filter:blur(72px);
+  animation:float2 16s ease-in-out infinite;
+}
+.blob3{
+  width:300px;height:300px;top:38%;right:-70px;
+  background:radial-gradient(circle,rgba(88,232,244,.13) 0%,transparent 70%);
+  filter:blur(52px);
+  animation:float3 19s ease-in-out infinite;
+}
+.blob4{
+  width:220px;height:220px;top:62%;left:28%;
+  background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);
+  filter:blur(44px);
+  animation:float1 22s ease-in-out infinite reverse;
+  display:none;
+}
+[data-theme="light"] .blob1{
+  background:radial-gradient(circle,rgba(232,249,252,.40) 0%,rgba(58,190,205,.14) 55%,transparent 100%);
+}
+[data-theme="light"] .blob2{
+  background:radial-gradient(circle,rgba(15,90,108,.45) 0%,rgba(20,110,128,.18) 55%,transparent 100%);
+}
+[data-theme="light"] .blob3{
+  background:radial-gradient(circle,rgba(232,249,252,.28) 0%,transparent 70%);
+}
+@keyframes float1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-28px,22px) scale(1.06)}66%{transform:translate(18px,-14px) scale(.96)}}
+@keyframes float2{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(36px,-28px) scale(1.08)}80%{transform:translate(-18px,14px) scale(.97)}}
+@keyframes float3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-22px,30px) scale(1.12)}}
+.theme-toggle{width:38px;height:38px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text);background:var(--field-bg);border:1px solid var(--border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .28s cubic-bezier(.34,1.4,.64,1),background .25s,box-shadow .25s;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.theme-toggle:hover{border-color:var(--border-hi);box-shadow:0 0 14px rgba(48,201,213,.22),inset 0 1px 0 rgba(255,255,255,.08)}
+.theme-toggle:active{transform:scale(.86) rotate(-18deg);background:var(--glass-strong)}
+.gate-theme-toggle{position:absolute;top:18px;left:18px;width:44px;height:44px;font-size:18px}
+#loading-screen{
+  position:fixed;inset:0;z-index:9999;color:var(--text);
+  background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(48,201,213,.14),transparent 55%),linear-gradient(180deg,var(--bg1),var(--bg2));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+[data-theme="light"] #loading-screen{
+  background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(232,249,252,.30),transparent 55%),linear-gradient(180deg,var(--bg1),var(--bg2));
+}
+[data-theme="light"] .modal-handle{
+  background:linear-gradient(90deg,transparent,rgba(232,249,252,.45),transparent);
+}
+#load-icon{
+  font-size:58px;margin-bottom:28px;
+  animation:logoFloat 3.6s ease-in-out infinite;
+  filter:drop-shadow(0 0 22px rgba(48,201,213,.5)) drop-shadow(0 14px 30px rgba(0,0,0,.4));
+}
+#load-icon img{display:block;margin:0 auto;max-width:50vw;max-height:30vh;width:auto;height:auto;border-radius:20px}
+.spinner{
+  width:48px;height:48px;border-radius:50%;
+  border:2.5px solid rgba(48,201,213,.12);
+  border-top-color:var(--p1);border-right-color:var(--p2);
+  animation:spin 1s cubic-bezier(.55,.15,.45,.85) infinite;
+  margin-bottom:20px;
+  box-shadow:0 0 0 8px rgba(48,201,213,.04),0 0 28px rgba(48,201,213,.28);
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-txt{font-size:14px;color:var(--muted);letter-spacing:.8px;font-weight:600}
+#loading-screen.hide{opacity:0;pointer-events:none;transition:opacity .5s ease}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#gate{background:transparent;align-items:center;justify-content:center;padding:36px 22px}
+.gate-logo{
+  font-size:72px;margin-bottom:14px;
+  animation:logoFloat 4.2s ease-in-out infinite;
+  filter:drop-shadow(0 0 24px rgba(48,201,213,.55)) drop-shadow(0 16px 32px rgba(0,0,0,.45));
+}
+.gate-logo img{display:block;margin:0 auto;max-width:80vw;max-height:38vh;width:auto;height:auto;border-radius:22px}
+
+/* ── Decorative ring behind logo ── */
+.gate-logo-wrap{position:relative;display:inline-flex;align-items:center;justify-content:center;margin-bottom:0}
+.gate-logo-wrap::before{
+  content:'';position:absolute;inset:-18px;border-radius:50%;
+  background:radial-gradient(circle,rgba(48,201,213,.12) 0%,transparent 65%);
+  filter:blur(10px);
+}
+.gate-logo-wrap::after{
+  content:'';position:absolute;inset:-28px;border-radius:50%;
+  border:1px solid rgba(98,237,245,.10);
+}
+
+.gate-clinic{
+  font-size:24px;font-weight:400;margin-bottom:5px;
+  font-family:'Cinzel Decorative','Cairo',sans-serif;
+  letter-spacing:.6px;text-align:center;
+  background:linear-gradient(135deg,#FFFFFF 0%,#EDF8FA 45%,#BDE7F0 70%,#FFFFFF 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:none;
+  filter:drop-shadow(0 0 14px rgba(140,225,240,.40));
+}
+.gate-sub{
+  font-size:12px;font-weight:400;color:var(--text-soft);margin-bottom:38px;
+  font-family:'Cinzel Decorative','Cairo',sans-serif;
+  text-align:center;letter-spacing:.4px;
+}
+/* ── Thin decorative line under title ── */
+.gate-divider{
+  width:80px;height:1px;margin:0 auto 34px;
+  background:var(--accent-line);
+}
+
+.gate-cards{width:100%;max-width:390px;display:flex;flex-direction:column;gap:12px}
+
+.gate-card{
+  position:relative;
+  background:linear-gradient(140deg,rgba(98,237,245,.07) 0%,rgba(255,255,255,.03) 100%);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:18px 20px;
+  display:flex;align-items:center;gap:16px;
+  cursor:pointer;color:var(--text);
+  transition:transform .28s cubic-bezier(.34,1.4,.64,1),border-color .25s,box-shadow .30s;
+  box-shadow:0 2px 12px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.06);
+  overflow:hidden;
+}
+.gate-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(140deg,rgba(98,237,245,.04),transparent 55%);
+  pointer-events:none;
+}
+[data-theme="light"] .gate-card{
+  background:linear-gradient(140deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.55) 100%);
+  box-shadow:0 4px 18px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.90);
+  border-color:rgba(255,255,255,.28);
+}
+[data-theme="light"] .gate-clinic{
+  text-shadow:none;
+}
+[data-theme="light"] .gate-logo{
+  filter:drop-shadow(0 0 22px rgba(232,249,252,.60)) drop-shadow(0 12px 28px rgba(0,0,0,.22));
+}
+.gate-card:active{
+  transform:scale(.968);
+  border-color:rgba(48,201,213,.50);
+  box-shadow:0 0 0 1px rgba(48,201,213,.20),0 14px 38px rgba(0,0,0,.32),var(--glow-teal);
+}
+.gate-card-icon{
+  font-size:32px;width:58px;height:58px;border-radius:16px;
+  background:linear-gradient(145deg,rgba(48,201,213,.22),rgba(15,138,157,.08));
+  border:1px solid rgba(98,237,245,.22);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 4px 16px rgba(48,201,213,.14);
+}
+.gate-card-info{flex:1;min-width:0}
+.gate-card-title{font-size:18px;font-weight:900;letter-spacing:.2px}
+.gate-card-sub{font-size:13px;color:var(--muted);margin-top:4px;font-weight:600}
+.gate-card-arrow{font-size:22px;opacity:.45;color:var(--p2)}
+.gate-pin-area{display:none;width:100%;max-width:390px;margin-top:14px;flex-direction:column;gap:11px;animation:pageIn .3s ease}
+.gate-pin-area.open{display:flex}
+.pin-dots{display:flex;justify-content:center;gap:14px;margin:6px 0 10px}
+.pin-dot{
+  width:12px;height:12px;border-radius:50%;
+  border:1.5px solid rgba(98,237,245,.25);
+  transition:all .28s cubic-bezier(.34,1.4,.64,1);
+  background:transparent;
+}
+.pin-dot.filled{
+  background:var(--p2);border-color:var(--p2);
+  box-shadow:0 0 0 4px rgba(48,201,213,.15),0 0 16px rgba(48,201,213,.65);
+  transform:scale(1.18);
+}
+.pin-input{
+  width:100%;
+  background:var(--field-bg);
+  border:1.5px solid var(--border);
+  border-radius:18px;
+  padding:14px 16px;
+  font-size:22px;color:var(--text);text-align:center;letter-spacing:14px;
+  outline:none;
+  transition:border-color .25s,box-shadow .28s,background .25s;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.18);
+}
+.pin-input::placeholder{letter-spacing:2px;font-size:14px;color:var(--text-soft)}
+.pin-input:focus{
+  border-color:var(--p2);
+  box-shadow:0 0 0 4px rgba(48,201,213,.14),inset 0 2px 8px rgba(0,0,0,.18);
+  background:rgba(0,0,0,.22);
+}
+.pin-btn{
+  background:var(--btn-grad);color:#fff;border:none;border-radius:18px;
+  padding:15px;font-size:15px;font-weight:800;cursor:pointer;
+  box-shadow:var(--glow-teal);
+  transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.pin-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.14),transparent);pointer-events:none}
+.pin-btn:active{transform:scale(.96);box-shadow:0 0 18px rgba(48,201,213,.30)}
+.pin-error{color:var(--red);font-size:13px;text-align:center;display:none;font-weight:700}
+#emp-page{background:transparent}
+.emp-hero{
+  position:relative;flex-shrink:0;padding:24px 20px 28px;overflow:hidden;
+  border-bottom:1px solid var(--border);
+  background:
+    radial-gradient(700px 260px at 50% -5%,rgba(48,201,213,.18),transparent 68%),
+    linear-gradient(165deg,rgba(98,237,245,.07),rgba(255,255,255,.015));
+  backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+}
+.emp-hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:var(--accent-line);
+}
+[data-theme="light"] .emp-hero{
+  background:
+    radial-gradient(700px 260px at 50% -5%,rgba(232,249,252,.30),transparent 68%),
+    linear-gradient(165deg,rgba(255,255,255,.18),rgba(58,190,205,.08));
+}
+.emp-hero-top{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.emp-clinic-badge{
+  font-size:12px;font-weight:600;
+  background:rgba(0,0,0,.18);
+  border:1px solid var(--border);
+  padding:6px 14px;border-radius:22px;
+  font-family:'Cinzel Decorative','Cairo',sans-serif;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:58%;
+  backdrop-filter:blur(12px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+[data-theme="light"] .emp-clinic-badge{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.30)}
+.emp-time{
+  font-size:66px;font-weight:300;letter-spacing:5px;line-height:1;
+  font-family:'Rajdhani','Cairo',sans-serif;
+  background:linear-gradient(180deg,var(--clock-1),var(--clock-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 6px 24px rgba(62,205,214,.32));
+}
+[data-theme="light"] .emp-time{
+  background:linear-gradient(180deg,var(--clock-1),var(--clock-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 22px rgba(58,190,205,.40));
+}
+.emp-date{font-size:13px;color:var(--muted);margin-top:9px;text-align:center;font-weight:600;letter-spacing:.3px}
+.emp-body{padding:20px 16px;display:flex;flex-direction:column;gap:14px;flex:1}
+.name-selector{
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid var(--border);overflow:hidden;
+  box-shadow:var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.ns-header{
+  padding:13px 16px;font-size:12px;font-weight:800;color:var(--muted);
+  border-bottom:1px solid var(--border);
+  background:var(--header-bg);letter-spacing:.5px;
+  position:relative;
+}
+.ns-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--accent-line)}
+.ns-item{
+  display:flex;align-items:center;gap:14px;padding:16px 18px;
+  border-bottom:1px solid var(--border);cursor:pointer;
+  transition:background .2s;
+}
+.ns-item:last-child{border-bottom:none}
+.ns-item:active{background:var(--pressed)}
+.ns-avatar{
+  width:52px;height:52px;border-radius:16px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:900;color:var(--p1);
+  background:linear-gradient(145deg,rgba(88,232,244,.22),rgba(13,138,155,.06));
+  border:1.5px solid rgba(88,232,244,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 4px 14px rgba(88,232,244,.14);
+}
+.ns-info{flex:1;min-width:0}
+.ns-name{font-size:17px;font-weight:900;color:var(--text);line-height:1.3}
+.ns-role{font-size:12px;color:var(--muted);margin-top:3px;font-weight:600}
+.ns-status{font-size:12px;padding:5px 14px;border-radius:20px;font-weight:900;flex-shrink:0;letter-spacing:.2px}
+.ns-in{background:var(--chip-on);color:var(--amber);border:1px solid rgba(255,204,68,.30)}
+.ns-out{background:var(--chip-off);color:var(--muted);border:1px solid var(--border)}
+
+.action-card{
+  background:linear-gradient(160deg,rgba(98,237,245,.06),var(--card));
+  border-radius:var(--radius);border:1px solid var(--border);
+  padding:28px 20px 24px;text-align:center;
+  box-shadow:var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+}
+.action-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:var(--accent-line);
+}
+.action-who{font-size:24px;font-weight:900;margin-bottom:5px;letter-spacing:.2px}
+.action-role{font-size:14px;color:var(--muted);margin-bottom:30px;font-weight:600}
+
+.big-btn{
+  position:relative;width:168px;height:168px;border-radius:50%;border:none;
+  font-family:'Cairo',sans-serif;font-size:16px;font-weight:900;color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  margin:0 auto 22px;cursor:pointer;isolation:isolate;
+  transition:transform .24s cubic-bezier(.34,1.4,.64,1),box-shadow .30s;
+  text-shadow:0 2px 8px rgba(0,0,0,.30);
+}
+.big-btn::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:linear-gradient(160deg,rgba(255,255,255,.28) 0%,transparent 55%,rgba(0,0,0,.14) 100%);
+  pointer-events:none;z-index:1;
+}
+.big-btn::after{
+  content:'';position:absolute;inset:-10px;border-radius:50%;
+  border:2px solid currentColor;opacity:0;pointer-events:none;
+}
+.big-btn:active{transform:scale(.91)}
+.big-btn-icon{font-size:52px;line-height:1;filter:drop-shadow(0 4px 14px rgba(0,0,0,.30))}
+
+.big-btn.btn-in{
+  background:linear-gradient(155deg,#72EEF6 0%,#22BCCA 42%,#0A7486 100%);
+  box-shadow:
+    0 0 0 8px rgba(48,201,213,.08),
+    0 12px 36px rgba(48,201,213,.48),
+    0 4px 14px rgba(0,0,0,.28);
+  color:#022830;
+  text-shadow:0 1px 6px rgba(255,255,255,.32);
+}
+.big-btn.btn-in::after{color:var(--p2);animation:pulseRing 2.8s ease-out infinite}
+.big-btn.btn-out{
+  background:linear-gradient(155deg,#FF9C9C 0%,#FF5C5C 44%,#C02830 100%);
+  box-shadow:
+    0 0 0 8px rgba(255,92,92,.07),
+    0 12px 36px rgba(255,92,92,.44),
+    0 4px 14px rgba(0,0,0,.28);
+  color:#fff;
+}
+.big-btn.btn-out::after{color:var(--red);animation:pulseRing 2.8s ease-out infinite}
+@keyframes pulseRing{0%{opacity:.5;transform:scale(.92)}65%{opacity:0;transform:scale(1.22)}100%{opacity:0}}
+.action-status{font-size:15px;color:var(--muted);font-weight:800;letter-spacing:.2px}
+.msg-card{
+  position:relative;border-radius:var(--radius);border:1px solid var(--border);
+  padding:20px 20px 20px 22px;text-align:center;margin-top:14px;
+  overflow:hidden;box-shadow:var(--shadow-sm);
+  animation:pageIn .35s cubic-bezier(.22,1,.36,1);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+}
+.msg-card::before{
+  content:'';position:absolute;top:0;bottom:0;right:0;width:3px;
+  background:var(--brand-grad);border-radius:0 3px 3px 0;
+}
+.msg-card.welcome{background:linear-gradient(140deg,rgba(48,201,213,.09),var(--card))}
+.msg-card.coat-bad{background:linear-gradient(140deg,rgba(255,92,92,.10),var(--card))}
+.msg-card.coat-bad::before{background:linear-gradient(180deg,#FF9B9B,#C02830)}
+.msg-card.coat-good{background:linear-gradient(140deg,rgba(48,201,213,.09),var(--card))}
+.msg-line1{font-size:17px;font-weight:800;color:var(--amber);margin-bottom:6px;line-height:1.4}
+.msg-line2{font-size:14px;color:var(--muted);margin-bottom:4px;line-height:1.6}
+.msg-line3{font-size:13px;color:var(--text-soft);font-style:italic;line-height:1.5}
+
+.coat-card{
+  background:linear-gradient(155deg,rgba(48,201,213,.07),var(--card));
+  border-radius:var(--radius);border:1px solid var(--border);
+  padding:24px 20px;text-align:center;
+  box-shadow:var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,.05);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  animation:pageIn .3s ease;
+}
+.coat-title{font-size:17px;font-weight:800;margin-bottom:6px}
+.coat-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.7}
+.coat-btns{display:flex;gap:11px}
+.coat-btn{
+  flex:1;padding:14px;border-radius:16px;border:none;
+  font-family:'Cairo',sans-serif;font-size:15px;font-weight:800;cursor:pointer;
+  transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .22s;
+  position:relative;overflow:hidden;
+}
+.coat-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.18),transparent);pointer-events:none}
+.coat-btn:active{transform:scale(.94)}
+.coat-yes{background:var(--btn-grad);color:#fff;box-shadow:var(--glow-teal)}
+.coat-no{background:var(--red-l);color:var(--red);border:1.5px solid var(--red-border)}
+
+.today-log{
+  background:var(--card);border-radius:var(--radius);border:1px solid var(--border);
+  overflow:hidden;box-shadow:var(--shadow-sm);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+.tl-head{
+  padding:12px 16px;font-size:12px;font-weight:800;color:var(--muted);
+  border-bottom:1px solid var(--border);background:var(--header-bg);letter-spacing:.5px;
+  position:relative;
+}
+.tl-head::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--accent-line)}
+.tl-row{display:flex;align-items:center;gap:13px;padding:15px 18px;border-bottom:1px solid var(--border)}
+.tl-row:last-child{border-bottom:none}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.dot-in{background:var(--p2);box-shadow:0 0 0 4px rgba(40,198,212,.16),0 0 14px rgba(40,198,212,.70)}
+.dot-out{background:var(--red);box-shadow:0 0 0 4px rgba(255,98,98,.14),0 0 14px rgba(255,98,98,.70)}
+.tl-label{flex:1;font-size:14px;font-weight:800}
+.tl-time{font-size:15px;color:var(--text);font-weight:700;font-variant-numeric:tabular-nums}
+.emp-footer{
+  padding:18px 16px calc(18px + env(safe-area-inset-bottom));
+  text-align:center;font-size:11px;color:var(--text-soft);flex-shrink:0;
+  font-family:'Cinzel Decorative','Cairo',sans-serif;letter-spacing:.5px;
+}
+.emp-edit-self{
+  background:var(--card);border-radius:var(--radius);border:1px solid var(--border);
+  padding:18px;box-shadow:var(--shadow-sm);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+}
+#owner-page{background:transparent}
+.owner-topbar{
+  position:sticky;top:0;z-index:50;flex-shrink:0;
+  display:flex;align-items:center;gap:10px;padding:13px 16px;color:var(--text);
+  background:var(--nav-bg);
+  backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);
+  border-bottom:1px solid rgba(98,237,245,.08);
+}
+.owner-topbar::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--accent-line);
+}
+.owner-topbar-title{
+  flex:1;font-size:15px;font-weight:400;
+  font-family:'Cinzel Decorative','Cairo',sans-serif;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  letter-spacing:.3px;
+}
+.topbar-btn{
+  background:rgba(0,0,0,.20);border:1px solid var(--border);color:var(--text);
+  border-radius:50%;width:38px;height:38px;font-size:15px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .22s;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+[data-theme="light"] .topbar-btn{background:rgba(0,0,0,.16);border-color:rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.10)}
+.topbar-btn:hover{border-color:var(--border-hi);box-shadow:0 0 12px rgba(48,201,213,.18),inset 0 1px 0 rgba(255,255,255,.06)}
+.topbar-btn:active{transform:scale(.86);background:var(--glass-strong)}
+.owner-sub{display:none;flex:1;overflow-y:auto;padding-bottom:calc(128px + env(safe-area-inset-bottom));scroll-behavior:smooth}
+.owner-sub.show{display:block}
+.dash-hero{
+  padding:24px 18px 22px;color:var(--text);
+  border-bottom:1px solid var(--border);
+  background:
+    radial-gradient(500px 180px at 92% -10%,rgba(48,201,213,.18),transparent 68%),
+    linear-gradient(150deg,rgba(98,237,245,.06),var(--card));
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  position:relative;
+}
+[data-theme="light"] .dash-hero{
+  background:
+    radial-gradient(500px 180px at 92% -10%,rgba(232,249,252,.22),transparent 65%),
+    linear-gradient(150deg,rgba(255,255,255,.14),rgba(58,190,205,.06));
+}
+.dash-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--accent-line)}
+.dash-date{font-size:12px;color:var(--muted);margin-bottom:7px;font-weight:600;letter-spacing:.4px}
+.dash-greeting{font-size:21px;font-weight:400;font-family:'Cinzel Decorative','Cairo',sans-serif;letter-spacing:.3px}
+.rep-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:12px 16px}
+.rep-stat{
+  position:relative;overflow:hidden;
+  background:linear-gradient(155deg,rgba(79,216,235,.055),rgba(255,255,255,.022));
+  border:1px solid var(--border);border-radius:17px;
+  padding:14px 8px 12px;text-align:center;
+  box-shadow:var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,.05);
+}
+[data-theme="light"] .rep-stat{
+  background:linear-gradient(155deg,rgba(255,255,255,.10),rgba(255,255,255,.05));
+  box-shadow:0 2px 10px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.12);
+  border-color:rgba(255,255,255,.16);
+}
+.rep-stat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1.5px;
+  background:linear-gradient(90deg,transparent,rgba(79,216,235,.65),transparent);
+}
+[data-theme="light"] .rep-stat::before{
+  background:linear-gradient(90deg,transparent,rgba(232,249,252,.60),transparent);
+}
+.rep-stat-val{font-size:19px;font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:.3px}
+.rep-stat-lbl{font-size:10px;color:var(--muted);margin-top:4px;font-weight:700;letter-spacing:.2px}
+.dash-section{padding:0 16px 16px}
+.dash-section-hd{font-size:14px;font-weight:800;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.dashcal-sub{font-size:11px;color:var(--muted);margin:2px 2px 10px;font-weight:600}
+.dashcal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;direction:ltr}
+.dashcal-dow{font-size:10px;font-weight:800;color:var(--muted);text-align:center;padding:3px 0;letter-spacing:.3px}
+.dashcal-day{position:relative;min-height:48px;border:1px solid var(--border);border-radius:11px;background:var(--card);display:flex;flex-direction:column;align-items:center;padding:4px 3px 5px}
+.dashcal-day.today{border-color:var(--amber);background:linear-gradient(160deg,var(--amber-soft),var(--card));box-shadow:0 0 0 1px rgba(255,209,102,.25),0 4px 14px rgba(255,209,102,.18)}
+.dashcal-num{font-size:12px;font-weight:800;line-height:1.35;font-variant-numeric:tabular-nums}
+.dashcal-day.today .dashcal-num{color:var(--amber)}
+.dashcal-dots{display:flex;flex-wrap:wrap;gap:3px;justify-content:flex-start;direction:ltr;width:100%;margin-top:auto;padding:4px 2px 0}
+.dashcal-dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 6px rgba(255,122,122,.55);flex-shrink:0}
+.dashcal-more{font-size:8px;color:var(--muted);line-height:1;font-weight:700}
+.dashcal-empty{min-height:48px}
+.log-card{background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow-sm)}
+.log-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border)}
+.log-row:last-child{border-bottom:none}
+.rep-emp-tabs{
+  display:flex;gap:8px;padding:12px 16px;
+  border-bottom:1px solid var(--border);background:var(--card);
+  overflow-x:auto;scrollbar-width:none;
+}
+.rep-emp-tabs::-webkit-scrollbar{display:none}
+.rep-emp-tab{
+  padding:7px 17px;border-radius:22px;
+  border:1.5px solid var(--border);background:var(--bg);
+  font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;
+  white-space:nowrap;color:var(--muted);
+  transition:all .25s cubic-bezier(.34,1.4,.64,1);
+  -webkit-appearance:none;appearance:none;
+}
+.rep-emp-tab.active{
+  background-image:var(--btn-grad);background-color:transparent;
+  color:#fff;border-color:transparent;
+  box-shadow:var(--glow-teal);
+}
+.rep-view-toggle{
+  display:flex;margin:12px 16px 0;
+  border-radius:15px;overflow:hidden;
+  border:1.5px solid var(--border);background:rgba(0,0,0,.15);
+}
+.rep-view-btn{
+  flex:1;padding:10px;border:none;
+  font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;cursor:pointer;
+  background:transparent;color:var(--muted);transition:all .25s;
+}
+.rep-view-btn.active{background:var(--btn-grad);color:#fff;box-shadow:var(--glow-teal)}
+.month-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 16px;background:var(--card);border-bottom:1px solid var(--border);
+}
+.mnav-btn{
+  background:rgba(0,0,0,.18);border:1px solid var(--border);border-radius:12px;
+  padding:7px 15px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;
+  cursor:pointer;color:var(--text);transition:all .22s cubic-bezier(.34,1.4,.64,1);
+}
+.mnav-btn:active{transform:scale(.91);background:var(--glass-strong)}
+.month-lbl{font-size:15px;font-weight:800;text-align:center;flex:1;letter-spacing:.3px}
+.rep-table-header{display:flex;align-items:center;padding:10px 14px;background:var(--header-bg);border-bottom:1px solid var(--border);font-size:11px;font-weight:800;color:var(--muted)}
+.rep-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);background:var(--card)}
+.rep-row:last-child{border-bottom:none}
+.rep-col-day{width:52px;font-size:13px;font-weight:800;color:var(--muted)}
+.rep-col-in,.rep-col-out{flex:1;text-align:center}
+.rep-time{font-size:12px;padding:4px 8px;border-radius:9px;font-weight:700;display:inline-block;font-variant-numeric:tabular-nums}
+.rep-time-in{background:var(--chip-on);color:var(--amber);border:1px solid rgba(255,209,102,.2)}
+.rep-time-out{background:var(--red-l);color:var(--red);border:1px solid rgba(255,122,122,.2)}
+.rep-time-none{background:var(--chip-off);color:var(--muted);border:1px solid var(--border)}
+.rep-col-h{font-size:12px;font-weight:800;min-width:46px;text-align:left;color:var(--text);font-variant-numeric:tabular-nums}
+.rep-col-del{width:28px;text-align:center}
+.del-log-btn{background:none;border:none;font-size:15px;cursor:pointer;color:var(--muted);padding:2px}
+.export-btn{
+  display:flex;align-items:center;gap:8px;justify-content:center;
+  background:var(--btn-grad);color:#fff;border:none;border-radius:16px;
+  padding:13px 18px;font-family:'Cairo',sans-serif;font-size:14px;font-weight:800;cursor:pointer;
+  margin:14px 16px;width:calc(100% - 32px);
+  box-shadow:var(--glow-teal);
+  transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.export-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent);pointer-events:none}
+.export-btn:active{transform:scale(.97);box-shadow:0 0 16px rgba(48,201,213,.28)}
+.ann-row{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border);background:var(--card)}
+.ann-row:last-child{border-bottom:none}
+.ann-month-name{font-size:14px;font-weight:800;flex:1}
+.ann-days{font-size:13px;color:var(--muted);min-width:44px;text-align:center;font-weight:600}
+.ann-bar-wrap{flex:1;height:6px;background:var(--chip-off);border-radius:4px;margin:0 10px;overflow:hidden}
+.ann-bar{height:6px;border-radius:4px;background:var(--brand-grad);box-shadow:0 0 10px rgba(62,205,214,.5);transition:width .5s cubic-bezier(.22,1,.36,1)}
+.ann-hours{font-size:13px;font-weight:800;color:var(--amber);min-width:56px;text-align:left;font-variant-numeric:tabular-nums}
+.emp-rep-row{display:flex;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);background:var(--card)}
+.emp-rep-row:last-child{border-bottom:none}
+.emp-rep-col-day{width:52px;font-size:13px;font-weight:800;color:var(--muted)}
+.emp-rep-col-in,.emp-rep-col-out{flex:1;text-align:center}
+.emp-rep-col-h{font-size:12px;font-weight:800;min-width:46px;text-align:left;color:var(--text);font-variant-numeric:tabular-nums}
+.set-section{padding:16px}
+.set-section-title{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:11px}
+.set-group{background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);overflow:hidden;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.set-row{display:flex;align-items:center;padding:14px;border-bottom:1px solid var(--border);gap:10px;transition:background .15s}
+.set-row:last-child{border-bottom:none}
+.set-row:active{background:var(--pressed)}
+.set-row-icon{font-size:20px;width:28px;text-align:center;flex-shrink:0}
+.set-row-lbl{font-size:14px;font-weight:700;flex:1}
+.set-row-val{font-size:13px;color:var(--muted)}
+.form-label{font-size:11.5px;font-weight:800;color:var(--muted);display:block;margin-bottom:6px;letter-spacing:.3px}
+.form-input{
+  width:100%;padding:12px 14px;
+  border:1.5px solid var(--border);border-radius:15px;
+  font-size:14px;direction:rtl;outline:none;
+  background:var(--field-bg);color:var(--text);
+  transition:border-color .25s,box-shadow .28s,background .25s;
+  box-shadow:inset 0 2px 6px rgba(0,0,0,.15);
+}
+.form-input:focus{
+  border-color:var(--p2);
+  background:rgba(0,0,0,.22);
+  box-shadow:0 0 0 4px rgba(48,201,213,.13),inset 0 2px 6px rgba(0,0,0,.15);
+}
+.form-input::placeholder{color:var(--text-soft)}
+.form-group{margin-bottom:13px}
+textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
+.save-btn{
+  width:100%;padding:14px;
+  background:var(--btn-grad);color:#fff;border:none;border-radius:16px;
+  font-family:'Cairo',sans-serif;font-size:15px;font-weight:800;cursor:pointer;
+  margin-top:4px;box-shadow:var(--glow-teal);
+  transition:transform .22s cubic-bezier(.34,1.4,.64,1),box-shadow .25s;
+  position:relative;overflow:hidden;
+}
+.save-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.16),transparent);pointer-events:none}
+.save-btn:active{transform:scale(.97);box-shadow:0 0 16px rgba(48,201,213,.28)}
+.del-btn{
+  width:100%;padding:13px;
+  background:var(--red-l);color:var(--red);
+  border:1px solid var(--red-border);border-radius:16px;
+  font-family:'Cairo',sans-serif;font-size:14px;font-weight:800;cursor:pointer;
+  margin-top:9px;transition:transform .22s cubic-bezier(.34,1.4,.64,1);
+}
+.del-btn:active{transform:scale(.97)}
+.logo-preview{width:74px;height:74px;border-radius:16px;background:var(--field-bg) center/cover no-repeat;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:36px;overflow:hidden;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 6px 18px rgba(0,0,0,.18)}
+.logo-preview img{width:100%;height:100%;object-fit:cover}
+.logo-control{display:flex;align-items:center;gap:12px;padding:6px 0}
+.logo-width-bar{flex:1;accent-color:var(--p2);height:6px;border-radius:4px}
+.logo-width-val{font-size:14px;font-weight:800;color:var(--p2);min-width:48px;text-align:center;font-variant-numeric:tabular-nums}
+.shift-card{background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:14px;margin-bottom:11px;box-shadow:var(--shadow-sm)}
+.shift-card-hd{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.shift-avatar{width:40px;height:40px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--p1);background:linear-gradient(140deg,rgba(62,205,214,.24),rgba(31,157,176,.08));border:1px solid rgba(62,205,214,.24)}
+.shift-card-name{font-size:14.5px;font-weight:800;color:var(--text);line-height:1.3}
+.shift-role{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.shift-edit-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:13px;cursor:pointer;flex-shrink:0}
+.shift-inputs{display:flex;flex-direction:column;gap:9px}
+.shift-row{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--muted);font-weight:600}
+.shift-row span{flex:1}
+.shift-row input[type=time]{flex:1;max-width:132px;background:var(--field-bg);border:1.5px solid var(--border);border-radius:11px;padding:9px 11px;font-family:'Cairo',sans-serif;font-size:13px;color:var(--text);outline:none;direction:ltr}
+.shift-row input[type=time]:focus{border-color:var(--p2);box-shadow:0 0 0 3px rgba(62,205,214,.13)}
+.shift-hours-badge{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding:10px 12px;border-radius:11px;background:var(--chip-off);font-size:12px;color:var(--muted);font-weight:600}
+.shift-hours-badge b{color:var(--amber);font-size:14px;font-weight:900;font-variant-numeric:tabular-nums}
+.shift-save{width:100%;margin-top:10px;padding:10px;background:var(--btn-grad);color:#fff;border:none;border-radius:11px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.owner-bottom-nav{
+  position:fixed;z-index:90;display:none;
+  left:50%;transform:translateX(-50%);
+  bottom:0;width:100%;max-width:520px;
+  background:var(--nav-bg);
+  backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);
+  border-top:1px solid rgba(98,237,245,.08);
+  padding:6px 8px calc(6px + env(safe-area-inset-bottom));
+  box-shadow:0 -12px 40px rgba(0,0,0,.35),0 -1px 0 rgba(98,237,245,.08);
+}
+[data-theme="light"] .owner-bottom-nav{
+  border-top:1px solid rgba(255,255,255,.20);
+  box-shadow:0 -8px 30px rgba(0,0,0,.18),0 -1px 0 rgba(255,255,255,.14);
+}
+[data-theme="light"] .onav-item.active{color:var(--p1)}
+.onav-item{
+  flex:1;position:relative;padding:9px 4px 7px;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  cursor:pointer;border:none;background:none;
+  font-family:'Cairo',sans-serif;font-size:11px;font-weight:700;
+  color:var(--nav-text);transition:color .28s;border-radius:14px;
+}
+.onav-icon{
+  font-size:22px;line-height:1;
+  transition:transform .34s cubic-bezier(.34,1.4,.64,1),filter .32s;
+  filter:grayscale(.5) opacity(.7);
+}
+.onav-item.active{color:var(--p1)}
+.onav-item.active .onav-icon{
+  transform:translateY(-3px) scale(1.16);
+  filter:grayscale(0) opacity(1) drop-shadow(0 6px 16px rgba(48,201,213,.65));
+}
+.onav-item.active::before{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:30px;height:2.5px;border-radius:0 0 4px 4px;
+  background:var(--brand-grad);
+  box-shadow:0 0 16px rgba(48,201,213,.95);
+  animation:navIndicator .32s cubic-bezier(.34,1.4,.64,1);
+}
+@keyframes navIndicator{from{width:0;opacity:0}to{width:30px;opacity:1}}
+
+.modal-backdrop{
+  position:fixed;inset:0;z-index:200;display:none;
+  align-items:flex-end;justify-content:center;
+  background:rgba(1,10,14,.65);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+[data-theme="light"] .modal-backdrop{background:rgba(0,60,80,.50)}
+.modal-backdrop.open{display:flex;animation:fadeIn .24s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal-sheet{
+  width:100%;max-width:520px;
+  background:linear-gradient(175deg,rgba(10,36,46,.96),rgba(4,24,32,.98));
+  backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%);
+  border-radius:28px 28px 0 0;
+  border-top:1px solid rgba(98,237,245,.18);
+  padding:0 0 32px;max-height:88vh;overflow-y:auto;
+  animation:slideUp .36s cubic-bezier(.22,1,.36,1);
+  position:relative;
+  box-shadow:0 -20px 60px rgba(0,0,0,.55),0 -1px 0 rgba(98,237,245,.12);
+}
+[data-theme="light"] .modal-sheet{
+  background:linear-gradient(175deg,rgba(42,120,140,.96),rgba(25,88,106,.98));
+  border-top:1px solid rgba(232,249,252,.20);
+  box-shadow:0 -20px 55px rgba(0,0,0,.30),0 -1px 0 rgba(232,249,252,.14);
+}
+[data-theme="light"] .modal-close{
+  background:rgba(0,0,0,.20);
+  border-color:rgba(255,255,255,.22);
+  color:var(--muted);
+}
+/* ━━ Light mode: كروت شفافة + بوردر ━━ */
+[data-theme="light"] .gate-card{
+  background:transparent;
+  border-color:rgba(255,255,255,.38);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22);
+}
+[data-theme="light"] .gate-card::before{background:none}
+[data-theme="light"] .action-card{background:transparent}
+[data-theme="light"] .name-selector{background:transparent}
+[data-theme="light"] .msg-card.welcome,
+[data-theme="light"] .msg-card.coat-good{background:transparent}
+[data-theme="light"] .msg-card.coat-bad{background:rgba(255,80,80,.08)}
+[data-theme="light"] .coat-card{background:transparent}
+[data-theme="light"] .today-log{background:transparent}
+[data-theme="light"] .emp-edit-self{background:transparent}
+[data-theme="light"] .ns-avatar{
+  background:rgba(255,255,255,.18);
+  border-color:rgba(255,255,255,.30);
+}
+
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.modal-handle{
+  width:40px;height:3px;border-radius:3px;margin:14px auto 4px;
+  background:linear-gradient(90deg,transparent,rgba(98,237,245,.35),transparent);
+}
+.modal-hd{padding:8px 22px 18px;text-align:center;font-size:18px;font-weight:800;color:var(--text)}
+.modal-close{
+  position:absolute;top:14px;left:16px;
+  background:rgba(0,0,0,.25);border:1px solid var(--border);
+  border-radius:50%;width:34px;height:34px;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:var(--muted);
+}
+.modal-body{padding:0 18px 4px}
+.del-log-list{display:flex;flex-direction:column}
+.del-log-item{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border);gap:10px}
+.del-log-item:last-child{border-bottom:none}
+.del-log-info{flex:1;font-size:13px}
+.del-log-time{font-size:12px;color:var(--muted);margin-top:3px;font-variant-numeric:tabular-nums}
+.del-log-x{background:var(--red-l);border:1px solid var(--red-border);color:var(--red);border-radius:10px;padding:6px 12px;font-size:13px;font-weight:800;cursor:pointer;font-family:'Cairo',sans-serif}
+.toast{
+  position:fixed;bottom:92px;left:50%;
+  transform:translateX(-50%) translateY(16px) scale(.93);
+  background:linear-gradient(145deg,#1EC5D2,#0A7486);
+  color:#fff;padding:12px 26px;border-radius:28px;
+  font-size:14px;font-weight:800;z-index:999;
+  opacity:0;white-space:nowrap;pointer-events:none;
+  box-shadow:0 0 0 1px rgba(98,237,245,.22),var(--glow-teal),0 10px 30px rgba(0,0,0,.38);
+  transition:opacity .3s,transform .32s cubic-bezier(.34,1.4,.64,1);
+  max-width:88vw;overflow:hidden;text-overflow:ellipsis;
+  border:1px solid rgba(98,237,245,.20);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}
+.empty{text-align:center;padding:38px 20px;color:var(--muted)}
+.empty-icon{font-size:46px;margin-bottom:12px;opacity:.7}
+.empty-txt{font-size:14px;font-weight:700}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+</style>
+</head>
+<body>
+
+<div id="loading-screen">
+  <div style="font-size:52px;margin-bottom:16px" id="load-icon">🦷</div>
+  <div class="spinner"></div>
+  <div class="loading-txt">جاري التحميل...</div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="background">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+</div>
+
+<!-- GATE -->
+<div class="page" id="gate">
+  <button class="theme-toggle gate-theme-toggle" onclick="toggleTheme()" title="تبديل المظهر">☀️</button>
+  <div class="gate-logo" id="gate-logo">🦷</div>
+  <div class="gate-clinic" id="gate-clinic-name">Zayed Dental Clinic</div>
+  <div class="gate-sub" id="gate-clinic-sub">نظام إدارة الحضور والانصراف</div>
+  <div class="gate-divider"></div>
+  <div class="gate-cards">
+    <div class="gate-card" onclick="showPinArea()">
+      <div class="gate-card-icon">🛡️</div>
+      <div class="gate-card-info"><div class="gate-card-title">مدير / مالك العيادة</div><div class="gate-card-sub">لوحة التحكم الكاملة</div></div>
+      <div class="gate-card-arrow">›</div>
+    </div>
+    <div class="gate-card" onclick="goEmpPage()">
+      <div class="gate-card-icon">👤</div>
+      <div class="gate-card-info"><div class="gate-card-title">موظف</div><div class="gate-card-sub">تسجيل الحضور والانصراف</div></div>
+      <div class="gate-card-arrow">›</div>
+    </div>
+  </div>
+  <div class="gate-pin-area" id="pin-area">
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+    </div>
+    <input class="pin-input" type="password" inputmode="numeric" maxlength="4" placeholder="أدخل رمز المدير" id="pin-input" oninput="onPinInput(this.value)" autocomplete="off">
+    <div class="pin-error" id="pin-error">❌ الرمز غير صحيح</div>
+    <button class="pin-btn" onclick="checkPin()">دخول لوحة المدير ←</button>
+    <button style="background:none;border:none;color:var(--text-soft);font-family:'Cairo',sans-serif;font-size:13px;cursor:pointer;padding:4px" onclick="hidePinArea()">إلغاء</button>
+  </div>
+</div>
+
+<!-- EMP PAGE -->
+<div class="page" id="emp-page">
+  <div class="emp-hero">
+    <div class="emp-hero-top">
+      <div class="emp-clinic-badge" id="emp-clinic-badge">🦷 Zayed Dental Clinic</div>
+      <button class="theme-toggle" onclick="toggleTheme()" title="تبديل المظهر" style="margin-right:auto">☀️</button>
+      <button style="background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:50%;width:36px;height:36px;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center" onclick="goEmpBack()">←</button>
+    </div>
+    <div style="text-align:center">
+      <div class="emp-time" id="emp-clock">--:--</div>
+      <div class="emp-date" id="emp-date-lbl">--</div>
+    </div>
+  </div>
+  <div class="emp-body">
+    <!-- PICK NAME -->
+    <div id="emp-state-pick">
+      <div class="name-selector">
+        <div class="ns-header">👋 اختر اسمك</div>
+        <div class="ns-options" id="ns-options-list"></div>
+      </div>
+    </div>
+
+    <!-- ACTION -->
+    <div id="emp-state-action" style="display:none">
+      <div class="action-card">
+        <div class="action-who" id="act-name">--</div>
+        <div class="action-role" id="act-role">--</div>
+        <button class="big-btn btn-in" id="action-big-btn" onclick="handleCheckInOut()">
+          <span class="big-btn-icon" id="action-icon">✅</span>
+          <span id="action-txt">تسجيل حضور</span>
+        </button>
+        <div class="action-status" id="action-status">--</div>
+        <!-- manual log button -->
+        <button id="manual-log-btn" onclick="openManualModal()" style="
+          margin-top:10px;background:var(--bg);border:1.5px dashed var(--border);
+          border-radius:var(--radius-sm);padding:8px 18px;font-family:'Cairo',sans-serif;
+          font-size:13px;color:var(--muted);cursor:pointer;width:100%;transition:all .2s">
+          🕐 نسيت التسجيل؟ سجّل يدوياً
+        </button>
+        <div style="display:flex;gap:10px;margin-top:12px;justify-content:center;flex-wrap:wrap">
+          <button style="background:none;border:none;font-family:'Cairo',sans-serif;font-size:13px;color:var(--muted);cursor:pointer" onclick="backToPickName()">← اختيار اسم آخر</button>
+          <span style="color:var(--border)">|</span>
+          <button style="background:none;border:none;font-family:'Cairo',sans-serif;font-size:13px;color:var(--link);cursor:pointer;font-weight:700" onclick="showEmpReport()">📊 سجلي</button>
+          <span style="color:var(--border)">|</span>
+          <button style="background:none;border:none;font-family:'Cairo',sans-serif;font-size:13px;color:var(--link);cursor:pointer;font-weight:700" onclick="showEmpEditSelf()">✏️ تعديل بياناتي</button>
+        </div>
+      </div>
+      <!-- welcome message (shown after check-in) -->
+      <div id="welcome-msg-card" style="display:none" class="msg-card welcome"></div>
+      <!-- coat confirm -->
+      <div id="coat-confirm" style="display:none;margin-top:14px">
+        <div class="coat-card">
+          <div class="coat-title">🥼 سؤال قبل الانصراف</div>
+          <div class="coat-sub">هل ارتديت البالطو أثناء عملك اليوم؟</div>
+          <div class="coat-btns">
+            <button class="coat-btn coat-yes" onclick="confirmCheckout(true)">✅ نعم</button>
+            <button class="coat-btn coat-no" onclick="confirmCheckout(false)">❌ لا</button>
+          </div>
+        </div>
+      </div>
+      <!-- checkout message (shown after checkout) -->
+      <div id="checkout-msg-card" style="display:none" class="msg-card"></div>
+      <div class="today-log" id="emp-today-log-card" style="margin-top:14px">
+        <div class="tl-head">Today's Log</div>
+        <div id="today-log-rows"></div>
+      </div>
+    </div>
+
+    <!-- MONTHLY REPORT (read-only) -->
+    <div id="emp-state-report" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <div style="font-size:16px;font-weight:700;flex:1" id="emp-rep-title">سجلي الشهري</div>
+        <button style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;color:var(--text)" onclick="hideEmpReport()">← رجوع</button>
+      </div>
+      <div style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;box-shadow:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--header-bg);border-bottom:1px solid var(--border)">
+          <button class="mnav-btn" onclick="empRepChangeMonth(-1)" style="padding:5px 10px;font-size:12px">▶</button>
+          <div style="font-size:14px;font-weight:700" id="emp-rep-month-lbl">--</div>
+          <button class="mnav-btn" onclick="empRepChangeMonth(1)" style="padding:5px 10px;font-size:12px">◀</button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;text-align:center;padding:12px 8px;border-bottom:1px solid var(--border)">
+          <div><div style="font-size:20px;font-weight:900;color:var(--amber)" id="emp-rep-days">0</div><div style="font-size:11px;color:var(--muted)">أيام الحضور</div></div>
+          <div><div style="font-size:18px;font-weight:900;color:var(--muted)" id="emp-rep-expected">--</div><div style="font-size:11px;color:var(--muted)">الساعات المطلوبة</div></div>
+          <div><div style="font-size:18px;font-weight:900;color:var(--amber)" id="emp-rep-hours">--</div><div style="font-size:11px;color:var(--muted)">الساعات الفعلية</div></div>
+        </div>
+        <!-- 3-col: late days | late hours | net diff -->
+        <div id="emp-rep-diff-row" style="padding:10px 12px;border-bottom:1px solid var(--border);display:none">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+            <div style="text-align:center">
+              <div id="emp-rep-late-days" style="font-size:17px;font-weight:900;color:var(--red)">0</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">أيام التأخير ⏰</div>
+            </div>
+            <div style="text-align:center">
+              <div id="emp-rep-late-hours" style="font-size:15px;font-weight:900;color:var(--red)">--</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">ساعات التأخير</div>
+            </div>
+            <div style="text-align:center">
+              <div id="emp-rep-diff-val" style="font-size:15px;font-weight:900">--</div>
+              <div style="font-size:10px;color:var(--muted);margin-top:2px">صافي الفارق</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;padding:8px 14px;background:var(--header-bg);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted)">
+          <span style="width:52px">Day</span><span style="flex:1;text-align:center">In</span><span style="flex:1;text-align:center">Out</span>
+          <span style="min-width:46px;text-align:left">Hours</span><span style="min-width:32px;text-align:center">🥼</span>
+        </div>
+        <div id="emp-rep-rows"></div>
+      </div>
+    </div>
+
+    <!-- EDIT SELF -->
+    <div id="emp-state-edit" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <button style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;color:var(--text)" onclick="hideEmpEditSelf()">← رجوع</button>
+        <div style="font-size:16px;font-weight:700;flex:1">تعديل بياناتي</div>
+      </div>
+      <div class="emp-edit-self">
+        <div class="form-group"><label class="form-label">الاسم الكامل</label><input class="form-input" id="self-name" placeholder="الاسم"></div>
+        <div class="form-group"><label class="form-label">المسمى الوظيفي</label><input class="form-input" id="self-role" placeholder="الوظيفة"></div>
+        <button class="save-btn" onclick="saveEmpSelf()">💾 حفظ التعديلات</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="emp-footer">© <span id="footer-clinic-name">Zayed Dental Clinic</span></div>
+</div>
+
+<!-- OWNER PAGE -->
+<div class="page" id="owner-page">
+  <div class="owner-topbar">
+    <div class="owner-topbar-title" id="owner-topbar-title">لوحة المدير</div>
+    <button class="topbar-btn" id="owner-topbar-right" onclick="openShareModal()">🔗</button>
+    <button class="theme-toggle" onclick="toggleTheme()" title="تبديل المظهر">☀️</button>
+    <button class="topbar-btn" onclick="ownerLogout()">←</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="owner-sub show" id="sub-dash">
+    <div class="dash-hero">
+      <div class="dash-date" id="dash-date">--</div>
+      <div class="dash-greeting" id="dash-greeting">مرحباً 👋</div>
+    </div>
+    <div class="month-nav">
+      <button class="mnav-btn" onclick="ownerChangeMonth(-1)">▶</button>
+      <div class="month-lbl" id="owner-month-lbl">--</div>
+      <button class="mnav-btn" onclick="ownerChangeMonth(1)">◀</button>
+    </div>
+<div class="rep-stats" style="padding:16px 16px 8px">
+      <div class="rep-stat"><div class="rep-stat-val" id="owner-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام الحضور</div></div>
+      <div class="rep-stat"><div class="rep-stat-val" id="owner-expected" style="color:var(--muted);font-size:16px">--</div><div class="rep-stat-lbl">الساعات المطلوبة</div></div>
+      <div class="rep-stat"><div class="rep-stat-val" id="owner-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات الفعلية</div></div>
+    </div>
+    <div style="padding:0 16px 8px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+          <div id="owner-late-days" style="font-size:18px;font-weight:900;color:var(--red)">0</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">أيام التأخير ⏰</div>
+        </div>
+        <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+          <div id="owner-late-hours" style="font-size:16px;font-weight:900;color:var(--red)">--</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">ساعات التأخير</div>
+        </div>
+        <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:10px;text-align:center">
+          <div id="owner-diff-val" style="font-size:16px;font-weight:900">--</div>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px">صافي الفارق</div>
+        </div>
+      </div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-hd">
+        ⏳ طلبات التسجيل اليدوي
+        <span id="pending-badge" style="background:var(--red);color:#fff;font-size:11px;padding:2px 8px;border-radius:20px;font-weight:700;display:none"></span>
+      </div>
+      <div id="pending-list" class="log-card"></div>
+    </div>
+    <div class="dash-section">
+      <div class="month-nav" style="border-bottom:1px solid var(--border)">
+        <button class="mnav-btn" onclick="ownerChangeMonth(-1)">▶</button>
+        <div class="month-lbl" id="dash-cal-lbl">--</div>
+        <button class="mnav-btn" onclick="ownerChangeMonth(1)">◀</button>
+      </div>
+      <div class="dashcal-sub" id="dash-cal-sub"></div>
+      <div class="dashcal-grid" id="dash-cal-grid" dir="ltr"></div>
+    </div>
+  </div>
+
+  <!-- REPORTS -->
+  <div class="owner-sub" id="sub-reports">
+    <div class="rep-emp-tabs" id="rep-emp-tabs"></div>
+    <div class="rep-view-toggle">
+      <button class="rep-view-btn active" id="btn-monthly" onclick="setRepView('monthly')">📅 شهري</button>
+      <button class="rep-view-btn" id="btn-annual" onclick="setRepView('annual')">📆 سنوي</button>
+    </div>
+    <div id="rep-monthly-view">
+      <div class="month-nav">
+        <button class="mnav-btn" onclick="changeMonth(-1)">▶</button>
+        <div class="month-lbl" id="month-lbl">--</div>
+        <button class="mnav-btn" onclick="changeMonth(1)">◀</button>
+      </div>
+      <div class="rep-stats">
+        <div class="rep-stat"><div class="rep-stat-val" id="rep-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام الحضور</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="rep-expected" style="color:var(--muted);font-size:16px">--</div><div class="rep-stat-lbl">الساعات المطلوبة</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="rep-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات الفعلية</div></div>
+      </div>
+      <!-- 3-col stats: late days | late hours | net diff -->
+      <div id="rep-diff-card" style="margin:0 16px 8px;display:none">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="rep-late-days" style="font-size:18px;font-weight:900;color:var(--red)">0</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">أيام التأخير ⏰</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="rep-late-hours" style="font-size:16px;font-weight:900;color:var(--red)">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">ساعات التأخير</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:10px;text-align:center">
+            <div id="rep-diff-val" style="font-size:16px;font-weight:900">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">صافي الفارق</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div class="rep-table-header">
+          <span class="rep-col-day">Day</span>
+          <span class="rep-col-in" style="text-align:center">In</span>
+          <span class="rep-col-out" style="text-align:center">Out</span>
+          <span class="rep-col-h">Hours</span>
+          <span style="min-width:32px;text-align:center">🥼</span>
+          <span class="rep-col-del">🗑️</span>
+        </div>
+        <div id="rep-rows"></div>
+      </div>
+      <button class="export-btn" onclick="exportCSV()">📤 تصدير Excel / CSV شهري</button>
+    </div>
+    <div id="rep-annual-view" style="display:none">
+      <div class="month-nav">
+        <button class="mnav-btn" onclick="changeYear(-1)">▶</button>
+        <div class="month-lbl" id="year-lbl">--</div>
+        <button class="mnav-btn" onclick="changeYear(1)">◀</button>
+      </div>
+      <div class="rep-stats">
+        <div class="rep-stat"><div class="rep-stat-val" id="ann-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="ann-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="ann-months" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أشهر نشطة</div></div>
+      </div>
+      <div style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div class="rep-table-header">
+          <span style="flex:1">Month</span><span style="min-width:44px;text-align:center">Days</span>
+          <span style="min-width:56px;text-align:left">Hours</span><span style="flex:1"></span>
+        </div>
+        <div id="ann-rows"></div>
+      </div>
+      <button class="export-btn" onclick="exportAnnualCSV()">📤 تصدير CSV سنوي</button>
+    </div>
+
+    <!-- AGGREGATED: ALL EMPLOYEES → MONTHLY -->
+    <div id="rep-all-monthly" style="display:none">
+      <div class="month-nav">
+        <button class="mnav-btn" onclick="changeMonth(-1)">▶</button>
+        <div class="month-lbl" id="all-month-lbl">--</div>
+        <button class="mnav-btn" onclick="changeMonth(1)">◀</button>
+      </div>
+      <div class="rep-stats">
+        <div class="rep-stat"><div class="rep-stat-val" id="all-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام الحضور</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="all-expected" style="color:var(--muted);font-size:16px">--</div><div class="rep-stat-lbl">الساعات المطلوبة</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="all-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات الفعلية</div></div>
+      </div>
+      <div style="padding:0 16px 8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="all-late-days" style="font-size:18px;font-weight:900;color:var(--red)">0</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">أيام التأخير ⏰</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="all-late-hours" style="font-size:16px;font-weight:900;color:var(--red)">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">ساعات التأخير</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:10px;text-align:center">
+            <div id="all-diff-val" style="font-size:16px;font-weight:900">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">صافي الفارق</div>
+          </div>
+        </div>
+      </div>
+      <div style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div class="rep-table-header">
+          <span style="flex:1;font-weight:700">الموظف</span>
+          <span style="min-width:40px;text-align:center">أيام</span>
+          <span style="min-width:58px;text-align:center">فعلي</span>
+          <span style="min-width:56px;text-align:center">مطلوب</span>
+          <span style="min-width:64px;text-align:center">ساعات التأخير</span>
+          <span style="min-width:56px;text-align:left">صافي</span>
+        </div>
+        <div id="all-rows"></div>
+      </div>
+      <button class="export-btn" onclick="exportAllCSV()">📤 تصدير Excel / CSV شهري مجمّع</button>
+    </div>
+
+    <!-- AGGREGATED: ALL EMPLOYEES → ANNUAL -->
+    <div id="rep-all-annual" style="display:none">
+      <div class="month-nav">
+        <button class="mnav-btn" onclick="changeYear(-1)">▶</button>
+        <div class="month-lbl" id="all-year-lbl">--</div>
+        <button class="mnav-btn" onclick="changeYear(1)">◀</button>
+      </div>
+      <div class="rep-stats">
+        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-months" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أشهر نشطة</div></div>
+      </div>
+      <div style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+        <div class="rep-table-header">
+          <span style="flex:1;font-weight:700">الموظف</span>
+          <span style="min-width:44px;text-align:center">أيام</span>
+          <span style="min-width:60px;text-align:left">ساعات</span>
+          <span style="min-width:44px;text-align:center">أشهر</span>
+        </div>
+        <div id="all-ann-rows"></div>
+      </div>
+      <button class="export-btn" onclick="exportAllAnnualCSV()">📤 تصدير Excel / CSV سنوي مجمّع</button>
+    </div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="owner-sub" id="sub-settings">
+    <div class="set-section">
+      <div class="set-section-title">معلومات العيادة</div>
+      <div class="form-group"><label class="form-label">اسم العيادة</label><input class="form-input" id="set-clinic-name"></div>
+      <div class="form-group"><label class="form-label">شعار (إيموجي)</label><input class="form-input" id="set-clinic-icon" maxlength="4"></div>
+      <div class="form-group"><label class="form-label">صورة اللوجو (تُفضّل على الإيموجي)</label>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="logo-preview" id="logo-preview">🦷<img id="logo-preview-img" style="display:none"></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:8px">
+            <button type="button" class="save-btn" style="margin:0" onclick="document.getElementById('set-logo-file').click()">📤 رفع صورة اللوجو</button>
+            <button type="button" class="del-btn" style="margin:0" onclick="removeLogo()">🗑️ إزالة اللوجو</button>
+          </div>
+          <input type="file" id="set-logo-file" accept="image/*" style="display:none" onchange="onLogoFile(this)">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">حجم اللوجو</label>
+        <div class="logo-control">
+          <input type="range" class="logo-width-bar" id="set-logo-width" min="40" max="1000" value="64" oninput="document.getElementById('logo-width-lbl').textContent=this.value+'px'">
+          <span class="logo-width-val" id="logo-width-lbl">64px</span>
+        </div>
+      </div>
+      <div class="form-group"><label class="form-label">وصف أو تخصص</label><input class="form-input" id="set-clinic-sub"></div>
+      <div class="form-group"><label class="form-label">رمز المدير (4 أرقام)</label><input class="form-input" id="set-pin" type="password" inputmode="numeric" maxlength="4" placeholder="****"></div>
+      <button class="save-btn" onclick="saveClinicSettings()">💾 حفظ</button>
+    </div>
+
+    <!-- MESSAGES SETTINGS -->
+    <div class="set-section">
+      <div class="set-section-title">💬 رسائل الموظفين</div>
+      <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:14px;margin-bottom:14px">
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">يمكن استخدام {name} لإدراج اسم الموظف</p>
+        <div class="form-group"><label class="form-label">رسالة الحضور — السطر الأول</label><input class="form-input" id="msg-in1" placeholder="أهلاً بك {name}!"></div>
+        <div class="form-group"><label class="form-label">رسالة الحضور — السطر الثاني</label><textarea class="form-input" id="msg-in2" rows="2" placeholder="لا تنس ارتداء البالطو 🥼😊"></textarea></div>
+        <div class="form-group"><label class="form-label">رسالة الحضور — السطر الثالث</label><input class="form-input" id="msg-in3" placeholder="نتمنى لك يوماً سعيداً"></div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:12px 0">
+        <div class="form-group"><label class="form-label">رسالة الانصراف — ارتدى البالطو ✅</label><textarea class="form-input" id="msg-out-yes" rows="2" placeholder="شكراً لالتزامك بالبالطو 🥼✅"></textarea></div>
+        <div class="form-group"><label class="form-label">ذيل رسالة الانصراف (البالطو ✅)</label><input class="form-input" id="msg-out-yes2" placeholder="نتمنى لك يوماً سعيداً"></div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:12px 0">
+        <div class="form-group"><label class="form-label">رسالة الانصراف — لم يرتدِ البالطو ❌</label><input class="form-input" id="msg-out-no1" placeholder="نحن نحرص على سلامتك 🛡️"></input></div>
+        <div class="form-group"><label class="form-label">سطر مائل تحتها</label><input class="form-input" id="msg-out-no2" placeholder="لذا نرجوا منك الالتزام بالبالطو"></div>
+        <div class="form-group"><label class="form-label">ذيل رسالة الانصراف (❌)</label><input class="form-input" id="msg-out-no3" placeholder="نتمنى لك يوماً سعيداً"></div>
+        <div class="form-group"><label class="form-label">رسالة الحضور — بعد 5:00 PM (متأخر) ⏰❌</label><textarea class="form-input" id="msg-late-in" rows="2" placeholder="حمدلله على سلامتك يا {name} لكنك لم تلتزم بميعاد عملك اليوم"></textarea></div>
+        <div class="form-group"><label class="form-label">رسالة الحضور — 5:00 PM أو قبلها ⏰✅</label><textarea class="form-input" id="msg-ontime-in" rows="2" placeholder="حمدلله على سلامتك يا {name} أنتَ دوماً قدوة في الحضور مبكراً"></textarea></div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:12px 0"><textarea class="form-input" id="msg-short-hours" rows="2" placeholder="نحن فخورون بك يا {name} لكنك لم تستوف عدد ساعات عملك اليوم"></textarea>
+        <div class="form-group"><label class="form-label">رسالة الانصراف — 5 ساعات أو أكثر ⏱️✅</label><textarea class="form-input" id="msg-full-hours" rows="2" placeholder="نحن ممتنون لك ونقدر تعبك يا {name} شكراً لمجهودك الوافر"></textarea></div>
+        <button class="save-btn" onclick="saveMessages()">💾 حفظ الرسائل</button>
+      </div>
+    </div>
+
+    <div class="set-section">
+      <div class="set-section-title">الموظفون</div>
+      <div id="settings-emp-list"></div>
+      <button class="save-btn" onclick="openEmpModal(null)">+ إضافة موظف جديد</button>
+    </div>
+    <div class="set-section">
+      <div class="set-section-title">البيانات</div>
+      <div class="set-group">
+        <div class="set-row" style="cursor:pointer" onclick="backupData()"><span class="set-row-icon">💾</span><span class="set-row-lbl">تصدير نسخة احتياطية</span><span class="set-row-val">←</span></div>
+        <div class="set-row" style="cursor:pointer" onclick="clearLogs()"><span class="set-row-icon">🗑️</span><span class="set-row-lbl" style="color:var(--red)">مسح جميع السجلات</span><span class="set-row-val">⚠️</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="owner-bottom-nav">
+    <button class="onav-item active" id="nav-0" onclick="switchOwnerTab('sub-dash',0)"><span class="onav-icon">🏠</span>الرئيسية</button>
+    <button class="onav-item" id="nav-1" onclick="switchOwnerTab('sub-reports',1)"><span class="onav-icon">📊</span>التقارير</button>
+    <button class="onav-item" id="nav-2" onclick="switchOwnerTab('sub-settings',2)"><span class="onav-icon">⚙️</span>الإعدادات</button>
+  </div>
+</div>
+
+<!-- MODAL: Employee -->
+<div class="modal-backdrop" id="modal-emp">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('modal-emp')">✕</button>
+    <div class="modal-hd" id="emp-modal-title">إضافة موظف</div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">الاسم الكامل</label><input class="form-input" id="me-name" placeholder="الاسم"></div>
+      <div class="form-group"><label class="form-label">الوظيفة</label><input class="form-input" id="me-role" placeholder="الوظيفة"></div>
+      <div class="form-group"><label class="form-label">رقم الهاتف (اختياري)</label><input class="form-input" id="me-phone" type="tel"></div>
+      <input type="hidden" id="me-id">
+      <button class="save-btn" onclick="saveEmployee()">💾 حفظ</button>
+      <button class="del-btn" id="emp-del-btn" onclick="deleteEmployee()" style="display:none">🗑️ حذف الموظف</button>
+    </div>
+  </div>
+</div>
+<!-- MODAL: Share -->
+<div class="modal-backdrop" id="modal-share">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('modal-share')">✕</button>
+    <div class="modal-hd">رابط الموظفين</div>
+    <div class="modal-body">
+      <p style="font-size:14px;color:var(--muted);margin-bottom:14px;text-align:center">شارك هذا الرابط مع موظفيك</p>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px;font-size:13px;word-break:break-all;color:var(--text);margin-bottom:12px" id="share-link-txt"></div>
+      <button class="save-btn" onclick="copyLink()">📋 نسخ الرابط</button>
+    </div>
+  </div>
+</div>
+<!-- MODAL: Delete Logs -->
+<div class="modal-backdrop" id="modal-del-logs">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('modal-del-logs')">✕</button>
+    <div class="modal-hd" id="del-logs-title">حذف سجلات اليوم</div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:12px;text-align:center">اضغط على السجل الذي تريد حذفه</p>
+      <div class="log-card"><div class="del-log-list" id="del-log-list"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Manual Log -->
+<div class="modal-backdrop" id="modal-manual">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('modal-manual')">✕</button>
+    <div class="modal-hd">🕐 تسجيل يدوي</div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--muted);margin-bottom:14px;text-align:center">أدخل التاريخ والوقت الفعلي للحضور أو الانصراف</p>
+      <!-- type selector -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+        <button id="manual-type-in" onclick="setManualType('in')" style="padding:11px;border-radius:var(--radius-sm);border:2px solid var(--p2);background:var(--p2);color:#fff;font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer">✅ حضور</button>
+        <button id="manual-type-out" onclick="setManualType('out')" style="padding:11px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--bg);color:var(--muted);font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer">🔴 انصراف</button>
+      </div>
+      <div class="form-group">
+        <label class="form-label">التاريخ</label>
+        <input class="form-input" type="date" id="manual-date" style="direction:ltr">
+      </div>
+      <div class="form-group">
+        <label class="form-label">الوقت</label>
+        <input class="form-input" type="time" id="manual-time" style="direction:ltr">
+      </div>
+      <!-- coat question (shown only for checkout) -->
+      <div id="manual-coat-section" style="display:none">
+        <div style="font-size:13px;font-weight:700;color:var(--muted);margin-bottom:8px">🥼 هل ارتديت البالطو؟</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+          <button id="manual-coat-yes-btn" onclick="setManualCoat(true)" style="padding:10px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--bg);color:var(--muted);font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer">✅ نعم</button>
+          <button id="manual-coat-no-btn" onclick="setManualCoat(false)" style="padding:10px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--bg);color:var(--muted);font-family:'Cairo',sans-serif;font-size:14px;font-weight:700;cursor:pointer">❌ لا</button>
+        </div>
+      </div>
+      <button class="save-btn" onclick="submitManualLog()">💾 تسجيل</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ══ SUPABASE ══ */
+const SB_URL='https://sowmhqblbmzhtupxccpz.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvd21ocWJsYm16aHR1cHhjY3B6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExMDI0NzksImV4cCI6MjA5NjY3ODQ3OX0.Tn3rKKFs3pRLFWx6yz_63_CnFdn37qNy2KHMXggprhw';
+const BASE_H={'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY};
+async function sbReq(method,table,body,params='',extra={}){
+  const r=await fetch(`${SB_URL}/rest/v1/${table}${params}`,{method,headers:{...BASE_H,...extra},body:body?JSON.stringify(body):undefined});
+  if(!r.ok){const t=await r.text();console.error(method,table,t);throw new Error(t);}
+  if(method==='DELETE'||r.status===204) return null;
+  const t=await r.text(); return t?JSON.parse(t):null;
+}
+const GET  =(t,p='')=>sbReq('GET',t,null,p);
+const POST =(t,b)   =>sbReq('POST',t,b,'',{'Prefer':'return=representation'});
+const PATCH=(t,b,p) =>sbReq('PATCH',t,b,p,{'Prefer':'return=representation'});
+const DEL  =(t,p)   =>sbReq('DELETE',t,null,p);
+
+/* ══ STATE ══ */
+let CLINIC={name:'Zayed Dental Clinic',icon:'🦷',sub:'نظام إدارة الحضور والانصراف',pin:'1611',logo:null,logoWidth:64,shifts:{}};
+let MSGS={
+  in1:'أهلاً بك {name}! 😊🥼',
+  in2:'لا تنس ارتداء البالطو أثناء عملك',
+  in3:'نتمنى لك يوماً سعيداً',
+  outYes1:'شكراً لالتزامك بالبالطو 🥼✅',
+  outYes2:'نتمنى لك يوماً سعيداً',
+  outNo1:'نحن نحرص على سلامتك 🛡️',
+  outNo2:'لذا نرجوا منك الالتزام بالبالطو',
+  outNo3:'نتمنى لك يوماً سعيداً',
+  shortHours:'نحن فخورون بك يا {name} لكنك لم تستوف عدد ساعات عملك اليوم',
+  fullHours:'نحن ممتنون لك ونقدر تعبك يا {name} شكراً لمجهودك الوافر',
+  lateIn:'حمدلله على سلامتك يا {name} لكنك لم تلتزم بميعاد عملك اليوم',
+  onTimeIn:'حمدلله على سلامتك يا {name} أنتَ دوماً قدوة في الحضور مبكراً'
+};
+let EMPLOYEES=[],LOGS=[],PENDING=[];
+let currentEmpId=null,repEmpId=null,repView='monthly';
+let repMonth=new Date().getMonth(),repYear=new Date().getFullYear();
+let ownerRepMonth=new Date().getMonth(),ownerRepYear=new Date().getFullYear();
+let empRepMonth=new Date().getMonth(),empRepYear=new Date().getFullYear();
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+/* ══ INIT ══ */
+async function init(){
+  try{
+    const cfg=await GET('clinic_settings','?select=key,value');
+    cfg.forEach(r=>{
+      if(r.key==='clinic') CLINIC={...CLINIC,...r.value};
+      if(r.key==='messages') MSGS={...MSGS,...r.value};
+    });
+    EMPLOYEES=await GET('clinic_employees','?select=*&order=id');
+    LOGS=await GET('clinic_logs','?select=*&order=ts');
+    PENDING=await GET('pending_logs','?select=*&order=ts');
+applyBranding();
+    hideLoading();
+    if((location.hash||'')!==''&&location.hash!=='#/'){try{history.replaceState(null,'','#/');}catch(e){}}
+    showPage('gate');
+  }catch(e){
+    document.querySelector('.loading-txt').textContent='خطأ في الاتصال — تأكد من الإنترنت';
+  }
+}
+function hideLoading(){const l=document.getElementById('loading-screen');l.classList.add('hide');setTimeout(()=>l.style.display='none',400);}
+
+/* ══ HELPERS ══ */
+function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function ft(ts){return new Date(ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});}
+function hm(hrs){const h=Math.floor(hrs);const m=Math.round((hrs-h)*60);return `${h}h ${String(m).padStart(2,'0')}m`;}
+function fd(ts){return new Date(ts).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});}
+function empById(id){return EMPLOYEES.find(e=>e.id===id);}
+function empLogs(id,dk){return LOGS.filter(l=>l.emp_id===id&&l.date_key===dk).sort((a,b)=>a.ts-b.ts);}
+function checkedIn(id){const l=empLogs(id,todayKey()).slice(-1)[0];return l?.type==='in';}
+function dayHours(id,dk){
+  const dl=empLogs(id,dk);let tot=0,inT=null;
+  dl.forEach(l=>{if(l.type==='in')inT=l.ts;else if(l.type==='out'&&inT){tot+=(l.ts-inT)/3600000;inT=null;}});
+  if(inT) tot+=(Date.now()-inT)/3600000;
+  return tot;
+}
+function monthData(id,mo,yr){
+  const keys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===id&&y===yr&&m-1===mo;}).map(l=>l.date_key))];
+  return {days:keys.length,hours:keys.reduce((s,k)=>s+dayHours(id,k),0)};
+}
+function fmtMsg(str,name){return str.replace(/\{name\}/g,name);}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(()=>t.classList.remove('show'),2800);}
+
+/* ══ EMPLOYEE SHIFT ══ */
+let SHIFT_DEF={start:'17:00',end:'22:00'};
+function empShift(id){
+  const s=CLINIC.shifts&&CLINIC.shifts[id];
+  return {start:(s&&s.start)||SHIFT_DEF.start,end:(s&&s.end)||SHIFT_DEF.end};
+}
+function timeToMin(t){const a=String(t||'0:0').split(':');return ((+a[0])||0)*60+((+a[1])||0);}
+function minToHM(m){m=Math.round(m);return Math.floor(m/60)+'h '+String(m%60).padStart(2,'0')+'m';}
+function requiredHours(empId){const m=timeToMin(empShift(empId).end)-timeToMin(empShift(empId).start);return m>0?m/60:5;}
+function shiftStartDate(d,empId){const dd=new Date(d),t=empShift(empId).start.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
+function shiftEndDate(d,empId){const dd=new Date(d),t=empShift(empId).end.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
+function onEmpShiftInput(id){
+  const st=document.getElementById('shift-start-'+id),en=document.getElementById('shift-end-'+id);
+  const el=document.getElementById('shift-hours-'+id);
+  if(!st||!en||!el) return;
+  if(!st.value||!en.value){el.textContent='--';return;}
+  const m=timeToMin(en.value)-timeToMin(st.value);
+  el.textContent=m>0?minToHM(m):'غير صالح';
+}
+async function saveEmpShift(id){
+  const st=document.getElementById('shift-start-'+id),en=document.getElementById('shift-end-'+id);
+  if(!st||!en||!st.value||!en.value){toast('⚠️ حدد موعد الحضور والانصراف');return;}
+  try{
+    CLINIC.shifts=CLINIC.shifts||{};
+    CLINIC.shifts[id]={start:st.value,end:en.value};
+    await PATCH('clinic_settings',{value:CLINIC},'?key=eq.clinic');
+    toast('✅ تم حفظ فترة '+(empById(id)?.name||'الموظف'));
+  }catch(e){toast('❌ '+e.message.slice(0,50));}
+}
+
+/* ══ CLOCK ══ */
+function tick(){
+  const now=new Date();
+  document.getElementById('emp-clock').textContent=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});
+  const d=now.toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('emp-date-lbl').textContent=d;
+  document.getElementById('dash-date').textContent=d;
+}
+setInterval(tick,1000);tick();
+
+/* ══ PAGES (hash routing so browser back/forward works) ══ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('show'));
+  document.getElementById(id).classList.add('show');
+  document.querySelector('.owner-bottom-nav').style.display = id==='owner-page' ? 'flex' : 'none';
+  if(id==='owner-page') renderOwner();
+  if(id==='emp-page')   renderEmpPage();
+}
+function goHash(h){ if(location.hash===h){routePage();} else {location.hash=h;} }
+function routePage(){
+  const h=(location.hash||'').replace(/^#\/?/,'');
+  if(h.startsWith('emp')){
+    showPage('emp-page');
+    const sub=h.replace(/^emp\/?/,'');
+    if(sub==='action'){
+      if(currentEmpId==null){goHash('#/emp');return;}
+      const e=empById(currentEmpId);
+      document.getElementById('act-name').textContent=e.name;
+      document.getElementById('act-role').textContent=e.role;
+      showEmpState('action');refreshActionUI();
+    }else if(sub==='report'){
+      if(currentEmpId==null){goHash('#/emp');return;}
+      empRepMonth=new Date().getMonth();empRepYear=new Date().getFullYear();
+      showEmpState('report');renderEmpMonthlyReport();
+    }else if(sub==='edit'){
+      if(currentEmpId==null){goHash('#/emp');return;}
+      const e=empById(currentEmpId);
+      document.getElementById('self-name').value=e.name;
+      document.getElementById('self-role').value=e.role;
+      showEmpState('edit');
+    }else{
+      currentEmpId=null;
+      showEmpState('pick');
+    }
+  }
+  else if(h.startsWith('owner')){
+    showPage('owner-page');
+    if(h.includes('report')) switchOwnerTab('sub-reports',1);
+    else if(h.includes('settings')) switchOwnerTab('sub-settings',2);
+    else switchOwnerTab('sub-dash',0);
+  }
+  else { showPage('gate'); }
+}
+window.addEventListener('hashchange',routePage);
+
+/* ══ PIN ══ */
+let pinVal='';
+function showPinArea(){pinVal='';document.getElementById('pin-area').classList.add('open');document.getElementById('pin-input').value='';document.getElementById('pin-error').style.display='none';updatePinDots();document.getElementById('pin-input').focus();}
+function hidePinArea(){document.getElementById('pin-area').classList.remove('open');}
+function onPinInput(v){pinVal=v;updatePinDots();if(v.length===4)checkPin();}
+function updatePinDots(){for(let i=0;i<4;i++)document.getElementById('d'+i).className='pin-dot'+(i<pinVal.length?' filled':'');}
+function checkPin(){
+  if(pinVal===CLINIC.pin){hidePinArea();goHash('#/owner');}
+  else{document.getElementById('pin-error').style.display='block';document.getElementById('pin-input').value='';pinVal='';updatePinDots();}
+}
+function ownerLogout(){goHash('#/');}
+
+/* ══ EMP PAGE ══ */
+function renderEmpPage(){
+  applyBranding();
+  document.getElementById('emp-clinic-badge').textContent=CLINIC.icon+' '+CLINIC.name;
+  document.getElementById('footer-clinic-name').textContent=CLINIC.name;
+  document.getElementById('ns-options-list').innerHTML=EMPLOYEES.map(e=>`
+    <div class="ns-item" onclick="selectEmp(${e.id})">
+      <div class="ns-name">${e.name}<div style="font-size:12px;color:var(--muted);font-weight:400">${e.role}</div></div>
+      <span class="ns-status ${checkedIn(e.id)?'ns-in':'ns-out'}">${checkedIn(e.id)?'حاضر':'خارج'}</span>
+    </div>`).join('');
+  showEmpState('pick');
+}
+function goEmpPage(){goHash('#/emp');}
+
+function showEmpState(state){
+  ['pick','action','report','edit'].forEach(s=>document.getElementById('emp-state-'+s).style.display=s===state?'block':'none');
+}
+
+function selectEmp(id){currentEmpId=id;goHash('#/emp/action');}
+function backToPickName(){currentEmpId=null;goHash('#/emp');}
+function goEmpBack(){
+  const h=(location.hash||'').replace(/^#\/?/,'');
+  if(h.startsWith('emp/report')||h.startsWith('emp/edit')){goHash('#/emp/action');}
+  else if(h==='emp/action'){backToPickName();}
+  else{goHash('#/');}
+}
+
+function refreshActionUI(){
+  if(!currentEmpId) return;
+  const ci=checkedIn(currentEmpId);
+  const btn=document.getElementById('action-big-btn');
+  btn.className='big-btn '+(ci?'btn-out':'btn-in');
+  document.getElementById('action-icon').textContent=ci?'🔴':'✅';
+  document.getElementById('action-txt').textContent=ci?'تسجيل انصراف':'تسجيل حضور';
+  const last=empLogs(currentEmpId,todayKey()).slice(-1)[0];
+  document.getElementById('action-status').textContent=ci?`حضرت الساعة ${ft(last.ts)}`:(last?`آخر انصراف ${ft(last.ts)}`:'لم يتم تسجيل الحضور بعد');
+  document.getElementById('coat-confirm').style.display='none';
+  document.getElementById('welcome-msg-card').style.display='none';
+  document.getElementById('checkout-msg-card').style.display='none';
+  document.getElementById('action-big-btn').style.display='';
+  document.getElementById('action-status').style.display='';
+  document.getElementById('emp-today-log-card').style.display='block';
+  const rows=empLogs(currentEmpId,todayKey());
+  const logEl=document.getElementById('today-log-rows');
+  if(!rows.length){logEl.innerHTML='<div style="padding:14px;text-align:center;font-size:13px;color:var(--muted)">No records today</div>';}
+  else logEl.innerHTML=rows.map(l=>`
+    <div class="tl-row">
+      <div class="tl-dot ${l.type==='in'?'dot-in':'dot-out'}"></div>
+      <div class="tl-label">${l.type==='in'?'📍 Check-in':'🚪 Check-out'}${l.coat!=null?' · 🥼'+(l.coat?'✅':'❌'):''}</div>
+      <div class="tl-time">${ft(l.ts)}</div>
+    </div>`).join('');
+}
+
+function handleCheckInOut(){
+  if(!currentEmpId) return;
+  if(checkedIn(currentEmpId)){
+    document.getElementById('action-big-btn').style.display='none';
+    document.getElementById('action-status').style.display='none';
+    document.getElementById('coat-confirm').style.display='block';
+    document.getElementById('emp-today-log-card').style.display='none';
+    document.getElementById('welcome-msg-card').style.display='none';
+    document.getElementById('checkout-msg-card').style.display='none';
+  } else {
+    doCheckIn();
+  }
+}
+
+async function doCheckIn(){
+  const e=empById(currentEmpId);
+  const now=new Date();
+  const log={id:Date.now()+'_'+Math.random().toString(36).slice(2,7),emp_id:currentEmpId,emp_name:e.name,type:'in',ts:Date.now(),date_key:todayKey(),coat:null};
+  try{
+    await POST('clinic_logs',log);
+    LOGS.push(log);
+// late check-in check (base = employee shift start)
+    const lateStart=shiftStartDate(now,currentEmpId);
+    const lateMinutes=Math.floor((now-lateStart)/60000);
+    const card=document.getElementById('welcome-msg-card');
+    let extraLine='';
+    if(lateMinutes>0){
+      extraLine=`<div class="msg-line2" style="color:var(--red);font-weight:700;margin-top:6px">⏰ لديك تأخير ${lateMinutes} دقيقة عن موعد الدوام</div>`;
+    }
+    card.innerHTML=`
+      <div class="msg-line1">${fmtMsg(MSGS.in1,e.name)}</div>
+      <div class="msg-line2">${fmtMsg(MSGS.in2,e.name)}</div>
+      ${extraLine}
+      <div class="msg-line3">${fmtMsg(MSGS.in3,e.name)}</div>`;
+    card.style.display='block';
+    // punctuality message (on-time vs late)
+    const punctualMsg=lateMinutes>0
+      ? fmtMsg(MSGS.lateIn||'',e.name)
+      : fmtMsg(MSGS.onTimeIn||'',e.name);
+    if(punctualMsg){
+      const pCard=document.createElement('div');
+      pCard.className='msg-card '+(lateMinutes>0?'coat-bad':'coat-good');
+      pCard.style.marginTop='10px';
+      pCard.innerHTML=`<div class="msg-line1" style="font-size:15px">${punctualMsg}</div>`;
+      card.insertAdjacentElement('afterend',pCard);
+      setTimeout(()=>pCard.remove(),lateMinutes>0?7000:5000);
+    }
+    setTimeout(()=>card.style.display='none',lateMinutes>0?7000:5000);
+    refreshActionUI();
+    card.style.display='block';
+  }catch(err){toast('❌ خطأ في الاتصال: '+err.message.slice(0,50));}
+}
+
+async function confirmCheckout(woreCoat){
+  const e=empById(currentEmpId);
+  const now=new Date();
+  const log={id:Date.now()+'_'+Math.random().toString(36).slice(2,7),emp_id:currentEmpId,emp_name:e.name,type:'out',ts:Date.now(),date_key:todayKey(),coat:woreCoat};
+  try{
+    await POST('clinic_logs',log);
+    LOGS.push(log);
+    document.getElementById('coat-confirm').style.display='none';
+// late checkout check (base = employee shift end)
+    const lateOut=shiftEndDate(now,currentEmpId);
+    const isLateOut=now>=lateOut;
+    const lateOutLine=isLateOut?`<div class="msg-line2" style="color:var(--red);font-weight:700;margin-top:8px">🙏 معذرة على تأخيرنا لك اليوم</div>`:'';
+    const card=document.getElementById('checkout-msg-card');
+    if(woreCoat){
+      card.className='msg-card coat-good';
+      card.innerHTML=`
+        <div class="msg-line1">${fmtMsg(MSGS.outYes1,e.name)}</div>
+        <div class="msg-line3">${fmtMsg(MSGS.outYes2,e.name)}</div>
+        ${lateOutLine}`;
+    } else {
+      card.className='msg-card coat-bad';
+      card.innerHTML=`
+        <div class="msg-line1">${fmtMsg(MSGS.outNo1,e.name)}</div>
+        <div class="msg-line2" style="font-style:italic">${fmtMsg(MSGS.outNo2,e.name)}</div>
+        <div class="msg-line3">${fmtMsg(MSGS.outNo3,e.name)}</div>
+        ${lateOutLine}`;
+    }
+    card.style.display='block';
+    document.getElementById('action-big-btn').style.display='';
+    document.getElementById('action-status').style.display='';
+    document.getElementById('emp-today-log-card').style.display='block';
+    refreshActionUI();
+// hours message
+    const todayH=dayHours(currentEmpId,todayKey());
+    const reqH=requiredHours(currentEmpId);
+    const hoursMsg=todayH<reqH?fmtMsg(MSGS.shortHours||'',e.name):fmtMsg(MSGS.fullHours||'',e.name);
+    if(hoursMsg){
+      const hCard=document.createElement('div');
+      hCard.className='msg-card '+(todayH<reqH?'coat-bad':'coat-good');
+      hCard.style.marginTop='10px';
+      hCard.innerHTML=`<div class="msg-line1" style="font-size:15px">${hoursMsg}</div>`;
+      card.insertAdjacentElement('afterend',hCard);
+      setTimeout(()=>hCard.remove(),7000);
+    }
+    card.style.display='block';
+    setTimeout(()=>card.style.display='none',isLateOut?8000:6000);
+  }catch(err){toast('❌ خطأ في الاتصال: '+err.message.slice(0,50));}
+}
+
+/* ══ EMP SELF EDIT ══ */
+function showEmpEditSelf(){goHash('#/emp/edit');}
+function hideEmpEditSelf(){goHash('#/emp/action');}
+async function saveEmpSelf(){
+  const name=document.getElementById('self-name').value.trim();
+  const role=document.getElementById('self-role').value.trim();
+  if(!name){toast('⚠️ أدخل الاسم');return;}
+  try{
+    await PATCH('clinic_employees',{name,role},`?id=eq.${currentEmpId}`);
+    const e=empById(currentEmpId); e.name=name; e.role=role;
+    // update emp_name in local logs display
+    document.getElementById('act-name').textContent=name;
+    document.getElementById('act-role').textContent=role;
+    toast('✅ تم حفظ بياناتك');
+    hideEmpEditSelf();
+  }catch(err){toast('❌ خطأ: '+err.message.slice(0,50));}
+}
+
+/* ══ EMP REPORT ══ */
+function showEmpReport(){goHash('#/emp/report');}
+function hideEmpReport(){goHash('#/emp/action');}
+function empRepChangeMonth(d){empRepMonth+=d;if(empRepMonth<0){empRepMonth=11;empRepYear--;}if(empRepMonth>11){empRepMonth=0;empRepYear++;}renderEmpMonthlyReport();}
+function renderEmpMonthlyReport(){
+  if(!currentEmpId) return;
+  const e=empById(currentEmpId);
+  document.getElementById('emp-rep-title').textContent=`سجل ${e.name}`;
+  document.getElementById('emp-rep-month-lbl').textContent=`${MONTHS[empRepMonth]} ${empRepYear}`;
+  const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===currentEmpId&&y===empRepYear&&m-1===empRepMonth;}).map(l=>l.date_key))].sort();
+  if(!dKeys.length){
+    document.getElementById('emp-rep-rows').innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:var(--muted)">No records this month</div>';
+    document.getElementById('emp-rep-days').textContent='0';
+    document.getElementById('emp-rep-hours').textContent='--';
+    document.getElementById('emp-rep-expected').textContent='--';
+    document.getElementById('emp-rep-diff-row').style.display='none';
+    return;
+  }
+  let totalH=0;
+  document.getElementById('emp-rep-rows').innerHTML=dKeys.map(key=>{
+    const dl=empLogs(currentEmpId,key);const h=dayHours(currentEmpId,key);totalH+=h;
+    const inL=dl.find(l=>l.type==='in');const outL=[...dl].reverse().find(l=>l.type==='out');
+    const[y,m,d]=key.split('-').map(Number);
+    const coatIcon=outL&&outL.coat!=null?(outL.coat?'✅':'❌'):'—';
+    return `<div class="emp-rep-row">
+      <div class="emp-rep-col-day">${d}<div style="font-size:10px">${DAYS[new Date(y,m-1,d).getDay()]}</div></div>
+      <div class="emp-rep-col-in"><span class="rep-time ${inL?'rep-time-in':'rep-time-none'}">${inL?ft(inL.ts):'--'}</span></div>
+      <div class="emp-rep-col-out"><span class="rep-time ${outL?'rep-time-out':'rep-time-none'}">${outL?ft(outL.ts):'--'}</span></div>
+      <div class="emp-rep-col-h" style="color:${h>=requiredHours(currentEmpId)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
+      <div style="min-width:32px;text-align:center;font-size:14px">${coatIcon}</div>
+    </div>`;
+  }).join('');
+const days=dKeys.length;
+  const expectedH=days*requiredHours(currentEmpId);
+  const {lateDays, lateHours, netHours}=calcLateStats(currentEmpId, dKeys);
+  const netStr=netHours>=0?`+${hm(netHours)}`:`-${hm(Math.abs(netHours))}`;
+  document.getElementById('emp-rep-days').textContent=days;
+  document.getElementById('emp-rep-hours').textContent=hm(totalH);
+  document.getElementById('emp-rep-expected').textContent=hm(expectedH);
+  document.getElementById('emp-rep-late-days').textContent=lateDays;
+  document.getElementById('emp-rep-late-hours').textContent=lateDays>0?hm(lateHours):'--';
+  document.getElementById('emp-rep-diff-val').textContent=netStr;
+  document.getElementById('emp-rep-diff-val').style.color=netHours>=0?'var(--amber)':'var(--red)';
+  document.getElementById('emp-rep-diff-row').style.display='block';
+}
+
+/* ══ OWNER DASHBOARD ══ */
+function renderOwner(){
+  applyBranding();
+  document.getElementById('owner-topbar-title').textContent=CLINIC.name+' — المدير';
+  document.getElementById('dash-greeting').textContent=`مرحباً — ${CLINIC.name} 👋`;
+  renderOwnerStats();
+  renderDashCal();
+  // settings prefill
+  document.getElementById('set-clinic-name').value=CLINIC.name;
+  document.getElementById('set-clinic-icon').value=CLINIC.icon;
+  document.getElementById('set-clinic-sub').value=CLINIC.sub;
+  document.getElementById('set-pin').value=CLINIC.pin;
+  syncLogoPreview();
+  document.getElementById('set-logo-width').value=CLINIC.logoWidth;
+  document.getElementById('logo-width-lbl').textContent=CLINIC.logoWidth+'px';
+  document.getElementById('set-logo-file').value='';
+  document.getElementById('msg-in1').value=MSGS.in1;
+  document.getElementById('msg-in2').value=MSGS.in2;
+  document.getElementById('msg-in3').value=MSGS.in3;
+  document.getElementById('msg-out-yes').value=MSGS.outYes1;
+  document.getElementById('msg-out-yes2').value=MSGS.outYes2;
+  document.getElementById('msg-out-no1').value=MSGS.outNo1;
+  document.getElementById('msg-out-no2').value=MSGS.outNo2;
+  document.getElementById('msg-out-no3').value=MSGS.outNo3;
+  document.getElementById('msg-short-hours').value=MSGS.shortHours||'';
+  document.getElementById('msg-full-hours').value=MSGS.fullHours||'';
+  document.getElementById('msg-late-in').value=MSGS.lateIn||'';
+  document.getElementById('msg-ontime-in').value=MSGS.onTimeIn||'';
+document.getElementById('settings-emp-list').innerHTML=EMPLOYEES.map(e=>{
+    const sh=empShift(e.id);
+    return `<div class="shift-card">
+      <div class="shift-card-hd"><div class="shift-card-name">${e.name}</div><div class="shift-role">${e.role||''}</div>
+        <button class="shift-edit-btn" onclick="openEmpModal(${e.id})" title="تعديل بيانات الموظف">✎</button></div>
+      <div class="shift-inputs">
+        <div class="shift-row"><span>⏰ موعد الحضور الأساسي</span><input type="time" id="shift-start-${e.id}" value="${sh.start}" oninput="onEmpShiftInput(${e.id})"></div>
+        <div class="shift-row"><span>🏁 موعد الانصراف</span><input type="time" id="shift-end-${e.id}" value="${sh.end}" oninput="onEmpShiftInput(${e.id})"></div>
+      </div>
+      <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b id="shift-hours-${e.id}">${minToHM(requiredHours(e.id)*60)}</b></div>
+      <button class="shift-save" onclick="saveEmpShift(${e.id})">💾 حفظ الفترة لهذا الموظف</button>
+    </div>`;
+  }).join('');
+  renderPending();
+  if(!repEmpId) repEmpId=EMPLOYEES[0]?.id;
+  renderReport();
+}
+
+function ownerChangeMonth(d){
+  ownerRepMonth+=d;
+  if(ownerRepMonth<0){ownerRepMonth=11;ownerRepYear--;}
+  if(ownerRepMonth>11){ownerRepMonth=0;ownerRepYear++;}
+  renderOwnerStats();
+  renderDashCal();
+}
+/* DASH-CALENDAR: days of ownerRepMonth; one bottom-left dot per attending employee (read-only, from LOGS) */
+function renderDashCal(){
+  const grid=document.getElementById('dash-cal-grid');
+  if(!grid) return;
+  const mo=ownerRepMonth,yr=ownerRepYear;
+  const dim=new Date(yr,mo+1,0).getDate();
+  const firstDow=new Date(yr,mo,1).getDay();
+  const pad=n=>String(n).padStart(2,'0');
+  const todayK=todayKey();
+  const lbl=document.getElementById('dash-cal-lbl');
+  if(lbl) lbl.textContent=`${MONTHS[mo]} ${yr}`;
+  // Week starts Saturday: header Sat..Fri, offset shifted accordingly.
+  const DOW_SAT_FIRST=[6,0,1,2,3,4,5];
+  let html=DOW_SAT_FIRST.map(i=>`<div class="dashcal-dow">${DAYS[i]}</div>`).join('');
+  for(let b=0;b<(firstDow+1)%7;b++) html+='<div class="dashcal-empty"></div>';
+  let unionDays=0;
+  for(let d=1;d<=dim;d++){
+    const key=`${yr}-${pad(mo+1)}-${pad(d)}`;
+    const attendees=[...new Set(LOGS.filter(l=>l.date_key===key).map(l=>l.emp_id))].filter(id=>empById(id));
+    if(attendees.length) unionDays++;
+    const names=attendees.map(id=>empById(id).name).join('، ');
+    const dots=attendees.slice(0,6).map(()=>`<span class="dashcal-dot"></span>`).join('')
+      +(attendees.length>6?`<span class="dashcal-more">+${attendees.length-6}</span>`:'');
+    html+=`<div class="dashcal-day${key===todayK?' today':''}" title="${names||'لا حضور'}">`
+      +`<div class="dashcal-num">${d}</div><div class="dashcal-dots">${dots}</div></div>`;
+  }
+  grid.innerHTML=html;
+  const sub=document.getElementById('dash-cal-sub');
+  if(sub) sub.textContent=`أيام عليها حضور: ${unionDays} من ${dim} يوم`;
+}
+
+function renderOwnerStats(){
+  const mo=ownerRepMonth,yr=ownerRepYear;
+  let sumDays=0,sumExpected=0,sumActual=0,sumLateDays=0,sumLateHours=0,sumNet=0;
+  EMPLOYEES.forEach(e=>{
+    const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===e.id&&y===yr&&m-1===mo;}).map(l=>l.date_key))].sort();
+    if(!dKeys.length) return;
+    const req=requiredHours(e.id);
+    sumDays+=dKeys.length;
+    sumExpected+=dKeys.length*req;
+    sumActual+=monthData(e.id,mo,yr).hours;
+    const ls=calcLateStats(e.id,dKeys);
+    sumLateDays+=ls.lateDays;
+    sumLateHours+=ls.lateHours;
+    sumNet+=ls.netHours;
+  });
+  document.getElementById('owner-month-lbl').textContent=`${MONTHS[ownerRepMonth]} ${ownerRepYear}`;
+  document.getElementById('owner-days').textContent=sumDays;
+  document.getElementById('owner-expected').textContent=hm(sumExpected);
+  document.getElementById('owner-hours').textContent=hm(sumActual);
+  document.getElementById('owner-late-days').textContent=sumLateDays;
+  document.getElementById('owner-late-hours').textContent=sumLateDays>0?hm(sumLateHours):'--';
+  document.getElementById('owner-diff-val').textContent=sumNet>=0?`+${hm(sumNet)}`:`-${hm(Math.abs(sumNet))}`;
+  document.getElementById('owner-diff-val').style.color=sumNet>=0?'var(--amber)':'var(--red)';
+}
+
+function switchOwnerTab(subId,idx){
+  const target=idx===0?'#/owner':idx===1?'#/owner-reports':'#/owner-settings';
+  if(location.hash!==target){location.hash=target;return;}
+  document.querySelectorAll('.owner-sub').forEach(s=>s.classList.remove('show'));
+  document.getElementById(subId).classList.add('show');
+  document.querySelectorAll('.onav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));
+  document.getElementById('owner-topbar-right').textContent=idx===1?'📤':'🔗';
+  document.getElementById('owner-topbar-right').onclick=idx===1?(repEmpId==='all'?(repView==='monthly'?exportAllCSV:exportAllAnnualCSV):(repView==='monthly'?exportCSV:exportAnnualCSV)):openShareModal;
+  if(idx===1) renderReport();
+  if(idx===2) renderOwner();
+}
+
+function calcLateStats(empId, dKeys){
+  let lateDays=0, totalLateMinutes=0, totalNetMinutes=0;
+  dKeys.forEach(key=>{
+    const dl=empLogs(empId,key);
+    const inL=dl.find(l=>l.type==='in');
+    const outL=[...dl].reverse().find(l=>l.type==='out');
+    if(!inL) return;
+    const checkIn=new Date(inL.ts);
+    const shiftStart=shiftStartDate(checkIn,empId);
+    // late = mins after shift start (0 if on time or early)
+    const lateMin=checkIn>shiftStart ? Math.floor((checkIn-shiftStart)/60000) : 0;
+    if(lateMin>0) lateDays++;
+    totalLateMinutes+=lateMin;
+    // required end = checkin + required hours + late mins
+    const requiredEndMs=inL.ts + (requiredHours(empId)*3600000) + (lateMin*60000);
+    // net = checkout - required end
+    const endMs=outL ? outL.ts : Date.now();
+    totalNetMinutes+=Math.floor((endMs - requiredEndMs)/60000);
+  });
+  return {
+    lateDays,
+    lateHours: totalLateMinutes/60,
+    netHours:  totalNetMinutes/60
+  };
+}
+
+/* ══ REPORTS ══ */
+function setRepView(v){
+  repView=v;
+  document.getElementById('btn-monthly').classList.toggle('active',v==='monthly');
+  document.getElementById('btn-annual').classList.toggle('active',v==='annual');
+  renderReport();
+}
+function syncRepViews(){
+  const all=repEmpId==='all';
+  document.getElementById('rep-monthly-view').style.display=(!all&&repView==='monthly')?'block':'none';
+  document.getElementById('rep-annual-view').style.display=(!all&&repView==='annual')?'block':'none';
+  document.getElementById('rep-all-monthly').style.display=(all&&repView==='monthly')?'block':'none';
+  document.getElementById('rep-all-annual').style.display=(all&&repView==='annual')?'block':'none';
+}
+function renderReport(){
+  if(!EMPLOYEES.length) return;
+  if(repEmpId!=='all' && !EMPLOYEES.find(e=>e.id===repEmpId)) repEmpId=EMPLOYEES[0].id;
+  document.getElementById('rep-emp-tabs').innerHTML=
+    `<button class="rep-emp-tab ${repEmpId==='all'?'active':''}" onclick="selectRepEmp('all')">👥 الكل</button>`+
+    EMPLOYEES.map(e=>`<button class="rep-emp-tab ${e.id===repEmpId?'active':''}" onclick="selectRepEmp(${e.id})">${e.name}</button>`).join('');
+  syncRepViews();
+  if(repEmpId==='all'){ if(repView==='monthly') renderAllMonthly(); else renderAllAnnual(); }
+  else { if(repView==='monthly') renderMonthly(); else renderAnnual(); }
+}
+function renderAllMonthly(){
+  const mo=repMonth,yr=repYear;
+  document.getElementById('all-month-lbl').textContent=`${MONTHS[mo]} ${yr}`;
+  let sumDays=0,sumActual=0,sumExpected=0,sumLateDays=0,sumLateHours=0,sumNet=0;
+  const rows=EMPLOYEES.map(e=>{
+    const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===e.id&&y===yr&&m-1===mo;}).map(l=>l.date_key))].sort();
+    const actual=dKeys.reduce((s,k)=>s+dayHours(e.id,k),0);
+    const expected=dKeys.length*requiredHours(e.id);
+    const ls=calcLateStats(e.id,dKeys);
+    sumDays+=dKeys.length;sumActual+=actual;sumExpected+=expected;
+    sumLateDays+=ls.lateDays;sumLateHours+=ls.lateHours;sumNet+=ls.netHours;
+    const netStr=ls.netHours>=0?`+${hm(ls.netHours)}`:`-${hm(Math.abs(ls.netHours))}`;
+    const netCol=ls.netHours>=0?'var(--amber)':'var(--red)';
+    return `<div class="rep-row" style="font-size:12px">
+      <div style="flex:1;font-weight:700">${e.name}</div>
+      <div style="min-width:40px;text-align:center">${dKeys.length}</div>
+      <div style="min-width:58px;text-align:center;color:var(--amber);font-weight:900">${actual>0?hm(actual):'--'}</div>
+      <div style="min-width:56px;text-align:center;color:var(--muted)">${expected>0?hm(expected):'--'}</div>
+      <div style="min-width:64px;text-align:center;color:var(--red);font-weight:700">${ls.lateDays>0?hm(ls.lateHours):'--'}</div>
+      <div style="min-width:56px;text-align:left;font-weight:900;color:${netCol}">${netStr}</div>
+    </div>`;
+  }).join('');
+  const totalNet=sumNet;
+  const totalNetStr=totalNet>=0?`+${hm(totalNet)}`:`-${hm(Math.abs(totalNet))}`;
+  document.getElementById('all-rows').innerHTML=rows+`<div class="rep-row" style="font-size:12px;font-weight:900;background:var(--bg);border-top:1px solid var(--border)">
+      <div style="flex:1">الإجمالي</div>
+      <div style="min-width:40px;text-align:center">${sumDays}</div>
+      <div style="min-width:58px;text-align:center">${hm(sumActual)}</div>
+      <div style="min-width:56px;text-align:center">${hm(sumExpected)}</div>
+      <div style="min-width:64px;text-align:center">${sumLateDays>0?hm(sumLateHours):'--'}</div>
+      <div style="min-width:56px;text-align:left">${totalNetStr}</div>
+    </div>`;
+  document.getElementById('all-days').textContent=sumDays;
+  document.getElementById('all-expected').textContent=hm(sumExpected);
+  document.getElementById('all-hours').textContent=hm(sumActual);
+  document.getElementById('all-late-days').textContent=sumLateDays;
+  document.getElementById('all-late-hours').textContent=sumLateDays>0?hm(sumLateHours):'--';
+  document.getElementById('all-diff-val').textContent=totalNetStr;
+  document.getElementById('all-diff-val').style.color=totalNet>=0?'var(--amber)':'var(--red)';
+}
+function renderAllAnnual(){
+  const yr=repYear;
+  document.getElementById('all-year-lbl').textContent=String(yr);
+  let totalH=0,totalDays=0,totalActive=0;
+  const rows=EMPLOYEES.map(e=>{
+    let h=0,d=0,act=0;
+    Array.from({length:12},(_,mo)=>{const md=monthData(e.id,mo,yr);h+=md.hours;d+=md.days;if(md.hours>0)act++;});
+    totalH+=h;totalDays+=d;totalActive+=act;
+    return `<div class="rep-row" style="font-size:12px">
+      <div style="flex:1;font-weight:700">${e.name}</div>
+      <div style="min-width:44px;text-align:center">${d}</div>
+      <div style="min-width:60px;text-align:left;color:var(--amber);font-weight:900">${h>0?hm(h):'--'}</div>
+      <div style="min-width:44px;text-align:center;color:var(--muted)">${act}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('all-ann-rows').innerHTML=rows+`<div class="rep-row" style="font-size:12px;font-weight:900;background:var(--bg);border-top:1px solid var(--border)">
+      <div style="flex:1">الإجمالي</div>
+      <div style="min-width:44px;text-align:center">${totalDays}</div>
+      <div style="min-width:60px;text-align:left">${totalH>0?hm(totalH):'--'}</div>
+      <div style="min-width:44px;text-align:center">${totalActive}</div>
+    </div>`;
+  document.getElementById('all-ann-days').textContent=totalDays;
+  document.getElementById('all-ann-hours').textContent=totalH>0?hm(totalH):'--';
+  document.getElementById('all-ann-months').textContent=totalActive;
+}
+function renderMonthly(){
+  document.getElementById('month-lbl').textContent=`${MONTHS[repMonth]} ${repYear}`;
+  const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===repEmpId&&y===repYear&&m-1===repMonth;}).map(l=>l.date_key))].sort();
+  if(!dKeys.length){
+    document.getElementById('rep-rows').innerHTML='<div class="empty"><div class="empty-icon">📭</div><div class="empty-txt">No records</div></div>';
+    document.getElementById('rep-days').textContent='0';
+    document.getElementById('rep-hours').textContent='--';
+    document.getElementById('rep-expected').textContent='--';
+    document.getElementById('rep-diff-card').style.display='none';
+    return;
+  }
+  let totalH=0;
+  document.getElementById('rep-rows').innerHTML=dKeys.map(key=>{
+    const dl=empLogs(repEmpId,key);const h=dayHours(repEmpId,key);totalH+=h;
+    const inL=dl.find(l=>l.type==='in');const outL=[...dl].reverse().find(l=>l.type==='out');
+    const[y,m,d]=key.split('-').map(Number);
+    const coatIcon=outL&&outL.coat!=null?(outL.coat?'✅':'❌'):'—';
+    return `<div class="rep-row">
+      <div class="rep-col-day">${d}<div style="font-size:10px">${DAYS[new Date(y,m-1,d).getDay()]}</div></div>
+      <div class="rep-col-in"><span class="rep-time ${inL?'rep-time-in':'rep-time-none'}">${inL?ft(inL.ts):'--'}</span></div>
+      <div class="rep-col-out"><span class="rep-time ${outL?'rep-time-out':'rep-time-none'}">${outL?ft(outL.ts):'--'}</span></div>
+      <div class="rep-col-h" style="color:${h>=requiredHours(repEmpId)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
+      <div style="min-width:32px;text-align:center;font-size:14px">${coatIcon}</div>
+      <div class="rep-col-del"><button class="del-log-btn" onclick="openDelLogsModal(${repEmpId},'${key}')">🗑️</button></div>
+    </div>`;
+  }).join('');
+const days=dKeys.length;
+  const expectedH=days*requiredHours(repEmpId);
+  const {lateDays, lateHours, netHours}=calcLateStats(repEmpId, dKeys);
+  const netStr=netHours>=0?`+${hm(netHours)}`:`-${hm(Math.abs(netHours))}`;
+  document.getElementById('rep-days').textContent=days;
+  document.getElementById('rep-hours').textContent=hm(totalH);
+  document.getElementById('rep-expected').textContent=hm(expectedH);
+  document.getElementById('rep-late-days').textContent=lateDays;
+  document.getElementById('rep-late-hours').textContent=lateDays>0?hm(lateHours):'--';
+  document.getElementById('rep-diff-val').textContent=netStr;
+  document.getElementById('rep-diff-val').style.color=netHours>=0?'var(--amber)':'var(--red)';
+  document.getElementById('rep-diff-card').style.display='block';
+}
+function renderAnnual(){
+  document.getElementById('year-lbl').textContent=String(repYear);
+  const mData=Array.from({length:12},(_,mo)=>monthData(repEmpId,mo,repYear));
+  const maxH=Math.max(...mData.map(m=>m.hours),.1);
+  let totalH=0,totalDays=0,active=0;
+  document.getElementById('ann-rows').innerHTML=mData.map((md,mo)=>{
+    totalH+=md.hours;totalDays+=md.days;if(md.hours>0)active++;
+    return `<div class="ann-row">
+      <div class="ann-month-name">${MONTHS[mo]}</div>
+      <div class="ann-days">${md.days}d</div>
+      <div class="ann-bar-wrap"><div class="ann-bar" style="width:${Math.round(md.hours/maxH*100)}%"></div></div>
+      <div class="ann-hours">${md.hours>0?hm(md.hours):'--'}</div>
+    </div>`;
+  }).join('');
+  document.getElementById('ann-days').textContent=totalDays;
+  document.getElementById('ann-hours').textContent=totalH>0?hm(totalH):'--';
+  document.getElementById('ann-months').textContent=active;
+}
+function selectRepEmp(id){repEmpId=id;renderReport();}
+function changeMonth(d){repMonth+=d;if(repMonth<0){repMonth=11;repYear--;}if(repMonth>11){repMonth=0;repYear++;}if(repEmpId==='all')renderAllMonthly();else renderMonthly();}
+function changeYear(d){repYear+=d;if(repEmpId==='all')renderAllAnnual();else renderAnnual();}
+
+/* ══ DELETE LOGS ══ */
+let delModalEmpId,delModalDateKey;
+function openDelLogsModal(empId,dateKey){
+  delModalEmpId=empId;delModalDateKey=dateKey;
+  const e=empById(empId);const[y,m,d]=dateKey.split('-').map(Number);
+  document.getElementById('del-logs-title').textContent=`${e.name} — ${MONTHS[m-1]} ${d}`;
+  renderDelList();openModal('modal-del-logs');
+}
+function renderDelList(){
+  const dl=empLogs(delModalEmpId,delModalDateKey);
+  const list=document.getElementById('del-log-list');
+  list.innerHTML=dl.length?dl.map(l=>`
+    <div class="del-log-item">
+      <div class="del-log-info">
+        <div style="font-weight:700">${l.type==='in'?'📍 Check-in':'🚪 Check-out'}${l.coat!=null?' 🥼'+(l.coat?'✅':'❌'):''}</div>
+        <div class="del-log-time">${ft(l.ts)}</div>
+      </div>
+      <button class="del-log-x" onclick="deleteOneLog('${l.id}')">حذف</button>
+    </div>`).join(''):'<div style="padding:14px;text-align:center;font-size:13px;color:var(--muted)">No records</div>';
+}
+async function deleteOneLog(logId){
+  try{
+    await DEL('clinic_logs',`?id=eq.${encodeURIComponent(logId)}`);
+    LOGS=LOGS.filter(l=>l.id!==logId);
+    toast('✅ تم الحذف');renderDelList();renderReport();renderOwner();
+  }catch(e){toast('❌ '+e.message.slice(0,50));}
+}
+
+/* ══ SETTINGS ══ */
+const SB_BUCKET='clinic-images';
+async function uploadLogoImage(file){
+  const ext=(file.name.split('.').pop()||'png').toLowerCase().replace(/[^a-z0-9]/g,'');
+  const name='logos/'+Date.now()+'-'+Math.random().toString(36).substring(2)+'.'+ext;
+  const r=await fetch(`${SB_URL}/storage/v1/object/${SB_BUCKET}/${name}`,{
+    method:'POST',
+    headers:{'Authorization':'Bearer '+SB_KEY,'apikey':SB_KEY,'Content-Type':file.type||'application/octet-stream'},
+    body:file
+  });
+  if(!r.ok){let m='فشل رفع الصورة';try{const j=await r.json();m=j.message||m;}catch(e){}throw new Error(m);}
+  return `${SB_URL}/storage/v1/object/public/${SB_BUCKET}/${name}`;
+}
+function syncLogoPreview(){
+  const img=document.getElementById('logo-preview-img');
+  if(CLINIC.logo){img.src=CLINIC.logo;img.style.display='block';}
+  else{img.removeAttribute('src');img.style.display='none';}
+}
+async function onLogoFile(input){
+  const f=input.files && input.files[0];
+  if(!f) return;
+  try{
+    toast('⏳ جارٍ رفع اللوجو...');
+    const url=await uploadLogoImage(f);
+    CLINIC.logo=url;
+    syncLogoPreview();
+    toast('✅ تم اختيار اللوجو — اضغط حفظ');
+  }catch(e){toast('❌ '+e.message.slice(0,50));}
+  if(input) input.value='';
+}
+function removeLogo(){
+  CLINIC.logo=null;
+  syncLogoPreview();
+}
+async function saveClinicSettings(){
+  const newC={
+    name:document.getElementById('set-clinic-name').value.trim()||CLINIC.name,
+    icon:document.getElementById('set-clinic-icon').value.trim()||CLINIC.icon,
+    logo:CLINIC.logo||null,
+    logoWidth:parseInt(document.getElementById('set-logo-width').value,10)||64,
+    shifts:CLINIC.shifts||{},
+    sub:document.getElementById('set-clinic-sub').value.trim(),
+    pin:(()=>{const p=document.getElementById('set-pin').value.trim();return(p.length===4&&/^\d+$/.test(p))?p:CLINIC.pin;})()
+  };
+  try{
+    await PATCH('clinic_settings',{value:newC},'?key=eq.clinic');
+    CLINIC={...newC};applyBranding();renderOwner();toast('✅ تم الحفظ');
+  }catch(e){toast('❌ '+e.message.slice(0,60));}
+}
+async function saveMessages(){
+  const newM={
+    in1:document.getElementById('msg-in1').value,
+    in2:document.getElementById('msg-in2').value,
+    in3:document.getElementById('msg-in3').value,
+    outYes1:document.getElementById('msg-out-yes').value,
+    outYes2:document.getElementById('msg-out-yes2').value,
+    outNo1:document.getElementById('msg-out-no1').value,
+    outNo2:document.getElementById('msg-out-no2').value,
+    outNo3:document.getElementById('msg-out-no3').value,
+    shortHours:document.getElementById('msg-short-hours').value,
+    fullHours:document.getElementById('msg-full-hours').value,
+    lateIn:document.getElementById('msg-late-in').value,
+    onTimeIn:document.getElementById('msg-ontime-in').value
+  };
+  try{
+    // upsert messages row
+    const exists=await GET('clinic_settings','?key=eq.messages');
+    if(exists&&exists.length) await PATCH('clinic_settings',{value:newM},'?key=eq.messages');
+    else await POST('clinic_settings',{key:'messages',value:newM});
+    MSGS={...newM};toast('✅ تم حفظ الرسائل');
+  }catch(e){toast('❌ '+e.message.slice(0,60));}
+}
+async function saveEmployee(){
+  const name=document.getElementById('me-name').value.trim();
+  if(!name){toast('⚠️ أدخل الاسم');return;}
+  const role=document.getElementById('me-role').value.trim()||'موظف';
+  const phone=document.getElementById('me-phone').value.trim();
+  const id=document.getElementById('me-id').value;
+  try{
+    if(id){
+      await PATCH('clinic_employees',{name,role,phone},`?id=eq.${id}`);
+      const e=empById(+id);e.name=name;e.role=role;e.phone=phone;
+    }else{
+      const [ne]=await POST('clinic_employees',{name,role,phone});
+      EMPLOYEES.push(ne);
+    }
+    closeModal('modal-emp');renderOwner();toast('✅ تم الحفظ');
+  }catch(e){toast('❌ '+e.message.slice(0,60));}
+}
+async function deleteEmployee(){
+  const id=+document.getElementById('me-id').value;
+  if(!confirm('هل تريد حذف الموظف؟')) return;
+  try{
+    await DEL('clinic_logs',`?emp_id=eq.${id}`);
+    await DEL('clinic_employees',`?id=eq.${id}`);
+    EMPLOYEES=EMPLOYEES.filter(e=>e.id!==id);LOGS=LOGS.filter(l=>l.emp_id!==id);
+    closeModal('modal-emp');renderOwner();toast('تم الحذف');
+  }catch(e){toast('❌ '+e.message.slice(0,60));}
+}
+async function clearLogs(){
+  if(!confirm('مسح جميع السجلات؟')) return;
+  try{await DEL('clinic_logs','?id=neq.null');LOGS=[];renderOwner();toast('تم المسح');}
+  catch(e){toast('❌ '+e.message.slice(0,60));}
+}
+function openEmpModal(id){
+  const e=id?empById(id):null;
+  document.getElementById('emp-modal-title').textContent=e?'تعديل موظف':'إضافة موظف جديد';
+  document.getElementById('me-name').value=e?.name||'';
+  document.getElementById('me-role').value=e?.role||'';
+  document.getElementById('me-phone').value=e?.phone||'';
+  document.getElementById('me-id').value=id||'';
+  document.getElementById('emp-del-btn').style.display=e?'block':'none';
+  openModal('modal-emp');
+}
+
+/* ══ CSV EXPORT (tab-separated for Excel compatibility) ══ */
+function dlTSV(filename,rows){
+  // Use proper CSV format that Excel reads correctly
+  const csv=rows.map(r=>r.map(cell=>{
+    const s=String(cell==null?'':cell);
+    // wrap in quotes if contains comma, quote, or newline
+    return (s.includes(',')||s.includes('"')||s.includes('\n'))?`"${s.replace(/"/g,'""')}"`:s;
+  }).join(',')).join('\r\n');
+  const uri='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  const a=document.createElement('a');a.href=uri;a.download=filename;a.click();
+}
+function exportCSV(){
+  const e=empById(repEmpId);
+  const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===repEmpId&&y===repYear&&m-1===repMonth;}).map(l=>l.date_key))].sort();
+  const rows=[
+    [`Attendance Report — ${e.name} — ${MONTHS[repMonth]} ${repYear}`],
+    ['Date','Day','Check-in','Check-out','Hours','Coat']
+  ];
+  let totalH=0;
+  dKeys.forEach(key=>{
+    const dl=empLogs(repEmpId,key);const h=dayHours(repEmpId,key);totalH+=h;
+    const inL=dl.find(l=>l.type==='in');const outL=[...dl].reverse().find(l=>l.type==='out');
+    const[y,m,d]=key.split('-').map(Number);
+    rows.push([key,DAYS[new Date(y,m-1,d).getDay()],inL?ft(inL.ts):'--',outL?ft(outL.ts):'--',hm(h),outL&&outL.coat!=null?(outL.coat?'Yes':'No'):'--']);
+  });
+  const expH=dKeys.length*requiredHours(repEmpId);
+  const diffH=totalH-expH;
+  rows.push([]);
+  rows.push(['Total Days','Expected Hours','Actual Hours','Difference']);
+  rows.push([dKeys.length,hm(expH),hm(totalH),(diffH>=0?'+':'-')+hm(Math.abs(diffH))]);
+  dlTSV(`attendance_${e.name.replace(/\s/g,'_')}_${MONTHS[repMonth]}_${repYear}.csv`,rows);
+  toast('✅ تم التصدير');
+}
+function exportAnnualCSV(){
+  const e=empById(repEmpId);
+  const rows=[[`Annual Report — ${e.name} — ${repYear}`],['Month','Days','Total Hours']];
+  Array.from({length:12},(_,mo)=>{const md=monthData(repEmpId,mo,repYear);rows.push([MONTHS[mo],md.days,md.hours>0?hm(md.hours):'--']);});
+  dlTSV(`annual_${e.name.replace(/\s/g,'_')}_${repYear}.csv`,rows);
+  toast('✅ تم التصدير');
+}
+function exportAllCSV(){
+  const mo=repMonth,yr=repYear;
+  const rows=[[`All Employees Monthly Report — ${MONTHS[mo]} ${yr}`],['Employee','Days','Actual Hours','Expected Hours','Late Days','Late Hours','Net Diff']];
+  let TD=0,TA=0,TE=0,TLD=0,TLH=0,TN=0;
+  EMPLOYEES.forEach(e=>{
+    const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===e.id&&y===yr&&m-1===mo;}).map(l=>l.date_key))].sort();
+    const actual=dKeys.reduce((s,k)=>s+dayHours(e.id,k),0);
+    const expected=dKeys.length*requiredHours(e.id);
+    const ls=calcLateStats(e.id,dKeys);
+    TD+=dKeys.length;TA+=actual;TE+=expected;TLD+=ls.lateDays;TLH+=ls.lateHours;TN+=ls.netHours;
+    rows.push([e.name,dKeys.length,actual>0?hm(actual):'--',expected>0?hm(expected):'--',ls.lateDays,ls.lateDays>0?hm(ls.lateHours):'--',(ls.netHours>=0?'+':'')+hm(Math.abs(ls.netHours))]);
+  });
+  rows.push([]);
+  rows.push(['Total',TD,hm(TA),hm(TE),TLD,hm(TLH),(TN>=0?'+':'')+hm(Math.abs(TN))]);
+  dlTSV(`all_employees_monthly_${MONTHS[mo]}_${yr}.csv`,rows);
+  toast('✅ تم التصدير');
+}
+function exportAllAnnualCSV(){
+  const yr=repYear;
+  const rows=[[`All Employees Annual Report — ${yr}`],['Employee','Days','Total Hours','Active Months']];
+  let TD=0,TH=0,TA=0;
+  EMPLOYEES.forEach(e=>{
+    let h=0,d=0,act=0;
+    Array.from({length:12},(_,mo)=>{const md=monthData(e.id,mo,yr);h+=md.hours;d+=md.days;if(md.hours>0)act++;});
+    TD+=d;TH+=h;TA+=act;
+    rows.push([e.name,d,h>0?hm(h):'--',act]);
+  });
+  rows.push([]);
+  rows.push(['Total',TD,hm(TH),TA]);
+  dlTSV(`all_employees_annual_${yr}.csv`,rows);
+  toast('✅ تم التصدير');
+}
+function backupData(){
+  const uri='data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify({clinic:CLINIC,messages:MSGS,employees:EMPLOYEES,logs:LOGS},null,2));
+  const a=document.createElement('a');a.href=uri;a.download=`backup_${todayKey()}.json`;a.click();toast('✅ تم التصدير');
+}
+
+/* ══ MANUAL LOG ══ */
+let manualType='in', manualCoat=null;
+
+function openManualModal(){
+  if(!currentEmpId) return;
+  // default type based on current state
+  const ci=checkedIn(currentEmpId);
+  manualType=ci?'out':'in';
+  manualCoat=null;
+  // default date/time = now
+  const now=new Date();
+  document.getElementById('manual-date').value=now.toISOString().slice(0,10);
+  document.getElementById('manual-time').value=now.toTimeString().slice(0,5);
+  setManualType(manualType);
+  openModal('modal-manual');
+}
+
+function setManualType(type){
+  manualType=type;
+  manualCoat=null;
+  const inBtn=document.getElementById('manual-type-in');
+  const outBtn=document.getElementById('manual-type-out');
+  if(type==='in'){
+    inBtn.style.cssText='padding:11px;border-radius:var(--radius-sm);border:2px solid var(--p2);background:var(--p2);color:#fff;font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+    outBtn.style.cssText='padding:11px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--bg);color:var(--muted);font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+    document.getElementById('manual-coat-section').style.display='none';
+  } else {
+    outBtn.style.cssText='padding:11px;border-radius:var(--radius-sm);border:2px solid var(--red);background:var(--red);color:#fff;font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+    inBtn.style.cssText='padding:11px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--bg);color:var(--muted);font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+    document.getElementById('manual-coat-section').style.display='block';
+  }
+}
+
+function setManualCoat(val){
+  manualCoat=val;
+  const yBtn=document.getElementById('manual-coat-yes-btn');
+  const nBtn=document.getElementById('manual-coat-no-btn');
+  if(val){
+    yBtn.style.cssText='padding:10px;border-radius:var(--radius-sm);border:2px solid var(--p2);background:var(--p2);color:#fff;font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+    nBtn.style.cssText='padding:10px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--bg);color:var(--muted);font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+  } else {
+    nBtn.style.cssText='padding:10px;border-radius:var(--radius-sm);border:2px solid var(--red);background:var(--red);color:#fff;font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+    yBtn.style.cssText='padding:10px;border-radius:var(--radius-sm);border:2px solid var(--border);background:var(--bg);color:var(--muted);font-family:Cairo,sans-serif;font-size:14px;font-weight:700;cursor:pointer';
+  }
+}
+
+async function submitManualLog(){
+  if(!currentEmpId) return;
+  const dateVal=document.getElementById('manual-date').value;
+  const timeVal=document.getElementById('manual-time').value;
+  if(!dateVal||!timeVal){toast('⚠️ أدخل التاريخ والوقت');return;}
+  if(manualType==='out' && manualCoat===null){toast('⚠️ حدد هل ارتديت البالطو');return;}
+  const ts=new Date(`${dateVal}T${timeVal}:00`).getTime();
+  if(isNaN(ts)){toast('⚠️ تاريخ أو وقت غير صحيح');return;}
+  const e=empById(currentEmpId);
+  const pending={
+    id:Date.now()+'_'+Math.random().toString(36).slice(2,7),
+    emp_id:currentEmpId, emp_name:e.name,
+    type:manualType, ts, date_key:dateVal,
+    coat:manualType==='out'?manualCoat:null
+  };
+  try{
+    await POST('pending_logs',pending);
+    PENDING.push(pending);
+    closeModal('modal-manual');
+    // show pending notice
+    const card=document.getElementById('welcome-msg-card');
+    card.className='msg-card';
+    card.style.background='linear-gradient(135deg,var(--amber-soft),var(--amber-soft))';
+    card.innerHTML=`
+      <div class="msg-line1" style="color:var(--amber)">⏳ طلب التسجيل قيد المراجعة</div>
+      <div class="msg-line2">سيتم إضافة السجل بعد موافقة المدير</div>
+      <div class="msg-line3">${dateVal} — ${timeVal}</div>`;
+    card.style.display='block';
+    setTimeout(()=>card.style.display='none',5000);
+    refreshActionUI();
+    card.style.display='block';
+  }catch(err){toast('❌ خطأ: '+err.message.slice(0,50));}
+}
+/* ══ PENDING APPROVALS ══ */
+function renderPending(){
+  const badge=document.getElementById('pending-badge');
+  const list=document.getElementById('pending-list');
+  if(!list) return;
+  if(!PENDING.length){
+    badge.style.display='none';
+    list.innerHTML='<div style="padding:14px;text-align:center;font-size:13px;color:var(--muted)">لا توجد طلبات معلقة ✅</div>';
+    return;
+  }
+  badge.style.display='inline';
+  badge.textContent=PENDING.length;
+  list.innerHTML=PENDING.map(p=>{
+    const coatStr=p.coat!=null?' 🥼'+(p.coat?'✅':'❌'):'';
+    return `<div class="log-row" style="flex-wrap:wrap;gap:6px;padding:12px 14px">
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:700">${p.emp_name}</div>
+        <div style="font-size:12px;color:var(--muted)">${p.type==='in'?'📍 حضور':'🚪 انصراف'}${coatStr} — ${p.date_key} ${ft(p.ts)}</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0;margin-top:4px">
+        <button onclick="approvePending('${p.id}')" style="background:var(--p2);color:#fff;border:none;border-radius:8px;padding:6px 12px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer">✅ موافقة</button>
+        <button onclick="rejectPending('${p.id}')" style="background:var(--red-l);color:var(--red);border:1px solid var(--red-border);border-radius:8px;padding:6px 12px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer">❌ رفض</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+async function approvePending(id){
+  const p=PENDING.find(x=>x.id===id);
+  if(!p) return;
+  try{
+    const log={id:p.id,emp_id:p.emp_id,emp_name:p.emp_name,type:p.type,ts:p.ts,date_key:p.date_key,coat:p.coat};
+    await POST('clinic_logs',log);
+    await DEL('pending_logs',`?id=eq.${encodeURIComponent(id)}`);
+    LOGS.push(log);
+    PENDING=PENDING.filter(x=>x.id!==id);
+    toast(`✅ تمت الموافقة على تسجيل ${p.emp_name}`);
+    renderPending();renderReport();renderOwner();
+  }catch(e){toast('❌ '+e.message.slice(0,50));}
+}
+async function rejectPending(id){
+  const p=PENDING.find(x=>x.id===id);
+  if(!p) return;
+  if(!confirm(`هل تريد رفض طلب تسجيل ${p.emp_name}؟`)) return;
+  try{
+    await DEL('pending_logs',`?id=eq.${encodeURIComponent(id)}`);
+    PENDING=PENDING.filter(x=>x.id!==id);
+    toast(`🚫 تم رفض طلب ${p.emp_name}`);
+    renderPending();
+  }catch(e){toast('❌ '+e.message.slice(0,50));}
+}
+
+function applyBranding(){
+  const gl=document.getElementById('gate-logo');
+  if(CLINIC.logo){gl.innerHTML='<img src="'+CLINIC.logo+'" alt="logo" style="width:'+(parseInt(CLINIC.logoWidth,10)||64)+'px">';}
+  else{gl.textContent=CLINIC.icon;}
+  const li=document.getElementById('load-icon');
+  if(CLINIC.logo){li.innerHTML='<img src="'+CLINIC.logo+'" alt="logo" style="width:'+(parseInt(CLINIC.logoWidth,10)||64)+'px">';}
+  else{li.textContent=CLINIC.icon;}
+  document.getElementById('gate-clinic-name').textContent=CLINIC.name;
+  document.getElementById('gate-clinic-sub').textContent=CLINIC.sub;
+  document.title=CLINIC.name;
+}
+function openShareModal(){document.getElementById('share-link-txt').textContent=location.href.split('?')[0];openModal('modal-share');}
+function copyLink(){navigator.clipboard.writeText(location.href.split('?')[0]).then(()=>toast('✅ تم نسخ الرابط'));}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+/* ══ THEME TOGGLE ══ */
+function getTheme(){try{return localStorage.getItem('za28-theme')||'dark';}catch(e){return 'dark';}}
+function setTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.querySelectorAll('.theme-toggle').forEach(el=>el.textContent=(t==='light')?'🌙':'☀️');
+  const mc=document.querySelector('meta[name="theme-color"]');
+  if(mc)mc.setAttribute('content',t==='light'?'#064250':'#02161C');
+  try{localStorage.setItem('za28-theme',t);}catch(e){}
+}
+function toggleTheme(){setTheme(getTheme()==='light'?'dark':'light');}
+
+/* ══ START ══ */
+setTheme(getTheme());
+init();
+</script>
+</body>
+</html>
+
