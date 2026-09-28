@@ -57,34 +57,34 @@
 
 /* ━━ LIGHT: سماوي متوسط — حيوي ونظيف ━━ */
 [data-theme="light"]{
-  --bg1:#064250;--bg2:#0D6B7A;--bg3:#2EA3B3;
-  --p1:#2EA3B3;--p2:#2EA3B3;--p3:#3ECDD6;--p4:#0D6B7A;--p5:#064250;--p6:#064250;
-  --brand-grad:linear-gradient(135deg,#3ECDD6 0%,#2EA3B3 50%,#0D6B7A 100%);
+  --bg1:#0F6475;--bg2:#1F8296;--bg3:#319FB3;
+  --p1:#2EA3B3;--p2:#2EA3B3;--p3:#3ECDD6;--p4:#0D6B7A;--p5:#0D6B7A;--p6:#0D6B7A;
+  --brand-grad:linear-gradient(135deg,#E8F9FC 0%,#2EA3B3 55%,#0D6B7A 100%);
   --btn-grad:linear-gradient(140deg,#2EA3B3 0%,#0D6B7A 100%);
   --red:#E5484D;--red-l:rgba(229,72,77,.14);--red-border:rgba(229,72,77,.50);
   --amber:#FFD166;--amber-soft:rgba(255,209,102,.20);
   --green:#5EE8B0;
-  --card:rgba(255,255,255,.10);
-  --card-hi:rgba(255,255,255,.16);
+  --card:rgba(255,255,255,.14);
+  --card-hi:rgba(255,255,255,.18);
   --bg:rgba(255,255,255,.07);
-  --border:rgba(255,255,255,.18);
-  --border-hi:rgba(255,255,255,.28);
+  --border:rgba(255,255,255,.28);
+  --border-hi:rgba(255,255,255,.42);
   --glass-strong:rgba(255,255,255,.20);
   --header-bg:rgba(255,255,255,.10);
-  --field-bg:rgba(255,255,255,.08);
+  --field-bg:rgba(0,0,0,.14);
   --pressed:rgba(255,255,255,.15);
   --chip-on:rgba(46,163,179,.30);
   --chip-off:rgba(255,255,255,.12);
   --accent-soft:rgba(46,163,179,.15);
   --text:#FFFFFF;
-  --muted:rgba(255,255,255,.85);
+  --muted:rgba(255,255,255,.88);
   --text-soft:rgba(255,255,255,.62);
   --clock-1:#FFFFFF;--clock-2:#9EE9F0;
   --shadow-sm:0 1px 2px rgba(0,0,0,.18),0 4px 14px rgba(0,0,0,.16);
-  --shadow:0 2px 20px rgba(0,0,0,.18);
+  --shadow:none;
   --glow-teal:0 10px 32px rgba(46,163,179,.42);
   --glow-red:0 10px 32px rgba(229,72,77,.32);
-  --nav-bg:rgba(13,107,122,.94);
+  --nav-bg:rgba(60,154,174,.94);
   --nav-text:rgba(255,255,255,.92);
   --link:var(--amber);
   --glow:rgba(255,255,255,0);
@@ -95,8 +95,7 @@ html{height:100%;background:var(--bg1)}
 body{
   min-height:100%;font-family:'Cairo',sans-serif;color:var(--text);
   background:
-    radial-gradient(ellipse 90% 42% at 50% -6%, rgba(190,240,248,.13), transparent 55%),
-    radial-gradient(ellipse 120% 55% at 50% -4%, rgba(40,198,212,.32), transparent 54%),
+    radial-gradient(ellipse 120% 55% at 50% -4%, rgba(40,198,212,.24), transparent 54%),
     radial-gradient(ellipse 80% 50% at 110% 112%, rgba(13,138,155,.18), transparent 52%),
     radial-gradient(ellipse 60% 44% at -8% 65%, rgba(8,56,72,.50), transparent 50%),
     linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 50%,var(--bg3) 100%);
@@ -105,12 +104,11 @@ body{
 }
 
 [data-theme="light"] body{
-  background:
-    radial-gradient(ellipse 120% 55% at 50% -4%, rgba(232,249,252,.32), transparent 54%),
-    radial-gradient(ellipse 75% 48% at 110% 110%, rgba(58,190,205,.22), transparent 52%),
-    radial-gradient(ellipse 58% 40% at -8% 62%, rgba(15,106,120,.22), transparent 50%),
-    linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 52%,var(--bg3) 100%);
+  background:var(--bg1);
 }
+[data-theme="light"] body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse 115% 60% at 50% -8%,rgba(242,252,254,.6),transparent 55%),
+  radial-gradient(ellipse 90% 55% at 50% 112%,rgba(9,70,84,.30),transparent 60%)}
 button{font-family:'Cairo',sans-serif}
 input,textarea,select{font-family:'Cairo',sans-serif}
 .page{display:none;min-height:100vh;flex-direction:column;position:relative;z-index:1;width:100%;max-width:520px;margin:0 auto;animation:pageIn .34s cubic-bezier(.22,1,.36,1)}
@@ -159,6 +157,9 @@ input,textarea,select{font-family:'Cairo',sans-serif}
 .theme-toggle:hover{border-color:var(--border-hi);box-shadow:0 0 14px rgba(48,201,213,.22),inset 0 1px 0 rgba(255,255,255,.08)}
 .theme-toggle:active{transform:scale(.86) rotate(-18deg);background:var(--glass-strong)}
 .gate-theme-toggle{position:absolute;top:18px;left:18px;width:44px;height:44px;font-size:18px}
+.gate-gear{position:absolute;top:18px;right:18px;width:44px;height:44px;font-size:19px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);background:var(--field-bg);border:1px solid var(--border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);transition:transform .28s cubic-bezier(.34,1.4,.64,1),border-color .25s;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.gate-gear:hover{border-color:var(--border-hi)}
+.gate-gear:active{transform:scale(.86)}
 #loading-screen{
   position:fixed;inset:0;z-index:9999;color:var(--text);
   background:radial-gradient(ellipse 100% 60% at 50% 0%,rgba(48,201,213,.14),transparent 55%),linear-gradient(180deg,var(--bg1),var(--bg2));
@@ -212,10 +213,9 @@ input,textarea,select{font-family:'Cairo',sans-serif}
   font-size:24px;font-weight:400;margin-bottom:5px;
   font-family:'Cinzel Decorative','Cairo',sans-serif;
   letter-spacing:.6px;text-align:center;
-  background:linear-gradient(135deg,#FFFFFF 0%,#EDF8FA 45%,#BDE7F0 70%,#FFFFFF 100%);
+  background:linear-gradient(135deg,#fff 0%,var(--p1) 60%,var(--p2) 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   text-shadow:none;
-  filter:drop-shadow(0 0 14px rgba(140,225,240,.40));
 }
 .gate-sub{
   font-size:12px;font-weight:400;color:var(--text-soft);margin-bottom:38px;
@@ -247,13 +247,21 @@ input,textarea,select{font-family:'Cairo',sans-serif}
   background:linear-gradient(140deg,rgba(98,237,245,.04),transparent 55%);
   pointer-events:none;
 }
+.gate-card.gate-hello{flex-direction:column;gap:4px;text-align:center;padding:24px 20px;overflow:visible;
+  border-color:rgba(98,237,245,.30);
+  box-shadow:0 0 0 6px rgba(48,201,213,.07),0 12px 34px rgba(48,201,213,.30),0 4px 14px rgba(0,0,0,.28);}
+.gate-card.gate-hello::after{content:'';position:absolute;inset:-7px;border-radius:28px;
+  border:2px solid var(--p2);opacity:0;pointer-events:none;animation:pulseRing 2.8s ease-out infinite}
+.gate-card.gate-hello:active{transform:scale(.96)}
+.gate-hello-title{font-size:21px;font-weight:900;letter-spacing:.2px}
+.gate-hello-sub{font-size:13px;font-weight:600;color:var(--muted)}
 [data-theme="light"] .gate-card{
   background:linear-gradient(140deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.55) 100%);
   box-shadow:0 4px 18px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.90);
   border-color:rgba(255,255,255,.28);
 }
 [data-theme="light"] .gate-clinic{
-  text-shadow:none;
+  text-shadow:0 0 28px rgba(232,249,252,.50),0 2px 8px rgba(0,0,0,.18);
 }
 [data-theme="light"] .gate-logo{
   filter:drop-shadow(0 0 22px rgba(232,249,252,.60)) drop-shadow(0 12px 28px rgba(0,0,0,.22));
@@ -892,20 +900,15 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
 <!-- GATE -->
 <div class="page" id="gate">
   <button class="theme-toggle gate-theme-toggle" onclick="toggleTheme()" title="تبديل المظهر">☀️</button>
+  <button class="gate-gear" onclick="showPinArea()" title="المدير">⚙️</button>
   <div class="gate-logo" id="gate-logo">🦷</div>
   <div class="gate-clinic" id="gate-clinic-name">Zayed Dental Clinic</div>
   <div class="gate-sub" id="gate-clinic-sub">نظام إدارة الحضور والانصراف</div>
   <div class="gate-divider"></div>
   <div class="gate-cards">
-    <div class="gate-card" onclick="showPinArea()">
-      <div class="gate-card-icon">🛡️</div>
-      <div class="gate-card-info"><div class="gate-card-title">مدير / مالك العيادة</div><div class="gate-card-sub">لوحة التحكم الكاملة</div></div>
-      <div class="gate-card-arrow">›</div>
-    </div>
-    <div class="gate-card" onclick="goEmpPage()">
-      <div class="gate-card-icon">👤</div>
-      <div class="gate-card-info"><div class="gate-card-title">موظف</div><div class="gate-card-sub">تسجيل الحضور والانصراف</div></div>
-      <div class="gate-card-arrow">›</div>
+    <div class="gate-card gate-hello" onclick="goEmpPage()" title="تسجيل الحضور والانصراف">
+      <div class="gate-hello-title">أهلاً بك</div>
+      <div class="gate-hello-sub">تسجيل الحضور والانصراف</div>
     </div>
   </div>
   <div class="gate-pin-area" id="pin-area">
