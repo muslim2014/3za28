@@ -90,7 +90,7 @@
   --glow:rgba(255,255,255,0);
 }
 
-html{height:100%;background:var(--bg1)}
+html{height:100%;background:var(--bg1);scrollbar-gutter:stable}
 
 body{
   min-height:100%;font-family:'Cairo',sans-serif;color:var(--text);
@@ -191,7 +191,7 @@ input,textarea,select{font-family:'Cairo',sans-serif}
 @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 #gate{background:transparent;align-items:center;justify-content:center;padding:36px 22px}
 .gate-logo{
-  font-size:72px;margin-bottom:14px;margin-top:-36px;
+  font-size:72px;margin-bottom:14px;margin-top:-84px;
   animation:logoFloat 4.2s ease-in-out infinite;
   filter:drop-shadow(0 0 24px rgba(48,201,213,.55)) drop-shadow(0 16px 32px rgba(0,0,0,.45));
 }
@@ -985,10 +985,6 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
       </div>
       <!-- checkout message (shown after checkout) -->
       <div id="checkout-msg-card" style="display:none" class="msg-card"></div>
-      <div class="today-log" id="emp-today-log-card" style="margin-top:14px">
-        <div class="tl-head">Today's Log</div>
-        <div id="today-log-rows"></div>
-      </div>
     </div>
 
     <!-- MONTHLY REPORT (read-only) -->
@@ -1613,16 +1609,6 @@ function refreshActionUI(){
   document.getElementById('checkout-msg-card').style.display='none';
   document.getElementById('action-big-btn').style.display='';
   document.getElementById('action-status').style.display='';
-  document.getElementById('emp-today-log-card').style.display='block';
-  const rows=empLogs(currentEmpId,todayKey());
-  const logEl=document.getElementById('today-log-rows');
-  if(!rows.length){logEl.innerHTML='<div style="padding:14px;text-align:center;font-size:13px;color:var(--muted)">No records today</div>';}
-  else logEl.innerHTML=rows.map(l=>`
-    <div class="tl-row">
-      <div class="tl-dot ${l.type==='in'?'dot-in':'dot-out'}"></div>
-      <div class="tl-label">${l.type==='in'?'📍 Check-in':'🚪 Check-out'}${l.coat!=null?' · 🥼'+(l.coat?'✅':'❌'):''}</div>
-      <div class="tl-time">${ft(l.ts)}</div>
-    </div>`).join('');
 }
 
 function handleCheckInOut(){
@@ -1631,7 +1617,7 @@ function handleCheckInOut(){
     document.getElementById('action-big-btn').style.display='none';
     document.getElementById('action-status').style.display='none';
     document.getElementById('coat-confirm').style.display='block';
-    document.getElementById('emp-today-log-card').style.display='none';
+    { const _tc=document.getElementById('emp-today-log-card'); if(_tc) _tc.style.display='none'; }
     document.getElementById('welcome-msg-card').style.display='none';
     document.getElementById('checkout-msg-card').style.display='none';
   } else {
@@ -1708,7 +1694,7 @@ async function confirmCheckout(woreCoat){
     card.style.display='block';
     document.getElementById('action-big-btn').style.display='';
     document.getElementById('action-status').style.display='';
-    document.getElementById('emp-today-log-card').style.display='block';
+    { const _tc=document.getElementById('emp-today-log-card'); if(_tc) _tc.style.display='block'; }
     refreshActionUI();
 // hours message
     const todayH=dayHours(currentEmpId,todayKey());
