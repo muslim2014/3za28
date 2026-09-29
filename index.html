@@ -209,8 +209,12 @@ input,textarea,select{font-family:'Cairo',sans-serif}
   border:1px solid rgba(98,237,245,.10);
 }
 
+[data-theme="light"] .gate-clinic,[data-theme="light"] .gate-sub,[data-theme="light"] .clinic-grad{
+  background:none;-webkit-background-clip:border-box;background-clip:border-box;color:#fff;
+  text-shadow:0 1px 10px rgba(4,40,48,.35);
+}
 .gate-clinic{
-  font-size:24px;font-weight:400;margin-bottom:5px;
+  font-size:27px;font-weight:400;margin-bottom:5px;
   font-family:'Cinzel Decorative','Cairo',sans-serif;
   letter-spacing:.6px;text-align:center;
   background:linear-gradient(135deg,#fff 0%,var(--p1) 60%,var(--p2) 100%);
@@ -223,7 +227,7 @@ input,textarea,select{font-family:'Cairo',sans-serif}
   text-shadow:none;
 }
 .gate-sub{
-  font-size:12px;font-weight:400;color:var(--text-soft);margin-bottom:38px;
+  font-size:13px;font-weight:400;color:var(--text-soft);margin-bottom:38px;
   font-family:'Cinzel Decorative','Cairo',sans-serif;
   text-align:center;letter-spacing:.4px;
 }
@@ -252,12 +256,14 @@ input,textarea,select{font-family:'Cairo',sans-serif}
   background:linear-gradient(140deg,rgba(98,237,245,.04),transparent 55%);
   pointer-events:none;
 }
-.gate-card.gate-hello{flex-direction:column;gap:4px;text-align:center;padding:24px 20px;overflow:visible;
+.gate-card.gate-hello{flex-direction:column;gap:4px;text-align:center;padding:24px 20px;overflow:visible;cursor:default;
   border-color:rgba(98,237,245,.30);
   box-shadow:0 0 0 6px rgba(48,201,213,.07),0 12px 34px rgba(48,201,213,.30),0 4px 14px rgba(0,0,0,.28);}
+.gate-hello-btn{background:none;border:none;color:inherit;font:inherit;display:flex;flex-direction:column;gap:4px;align-items:center;width:100%;cursor:pointer;padding:0}
 .gate-card.gate-hello::after{content:'';position:absolute;inset:-7px;border-radius:28px;
   border:2px solid var(--p2);opacity:0;pointer-events:none;animation:pulseRing 2.8s ease-out infinite}
-.gate-card.gate-hello:active{transform:scale(.96)}
+.gate-card.gate-hello:active{transform:none}
+.gate-hello-btn:active{transform:scale(.97)}
 .gate-hello-title{font-size:21px;font-weight:900;letter-spacing:.2px}
 .gate-hello-sub{font-size:13px;font-weight:600;color:var(--muted)}
 [data-theme="light"] .gate-card{
@@ -911,9 +917,11 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
   <div class="gate-sub" id="gate-clinic-sub">نظام إدارة الحضور والانصراف</div>
   <div class="gate-divider"></div>
   <div class="gate-cards">
-    <div class="gate-card gate-hello" onclick="goEmpPage()" title="تسجيل الحضور والانصراف">
-      <div class="gate-hello-title">أهلاً بك</div>
-      <div class="gate-hello-sub">تسجيل الحضور والانصراف</div>
+    <div class="gate-card gate-hello">
+      <button class="gate-hello-btn" onclick="goEmpPage()" title="تسجيل الحضور والانصراف">
+        <span class="gate-hello-title">أهلاً بك</span>
+        <span class="gate-hello-sub">تسجيل الحضور والانصراف</span>
+      </button>
     </div>
   </div>
   <div class="gate-pin-area" id="pin-area">
