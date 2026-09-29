@@ -90,7 +90,7 @@
   --glow:rgba(255,255,255,0);
 }
 
-html{height:100%;background:var(--bg1);scrollbar-gutter:stable}
+html{height:100%;background:var(--bg1);scrollbar-gutter:stable;overflow-x:clip}
 
 body{
   min-height:100%;font-family:'Cairo',sans-serif;color:var(--text);
@@ -1039,6 +1039,10 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
           <span style="min-width:46px;text-align:left">Hours</span><span style="min-width:32px;text-align:center">🥼</span>
         </div>
         <div id="emp-rep-rows"></div>
+        <div style="padding:12px 14px">
+          <div class="dashcal-sub" id="emp-cal-sub"></div>
+          <div class="dashcal-grid" id="emp-cal-grid" dir="ltr"></div>
+        </div>
       </div>
     </div>
 
@@ -1753,6 +1757,7 @@ function renderEmpMonthlyReport(){
   const e=empById(currentEmpId);
   document.getElementById('emp-rep-title').textContent=`سجل ${e.name}`;
   document.getElementById('emp-rep-month-lbl').textContent=`${MONTHS[empRepMonth]} ${empRepYear}`;
+  renderEmpCal();
   const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===currentEmpId&&y===empRepYear&&m-1===empRepMonth;}).map(l=>l.date_key))].sort();
   if(!dKeys.length){
     document.getElementById('emp-rep-rows').innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:var(--muted)">No records this month</div>';
@@ -1843,16 +1848,17 @@ function ownerChangeMonth(d){
   renderOwnerStats();
   renderDashCal();
 }
-/* DASH-CALENDAR: days of ownerRepMonth; one bottom-left dot per attending employee (read-only, from LOGS) */
-function renderDashCal(){
-  const grid=document.getElementById('dash-cal-grid');
+/* SHARED-CALENDAR: one renderer for owner dashboard + employee سجلي. onlyEmpId=null → all employees. */
+const EMP_COLORS=['#FF6262','#FFB020','#3EDCD6','#5AA9FF','#B487FF','#FF7AB8','#4ADE80','#FACC15','#22D3EE','#F97316','#E879F9','#34D399'];
+function empColor(id){const e=(typeof empById==='function'?empById(id):null);const s=`${id}:${e?e.name:''}`;let h=0;for(let i=0;i<s.length;i++){h=((h*31)+s.charCodeAt(i))|0;}return EMP_COLORS[Math.abs(h)%EMP_COLORS.length];}
+function renderCalGrid(gridId,lblId,subId,mo,yr,onlyEmpId){
+  const grid=document.getElementById(gridId);
   if(!grid) return;
-  const mo=ownerRepMonth,yr=ownerRepYear;
   const dim=new Date(yr,mo+1,0).getDate();
   const firstDow=new Date(yr,mo,1).getDay();
   const pad=n=>String(n).padStart(2,'0');
   const todayK=todayKey();
-  const lbl=document.getElementById('dash-cal-lbl');
+  const lbl=document.getElementById(lblId);
   if(lbl) lbl.textContent=`${MONTHS[mo]} ${yr}`;
   // Week starts Saturday: header Sat..Fri, offset shifted accordingly.
   const DOW_SAT_FIRST=[6,0,1,2,3,4,5];
@@ -1861,17 +1867,26 @@ function renderDashCal(){
   let unionDays=0;
   for(let d=1;d<=dim;d++){
     const key=`${yr}-${pad(mo+1)}-${pad(d)}`;
-    const attendees=[...new Set(LOGS.filter(l=>l.date_key===key).map(l=>l.emp_id))].filter(id=>empById(id));
+    const attendees=[...new Set(LOGS.filter(l=>l.date_key===key&&(onlyEmpId==null||l.emp_id===onlyEmpId)).map(l=>l.emp_id))].filter(id=>empById(id));
     if(attendees.length) unionDays++;
     const names=attendees.map(id=>empById(id).name).join('، ');
-    const dots=attendees.slice(0,6).map(()=>`<span class="dashcal-dot"></span>`).join('')
+    const dots=attendees.slice(0,6).map(id=>{const c=empColor(id);return `<span class="dashcal-dot" title="${empById(id).name}" style="background:${c};box-shadow:0 0 6px ${c}88"></span>`;}).join('')
       +(attendees.length>6?`<span class="dashcal-more">+${attendees.length-6}</span>`:'');
     html+=`<div class="dashcal-day${key===todayK?' today':''}" title="${names||'لا حضور'}">`
       +`<div class="dashcal-num">${d}</div><div class="dashcal-dots">${dots}</div></div>`;
   }
   grid.innerHTML=html;
-  const sub=document.getElementById('dash-cal-sub');
+  const sub=document.getElementById(subId);
   if(sub) sub.textContent=`أيام عليها حضور: ${unionDays} من ${dim} يوم`;
+}
+/* DASH-CALENDAR: days of ownerRepMonth; dots per attending employee in their own color (read-only, from LOGS) */
+function renderDashCal(){
+  renderCalGrid('dash-cal-grid','dash-cal-lbl','dash-cal-sub',ownerRepMonth,ownerRepYear,null);
+}
+/* EMP-CALENDAR: سجلي — same renderer filtered to current employee, dot in his color */
+function renderEmpCal(){
+  if(!currentEmpId) return;
+  renderCalGrid('emp-cal-grid','emp-rep-month-lbl','emp-cal-sub',empRepMonth,empRepYear,currentEmpId);
 }
 
 function renderOwnerStats(){
