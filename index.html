@@ -1140,8 +1140,8 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
         <div class="rep-stat"><div class="rep-stat-val" id="rep-expected" style="color:var(--muted);font-size:16px">--</div><div class="rep-stat-lbl">الساعات المطلوبة</div></div>
         <div class="rep-stat"><div class="rep-stat-val" id="rep-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات الفعلية</div></div>
       </div>
-      <!-- 3-col stats: late days | late hours | net diff -->
-      <div id="rep-diff-card" style="margin:0 16px 8px;display:none">
+      <!-- 3-col stats: late days | late hours | net diff (always visible) -->
+      <div id="rep-diff-card" style="margin:0 16px 8px">
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
           <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
             <div id="rep-late-days" style="font-size:18px;font-weight:900;color:var(--red)">0</div>
@@ -1177,10 +1177,28 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
         <button class="mnav-btn" onclick="changeYear(1)">◀</button>
       </div>
       <div class="rep-stats">
-        <div class="rep-stat"><div class="rep-stat-val" id="ann-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام</div></div>
-        <div class="rep-stat"><div class="rep-stat-val" id="ann-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات</div></div>
-        <div class="rep-stat"><div class="rep-stat-val" id="ann-months" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أشهر نشطة</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="ann-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام الحضور</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="ann-expected" style="color:var(--muted);font-size:16px">--</div><div class="rep-stat-lbl">الساعات المطلوبة</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="ann-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات الفعلية</div></div>
       </div>
+      <!-- 3-col stats: late days | late hours | net diff (always visible, annual) -->
+      <div id="ann-diff-card" style="margin:0 16px 8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="ann-late-days" style="font-size:18px;font-weight:900;color:var(--red)">0</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">أيام التأخير ⏰</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="ann-late-hours" style="font-size:16px;font-weight:900;color:var(--red)">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">ساعات التأخير</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:10px;text-align:center">
+            <div id="ann-diff-val" style="font-size:16px;font-weight:900">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">صافي الفارق</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 16px 8px;font-size:12px;color:var(--muted);text-align:center">أشهر نشطة: <span id="ann-months" style="font-weight:900;color:var(--amber)">0</span></div>
       <div style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
         <div class="rep-table-header">
           <span style="flex:1">Month</span><span style="min-width:44px;text-align:center">Days</span>
@@ -1241,10 +1259,27 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
         <button class="mnav-btn" onclick="changeYear(1)">◀</button>
       </div>
       <div class="rep-stats">
-        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام</div></div>
-        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات</div></div>
-        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-months" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أشهر نشطة</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-days" style="color:var(--amber)">0</div><div class="rep-stat-lbl">أيام الحضور</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-expected" style="color:var(--muted);font-size:16px">--</div><div class="rep-stat-lbl">الساعات المطلوبة</div></div>
+        <div class="rep-stat"><div class="rep-stat-val" id="all-ann-hours" style="color:var(--amber)">--</div><div class="rep-stat-lbl">الساعات الفعلية</div></div>
       </div>
+      <div style="padding:0 16px 8px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="all-ann-late-days" style="font-size:18px;font-weight:900;color:var(--red)">0</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">أيام التأخير ⏰</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--red-border);padding:10px;text-align:center">
+            <div id="all-ann-late-hours" style="font-size:16px;font-weight:900;color:var(--red)">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">ساعات التأخير</div>
+          </div>
+          <div style="background:var(--card);border-radius:var(--radius-sm);border:1px solid var(--border);padding:10px;text-align:center">
+            <div id="all-ann-diff-val" style="font-size:16px;font-weight:900">--</div>
+            <div style="font-size:10px;color:var(--muted);margin-top:3px">صافي الفارق</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding:0 16px 8px;font-size:12px;color:var(--muted);text-align:center">أشهر نشطة: <span id="all-ann-months" style="font-weight:900;color:var(--amber)">0</span></div>
       <div style="background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
         <div class="rep-table-header">
           <span style="flex:1;font-weight:700">الموظف</span>
@@ -1307,6 +1342,29 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
         <div class="form-group"><label class="form-label">رسالة الانصراف — 5 ساعات أو أكثر ⏱️✅</label><textarea class="form-input" id="msg-full-hours" rows="2" placeholder="نحن ممتنون لك ونقدر تعبك يا {name} شكراً لمجهودك الوافر"></textarea></div>
         <button class="save-btn" onclick="saveMessages()">💾 حفظ الرسائل</button>
       </div>
+    </div>
+
+    <!-- MANUAL ATTENDANCE REGISTRATION SETTINGS -->
+    <div class="set-section">
+      <div class="set-section-title">🕐 التسجيل اليدوي للحضور</div>
+      <div class="set-group">
+        <div class="set-row" style="cursor:pointer" onclick="toggleManualGlobal()">
+          <span class="set-row-icon">🔓</span>
+          <span class="set-row-lbl">تسجيل الحضور اليدوي</span>
+          <span class="set-row-val" id="manual-global-state">--</span>
+        </div>
+        <div class="set-row" style="cursor:pointer" onclick="toggleManualBlockFuture()">
+          <span class="set-row-icon">📅</span>
+          <span class="set-row-lbl">منع التسجيل بتاريخ مستقبلي</span>
+          <span class="set-row-val" id="manual-future-state">--</span>
+        </div>
+      </div>
+      <div class="form-group" style="margin-top:14px">
+        <label class="form-label">أقصى عدد أيام للتسجيل اليدوي في الماضي</label>
+        <input class="form-input" id="set-manual-max-past" type="number" min="0" step="1" inputmode="numeric" style="direction:ltr">
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">مثال: 4 يعني أن اليوم و3 أيام سابقة مسموحة فقط.</div>
+      </div>
+      <button class="save-btn" onclick="saveManualSettings()">💾 حفظ إعدادات التسجيل اليدوي</button>
     </div>
 
     <div class="set-section">
@@ -1423,7 +1481,7 @@ const PATCH=(t,b,p) =>sbReq('PATCH',t,b,p,{'Prefer':'return=representation'});
 const DEL  =(t,p)   =>sbReq('DELETE',t,null,p);
 
 /* ══ STATE ══ */
-let CLINIC={name:'Zayed Dental Clinic',icon:'🦷',sub:'نظام إدارة الحضور والانصراف',pin:'1611',logo:null,logoWidth:64,shifts:{}};
+let CLINIC={name:'Zayed Dental Clinic',icon:'🦷',sub:'نظام إدارة الحضور والانصراف',pin:'1611',logo:null,logoWidth:64,shifts:{},manualReg:{enabled:false,blockFuture:true,maxPastDays:7},manualPerm:{}};
 let MSGS={
   in1:'أهلاً بك {name}! 😊🥼',
   in2:'لا تنس ارتداء البالطو أثناء عملك',
@@ -1614,6 +1672,8 @@ function goEmpBack(){
 
 function refreshActionUI(){
   if(!currentEmpId) return;
+  const manualBtn=document.getElementById('manual-log-btn');
+  if(manualBtn) manualBtn.style.display=canManualRegister(currentEmpId)?'block':'none';
   const ci=checkedIn(currentEmpId);
   const btn=document.getElementById('action-big-btn');
   btn.className='big-btn '+(ci?'btn-out':'btn-in');
@@ -1833,10 +1893,13 @@ document.getElementById('settings-emp-list').innerHTML=EMPLOYEES.map(e=>{
         <div class="shift-row"><span>🏁 موعد الانصراف</span><input type="time" id="shift-end-${e.id}" value="${sh.end}" oninput="onEmpShiftInput(${e.id})"></div>
       </div>
       <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b id="shift-hours-${e.id}">${minToHM(requiredHours(e.id)*60)}</b></div>
+      <div class="shift-row" style="justify-content:space-between;margin-top:8px"><span>🕐 التسجيل اليدوي لهذا الموظف</span>
+        <button id="manual-perm-${e.id}" onclick="toggleEmpManualPerm(${e.id})" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted)">--</button></div>
       <button class="shift-save" onclick="saveEmpShift(${e.id})">💾 حفظ الفترة لهذا الموظف</button>
     </div>`;
   }).join('');
   renderPending();
+  refreshManualUI();
   if(!repEmpId) repEmpId=EMPLOYEES[0]?.id;
   renderReport();
 }
@@ -1924,6 +1987,11 @@ function switchOwnerTab(subId,idx){
   document.getElementById('owner-topbar-right').onclick=idx===1?(repEmpId==='all'?(repView==='monthly'?exportAllCSV:exportAllAnnualCSV):(repView==='monthly'?exportCSV:exportAnnualCSV)):openShareModal;
   if(idx===1) renderReport();
   if(idx===2) renderOwner();
+}
+
+// All distinct date keys an employee has records for, within one year.
+function yearKeys(empId, yr){
+  return [...new Set(LOGS.filter(l=>{const[y]=l.date_key.split('-').map(Number);return l.emp_id===empId&&y===yr;}).map(l=>l.date_key))].sort();
 }
 
 function calcLateStats(empId, dKeys){
@@ -2019,10 +2087,14 @@ function renderAllMonthly(){
 function renderAllAnnual(){
   const yr=repYear;
   document.getElementById('all-year-lbl').textContent=String(yr);
-  let totalH=0,totalDays=0,totalActive=0;
+  let totalH=0,totalDays=0,totalActive=0,totalExpected=0,totalLateDays=0,totalLateHours=0,totalNet=0;
   const rows=EMPLOYEES.map(e=>{
     let h=0,d=0,act=0;
     Array.from({length:12},(_,mo)=>{const md=monthData(e.id,mo,yr);h+=md.hours;d+=md.days;if(md.hours>0)act++;});
+    const eKeys=yearKeys(e.id,yr);
+    totalExpected+=eKeys.length*requiredHours(e.id);
+    const ls=calcLateStats(e.id,eKeys);
+    totalLateDays+=ls.lateDays;totalLateHours+=ls.lateHours;totalNet+=ls.netHours;
     totalH+=h;totalDays+=d;totalActive+=act;
     return `<div class="rep-row" style="font-size:12px">
       <div style="flex:1;font-weight:700">${e.name}</div>
@@ -2037,8 +2109,14 @@ function renderAllAnnual(){
       <div style="min-width:60px;text-align:left">${totalH>0?hm(totalH):'--'}</div>
       <div style="min-width:44px;text-align:center">${totalActive}</div>
     </div>`;
+  const totalNetStr=totalNet>=0?`+${hm(totalNet)}`:`-${hm(Math.abs(totalNet))}`;
   document.getElementById('all-ann-days').textContent=totalDays;
+  document.getElementById('all-ann-expected').textContent=hm(totalExpected);
   document.getElementById('all-ann-hours').textContent=totalH>0?hm(totalH):'--';
+  document.getElementById('all-ann-late-days').textContent=totalLateDays;
+  document.getElementById('all-ann-late-hours').textContent=totalLateDays>0?hm(totalLateHours):'--';
+  document.getElementById('all-ann-diff-val').textContent=totalNetStr;
+  document.getElementById('all-ann-diff-val').style.color=totalNet>=0?'var(--amber)':'var(--red)';
   document.getElementById('all-ann-months').textContent=totalActive;
 }
 function renderMonthly(){
@@ -2049,7 +2127,12 @@ function renderMonthly(){
     document.getElementById('rep-days').textContent='0';
     document.getElementById('rep-hours').textContent='--';
     document.getElementById('rep-expected').textContent='--';
-    document.getElementById('rep-diff-card').style.display='none';
+    // All six boxes stay visible with their zero values (never hidden).
+    document.getElementById('rep-late-days').textContent='0';
+    document.getElementById('rep-late-hours').textContent='--';
+    document.getElementById('rep-diff-val').textContent='+0h 00m';
+    document.getElementById('rep-diff-val').style.color='var(--amber)';
+    document.getElementById('rep-diff-card').style.display='block';
     return;
   }
   let totalH=0;
@@ -2094,8 +2177,18 @@ function renderAnnual(){
       <div class="ann-hours">${md.hours>0?hm(md.hours):'--'}</div>
     </div>`;
   }).join('');
+  // The six annual boxes mirror the monthly report, aggregated over the whole year.
+  const dKeys=yearKeys(repEmpId,repYear);
+  const expectedH=dKeys.length*requiredHours(repEmpId);
+  const ls=calcLateStats(repEmpId,dKeys);
+  const netStr=ls.netHours>=0?`+${hm(ls.netHours)}`:`-${hm(Math.abs(ls.netHours))}`;
   document.getElementById('ann-days').textContent=totalDays;
+  document.getElementById('ann-expected').textContent=hm(expectedH);
   document.getElementById('ann-hours').textContent=totalH>0?hm(totalH):'--';
+  document.getElementById('ann-late-days').textContent=ls.lateDays;
+  document.getElementById('ann-late-hours').textContent=ls.lateDays>0?hm(ls.lateHours):'--';
+  document.getElementById('ann-diff-val').textContent=netStr;
+  document.getElementById('ann-diff-val').style.color=ls.netHours>=0?'var(--amber)':'var(--red)';
   document.getElementById('ann-months').textContent=active;
 }
 function selectRepEmp(id){repEmpId=id;renderReport();}
@@ -2171,6 +2264,8 @@ async function saveClinicSettings(){
     logo:CLINIC.logo||null,
     logoWidth:parseInt(document.getElementById('set-logo-width').value,10)||64,
     shifts:CLINIC.shifts||{},
+    manualReg:CLINIC.manualReg||{},
+    manualPerm:CLINIC.manualPerm||{},
     sub:document.getElementById('set-clinic-sub').value.trim(),
     pin:(()=>{const p=document.getElementById('set-pin').value.trim();return(p.length===4&&/^\d+$/.test(p))?p:CLINIC.pin;})()
   };
@@ -2323,18 +2418,111 @@ function backupData(){
 }
 
 /* ══ MANUAL LOG ══ */
+/* ══ MANUAL ATTENDANCE REGISTRATION SETTINGS ══ */
+const MANUAL_MAX_PAST_DEFAULT=7;
+function manualRegSettings(){
+  const m=(CLINIC&&CLINIC.manualReg)||{};
+  const n=Number(m.maxPastDays);
+  return {
+    enabled:m.enabled===true,
+    blockFuture:m.blockFuture!==false,
+    maxPastDays:(Number.isInteger(n)&&n>=0)?n:MANUAL_MAX_PAST_DEFAULT
+  };
+}
+function empManualPerm(id){const p=(CLINIC&&CLINIC.manualPerm)||{};return p[id]===true;}
+function canManualRegister(id){return !!id && manualRegSettings().enabled && empManualPerm(id);}
+// Local calendar date helpers — never UTC, so no timezone off-by-one around midnight.
+function parseDateKeyLocal(k){const p=String(k||'').split('-').map(Number);if(p.length!==3||p.some(v=>!Number.isFinite(v)))return null;const d=new Date(p[0],p[1]-1,p[2]);if(d.getFullYear()!==p[0]||d.getMonth()!==p[1]-1||d.getDate()!==p[2])return null;return d;}
+function dateKeyOf(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function shiftDateKey(k,days){const d=parseDateKeyLocal(k);if(!d)return k;d.setDate(d.getDate()+days);return dateKeyOf(d);}
+function manualDateBounds(){
+  const s=manualRegSettings();
+  const today=todayKey();
+  return {today:today, min:shiftDateKey(today,-s.maxPastDays), max:s.blockFuture?today:null};
+}
+// Single source of truth for the date rules (used by the picker AND on submit).
+function validateManualDate(dateKey){
+  const s=manualRegSettings();
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(String(dateKey||''))) return '⚠️ تاريخ غير صحيح';
+  const d=parseDateKeyLocal(dateKey);
+  if(!d) return '⚠️ تاريخ غير صحيح';
+  const b=manualDateBounds();
+  if(s.blockFuture && dateKey>b.today) return '⚠️ لا يمكن التسجيل بتاريخ مستقبلي';
+  if(dateKey<b.min) return `⚠️ أقدم تاريخ مسموح هو ${b.min}`;
+  return null;
+}
+async function persistClinicSettings(){await PATCH('clinic_settings',{value:CLINIC},'?key=eq.clinic');}
+// Re-read the authoritative settings row before opening/submitting, so a stale
+// cached page cannot bypass the manager's current rules.
+async function refreshManualSettingsFromServer(){
+  try{
+    const rows=await GET('clinic_settings','?key=eq.clinic&select=value');
+    const v=rows&&rows[0]&&rows[0].value;
+    if(v&&typeof v==='object') CLINIC={...CLINIC,...v};
+  }catch(e){/* offline: keep cached settings */}
+}
+function refreshManualUI(){
+  const s=manualRegSettings();
+  const g=document.getElementById('manual-global-state');if(g)g.textContent=s.enabled?'مفعّل ✅':'معطّل 🚫';
+  const f=document.getElementById('manual-future-state');if(f)f.textContent=s.blockFuture?'ممنوع 🚫':'مسموح ✅';
+  const inp=document.getElementById('set-manual-max-past');if(inp&&document.activeElement!==inp)inp.value=String(s.maxPastDays);
+  EMPLOYEES.forEach(e=>{
+    const b=document.getElementById('manual-perm-'+e.id);
+    if(!b)return;
+    const on=empManualPerm(e.id);
+    b.textContent=on?'مفعّل ✅':'معطّل 🚫';
+    b.style.color=on?'var(--p2)':'var(--muted)';
+    b.style.borderColor=on?'var(--p2)':'var(--border)';
+  });
+  const mlb=document.getElementById('manual-log-btn');
+  if(mlb&&currentEmpId)mlb.style.display=canManualRegister(currentEmpId)?'block':'none';
+}
+async function saveManualReg(patch){
+  const prev={...manualRegSettings()};
+  CLINIC.manualReg={...prev,...patch};
+  refreshManualUI();
+  try{await persistClinicSettings();toast('✅ تم حفظ إعدادات التسجيل اليدوي');}
+  catch(e){CLINIC.manualReg=prev;refreshManualUI();toast('❌ '+(e.message||'فشل الحفظ').slice(0,50));}
+}
+function toggleManualGlobal(){const s=manualRegSettings();saveManualReg({enabled:!s.enabled});}
+function toggleManualBlockFuture(){const s=manualRegSettings();saveManualReg({blockFuture:!s.blockFuture});}
+async function saveManualSettings(){
+  const el=document.getElementById('set-manual-max-past');
+  const raw=(el?el.value:'').trim();
+  if(!/^\d+$/.test(raw)){toast('⚠️ أدخل عدد أيام صحيحاً (0 أو أكثر)');return;}
+  const n=Number(raw);
+  if(!Number.isInteger(n)||n<0){toast('⚠️ أدخل عدد أيام صحيحاً (0 أو أكثر)');return;}
+  await saveManualReg({maxPastDays:n});
+}
+function toggleEmpManualPerm(id){
+  const prev={...(CLINIC.manualPerm||{})};
+  const next={...prev};
+  if(empManualPerm(id))delete next[id];else next[id]=true;
+  CLINIC.manualPerm=next;
+  refreshManualUI();
+  persistClinicSettings().catch(e=>{CLINIC.manualPerm=prev;refreshManualUI();toast('❌ '+(e.message||'فشل الحفظ').slice(0,50));});
+}
+
 let manualType='in', manualCoat=null;
 
-function openManualModal(){
+async function openManualModal(){
   if(!currentEmpId) return;
+  await refreshManualSettingsFromServer();
+  refreshManualUI();
+  if(!canManualRegister(currentEmpId)){toast('🚫 التسجيل اليدوي غير متاح لهذا الموظف');return;}
   // default type based on current state
   const ci=checkedIn(currentEmpId);
   manualType=ci?'out':'in';
   manualCoat=null;
-  // default date/time = now
+  // default date/time = now (local calendar date)
   const now=new Date();
-  document.getElementById('manual-date').value=now.toISOString().slice(0,10);
-  document.getElementById('manual-time').value=now.toTimeString().slice(0,5);
+  const b=manualDateBounds();
+  const dateEl=document.getElementById('manual-date');
+  dateEl.min=b.min;
+  if(b.max) dateEl.max=b.max; else dateEl.removeAttribute('max');
+  dateEl.value=b.today;
+  dateEl.onchange=function(){const err=validateManualDate(this.value);if(err){toast(err);this.value=b.today;}};
+  document.getElementById('manual-time').value=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
   setManualType(manualType);
   openModal('modal-manual');
 }
@@ -2373,6 +2561,12 @@ async function submitManualLog(){
   const dateVal=document.getElementById('manual-date').value;
   const timeVal=document.getElementById('manual-time').value;
   if(!dateVal||!timeVal){toast('⚠️ أدخل التاريخ والوقت');return;}
+  // Authoritative re-check on submit: never trust only the UI state.
+  await refreshManualSettingsFromServer();
+  refreshManualUI();
+  if(!canManualRegister(currentEmpId)){toast('🚫 التسجيل اليدوي غير متاح لهذا الموظف');closeModal('modal-manual');return;}
+  const dateErr=validateManualDate(dateVal);
+  if(dateErr){toast(dateErr);return;}
   if(manualType==='out' && manualCoat===null){toast('⚠️ حدد هل ارتديت البالطو');return;}
   const ts=new Date(`${dateVal}T${timeVal}:00`).getTime();
   if(isNaN(ts)){toast('⚠️ تاريخ أو وقت غير صحيح');return;}
