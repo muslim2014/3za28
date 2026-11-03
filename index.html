@@ -1025,8 +1025,8 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
         <button style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;color:var(--text)" onclick="hideEmpReport()">← رجوع</button>
       </div>
       <!-- SECTION 1 — current month and year -->
-      <div class="acc-card open" id="emp-acc-1">
-        <button class="acc-hd" type="button" onclick="toggleEmpAcc(1)" aria-expanded="true" aria-controls="emp-acc-1-body">
+      <div class="acc-card" id="emp-acc-1">
+        <button class="acc-hd" type="button" onclick="toggleEmpAcc(1)" aria-expanded="false" aria-controls="emp-acc-1-body">
           <span class="acc-title" id="emp-acc-1-title">--</span>
           <span class="acc-arrow" aria-hidden="true">▼</span>
         </button>
@@ -1062,8 +1062,8 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
       </div>
 
       <!-- SECTION 2 — attendance days (existing table + calendar) -->
-      <div class="acc-card open" id="emp-acc-2">
-        <button class="acc-hd" type="button" onclick="toggleEmpAcc(2)" aria-expanded="true" aria-controls="emp-acc-2-body">
+      <div class="acc-card" id="emp-acc-2">
+        <button class="acc-hd" type="button" onclick="toggleEmpAcc(2)" aria-expanded="false" aria-controls="emp-acc-2-body">
           <span class="acc-title">أيام الحضور</span>
           <span class="acc-arrow" aria-hidden="true">▼</span>
         </button>
@@ -1081,8 +1081,8 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
       </div>
 
       <!-- SECTION 3 — working hours for the effective schedule period -->
-      <div class="acc-card open" id="emp-acc-3">
-        <button class="acc-hd" type="button" onclick="toggleEmpAcc(3)" aria-expanded="true" aria-controls="emp-hours-body">
+      <div class="acc-card" id="emp-acc-3">
+        <button class="acc-hd" type="button" onclick="toggleEmpAcc(3)" aria-expanded="false" aria-controls="emp-hours-body">
           <span class="acc-title">ساعات العمل</span>
           <span class="acc-arrow" aria-hidden="true">▼</span>
         </button>
@@ -1572,6 +1572,8 @@ function hideLoading(){const l=document.getElementById('loading-screen');l.class
 /* ══ HELPERS ══ */
 function todayKey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 function ft(ts){return new Date(ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});}
+// 'HH:MM' (24h) → 12-hour clock label, matching the times shown in attendance rows.
+function t12(hhmm){const p=String(hhmm||'').split(':');const h=+p[0],m=+p[1]||0;if(isNaN(h))return hhmm||'--';return new Date(2000,0,1,h,m).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true});}
 function hm(hrs){const h=Math.floor(hrs);const m=Math.round((hrs-h)*60);return `${h}h ${String(m).padStart(2,'0')}m`;}
 function fd(ts){return new Date(ts).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});}
 function empById(id){return EMPLOYEES.find(e=>e.id===id);}
@@ -1939,25 +1941,19 @@ function toggleEmpAcc(n){
   const hd=card.querySelector('.acc-hd');
   if(hd) hd.setAttribute('aria-expanded',open?'true':'false');
 }
-// Section 3 — the schedule period that applies today, plus this month's hours.
-function renderEmpHoursSection(dKeys){
+// Section 3 — the schedule period that applies today (times shown on a 12-hour clock).
+function renderEmpHoursSection(){
   const el=document.getElementById('emp-hours-body');
   if(!el||!currentEmpId) return;
   const s=shiftOn(currentEmpId,todayKey());
-  const keys=Array.isArray(dKeys)?dKeys:empMonthKeys(currentEmpId,empRepMonth,empRepYear);
   const perDay=requiredHoursOn(currentEmpId,todayKey());
-  const expected=sumRequiredHours(currentEmpId,keys);
-  const actual=keys.reduce((sum,k)=>sum+dayHours(currentEmpId,k),0);
   el.innerHTML=`
     <div style="padding:12px 14px">
       <div class="shift-inputs">
-        <div class="shift-row"><span>⏰ موعد الحضور الأساسي</span><b style="color:var(--text);font-variant-numeric:tabular-nums" dir="ltr">${s.start}</b></div>
-        <div class="shift-row"><span>🏁 موعد الانصراف</span><b style="color:var(--text);font-variant-numeric:tabular-nums" dir="ltr">${s.end}</b></div>
+        <div class="shift-row"><span>⏰ موعد الحضور الأساسي</span><b style="color:var(--text);font-variant-numeric:tabular-nums" dir="ltr">${t12(s.start)}</b></div>
+        <div class="shift-row"><span>🏁 موعد الانصراف</span><b style="color:var(--text);font-variant-numeric:tabular-nums" dir="ltr">${t12(s.end)}</b></div>
       </div>
       <div class="shift-hours-badge"><span>ساعات العمل المطلوبة يومياً</span><b>${minToHM(perDay*60)}</b></div>
-      <div class="shift-hours-badge" style="margin-top:8px"><span>الساعات المطلوبة لهذا الشهر</span><b>${minToHM(expected*60)}</b></div>
-      <div class="shift-hours-badge" style="margin-top:8px"><span>الساعات الفعلية لهذا الشهر</span><b>${minToHM(actual*60)}</b></div>
-      ${s.from!==SCHED_EPOCH?`<div style="margin-top:10px;font-size:11.5px;font-weight:600;color:var(--muted)">سارية من ${fmtDMY(s.from)}</div>`:''}
     </div>`;
 }
 function renderEmpMonthlyReport(){
@@ -1969,7 +1965,7 @@ function renderEmpMonthlyReport(){
   if(t1) t1.textContent=`${AR_MONTHS[empRepMonth]} ${empRepYear}`;
   renderEmpCal();
   const dKeys=empMonthKeys(currentEmpId,empRepMonth,empRepYear);
-  renderEmpHoursSection(dKeys);
+  renderEmpHoursSection();
   if(!dKeys.length){
     document.getElementById('emp-rep-rows').innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:var(--muted)">No records this month</div>';
     document.getElementById('emp-rep-days').textContent='0';
