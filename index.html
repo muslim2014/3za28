@@ -772,6 +772,14 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
 .shift-hist-dates{flex:1}
 .shift-hist-times{font-variant-numeric:tabular-nums;direction:ltr}
 .shift-hist-hours{min-width:52px;text-align:left;font-variant-numeric:tabular-nums}
+.shift-hist-row{display:grid;grid-template-columns:1.35fr .8fr .8fr .55fr;gap:6px;font-size:11px}
+.shift-hist-row .shift-hist-dates{flex:none;white-space:nowrap}
+.shift-hist-times{font-variant-numeric:tabular-nums;direction:ltr;text-align:center;white-space:nowrap}
+.shift-add-btn{width:100%;margin-top:10px;padding:9px;background:var(--chip-off);color:var(--text);border:1px dashed var(--border);border-radius:11px;font-family:'Cairo',sans-serif;font-size:12.5px;font-weight:800;cursor:pointer}
+.shift-add-btn:active{transform:scale(.985)}
+.add-period{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.shift-warn{margin-top:8px;padding:8px 10px;border-radius:9px;background:var(--red-border);color:var(--red);font-size:11px;font-weight:700}
+.shift-hist-empty,.shift-hist-note{margin-top:6px;font-size:11px;color:var(--muted);font-weight:600}
 /* ━━ سجلي: expandable sections (stay inside the app's existing card look) ━━ */
 .acc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:11px;box-shadow:none}
 .acc-hd{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;padding:14px 16px;background:var(--header-bg);border:none;font-family:'Cairo',sans-serif;font-size:14px;font-weight:800;color:var(--text);cursor:pointer;text-align:right}
@@ -1388,7 +1396,25 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
       </div>
     </div>
 
-    <!-- MANUAL ATTENDANCE REGISTRATION SETTINGS -->
+    <div class="set-section">
+      <div class="set-section-title">البيانات</div>
+      <div class="set-group">
+        <div class="set-row" style="cursor:pointer" onclick="backupData()"><span class="set-row-icon">💾</span><span class="set-row-lbl">تصدير نسخة احتياطية</span><span class="set-row-val">←</span></div>
+        <div class="set-row" style="cursor:pointer" onclick="clearLogs()"><span class="set-row-icon">🗑️</span><span class="set-row-lbl" style="color:var(--red)">مسح جميع السجلات</span><span class="set-row-val">⚠️</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMPLOYEES -->
+  <div class="owner-sub" id="sub-employees">
+    <div class="set-section">
+      <div class="set-section-title">الموظفون</div>
+      <div id="emp-cards-list"></div>
+    </div>
+    <div class="set-section">
+      <div class="set-section-title">إضافة موظف جديد</div>
+      <button class="save-btn" onclick="openEmpModal(null)">+ إضافة موظف جديد</button>
+    </div>
     <div class="set-section">
       <div class="set-section-title">🕐 التسجيل اليدوي للحضور</div>
       <div class="set-group">
@@ -1411,24 +1437,13 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
       <button class="save-btn" onclick="saveManualSettings()">💾 حفظ إعدادات التسجيل اليدوي</button>
     </div>
 
-    <div class="set-section">
-      <div class="set-section-title">الموظفون</div>
-      <div id="settings-emp-list"></div>
-      <button class="save-btn" onclick="openEmpModal(null)">+ إضافة موظف جديد</button>
-    </div>
-    <div class="set-section">
-      <div class="set-section-title">البيانات</div>
-      <div class="set-group">
-        <div class="set-row" style="cursor:pointer" onclick="backupData()"><span class="set-row-icon">💾</span><span class="set-row-lbl">تصدير نسخة احتياطية</span><span class="set-row-val">←</span></div>
-        <div class="set-row" style="cursor:pointer" onclick="clearLogs()"><span class="set-row-icon">🗑️</span><span class="set-row-lbl" style="color:var(--red)">مسح جميع السجلات</span><span class="set-row-val">⚠️</span></div>
-      </div>
-    </div>
   </div>
 
   <div class="owner-bottom-nav">
     <button class="onav-item active" id="nav-0" onclick="switchOwnerTab('sub-dash',0)"><span class="onav-icon">🏠</span>الرئيسية</button>
-    <button class="onav-item" id="nav-1" onclick="switchOwnerTab('sub-reports',1)"><span class="onav-icon">📊</span>التقارير</button>
-    <button class="onav-item" id="nav-2" onclick="switchOwnerTab('sub-settings',2)"><span class="onav-icon">⚙️</span>الإعدادات</button>
+    <button class="onav-item" id="nav-1" onclick="switchOwnerTab('sub-settings',1)"><span class="onav-icon">⚙️</span>الإعدادات</button>
+    <button class="onav-item" id="nav-2" onclick="switchOwnerTab('sub-employees',2)"><span class="onav-icon">👥</span>الموظفون</button>
+    <button class="onav-item" id="nav-3" onclick="switchOwnerTab('sub-reports',3)"><span class="onav-icon">📊</span>التقارير</button>
   </div>
 </div>
 
@@ -1599,97 +1614,138 @@ function timeToMin(t){const a=String(t||'0:0').split(':');return ((+a[0])||0)*60
 function minToHM(m){m=Math.round(m);return Math.floor(m/60)+'h '+String(m%60).padStart(2,'0')+'m';}
 function fmtDMY(k){const p=String(k||'').split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:String(k||'--');}
 
-// Periods are always chained by effective date: each period ends the day before
-// the next one starts, so two periods for one employee can never overlap.
-function normalizePeriods(list){
-  const arr=(Array.isArray(list)?list:[])
-    .filter(p=>p&&/^\d{4}-\d{2}-\d{2}$/.test(String(p.from||''))&&/^\d{1,2}:\d{2}$/.test(String(p.start||''))&&/^\d{1,2}:\d{2}$/.test(String(p.end||'')))
-    .map(p=>({from:p.from,to:p.to||null,start:p.start,end:p.end}))
+// The administrator's saved periods are authoritative: they are never re-chained,
+// re-dated or rewritten. They are only validated.
+function normTime(t){const m=String(t||'').match(/^(\d{1,2}):(\d{2})$/);if(!m)return null;const h=+m[1],mi=+m[2];if(h>23||mi>59)return null;return String(h).padStart(2,'0')+':'+String(mi).padStart(2,'0');}
+const SCHED_OPEN='9999-12-31';
+function rawPeriods(id){
+  const list=(CLINIC.schedules&&CLINIC.schedules[id])||[];
+  return (Array.isArray(list)?list:[])
+    .filter(p=>p&&/^\d{4}-\d{2}-\d{2}$/.test(String(p.from||''))&&normTime(p.start)&&normTime(p.end))
+    .map(p=>({from:p.from,to:(p.to&&/^\d{4}-\d{2}-\d{2}$/.test(String(p.to)))?p.to:null,start:normTime(p.start),end:normTime(p.end)}))
     .sort((a,b)=>a.from<b.from?-1:a.from>b.from?1:0);
-  arr.forEach((p,i)=>{p.to=(i<arr.length-1)?shiftDateKey(arr[i+1].from,-1):null;});
-  return arr;
 }
-
-// Every employee has a list of schedule periods. The legacy single schedule
-// (CLINIC.shifts) is read as one open-ended period, so nothing changes for
-// employees whose history has not been dated yet.
-function schedulePeriods(id){
-  const arr=normalizePeriods(CLINIC.schedules&&CLINIC.schedules[id]);
-  if(arr.length) return arr;
-  const s=CLINIC.shifts&&CLINIC.shifts[id];
-  return [{from:SCHED_EPOCH,to:null,start:(s&&s.start)||SHIFT_DEF.start,end:(s&&s.end)||SHIFT_DEF.end}];
-}
-
-// Employee ID + attendance date → the schedule that applied on that date.
+// Legacy single schedule (CLINIC.shifts) still applies while an employee has no
+// dated periods at all, so nothing changes for employees not yet dated.
 function shiftOn(id,dateKey){
-  const periods=schedulePeriods(id);
   const k=String(dateKey||todayKey());
-  let chosen=periods[0];
-  for(const p of periods){ if(p.from<=k) chosen=p; else break; }
-  return chosen;
+  const list=rawPeriods(id);
+  if(list.length){
+    // Employee ID + attendance date → the saved period that covers that date.
+    return list.find(p=>p.from<=k && (!p.to || k<=p.to)) || null;
+  }
+  const s=CLINIC.shifts&&CLINIC.shifts[id];
+  return {from:SCHED_EPOCH,to:null,start:(s&&normTime(s.start))||SHIFT_DEF.start,end:(s&&normTime(s.end))||SHIFT_DEF.end,legacy:true};
 }
+// null = no schedule recorded for that date (never guessed, never substituted).
 function requiredHoursOn(id,dateKey){
   const s=shiftOn(id,dateKey);
+  if(!s) return null;
   const m=timeToMin(s.end)-timeToMin(s.start);
-  return m>0?m/60:5;
+  return m>0?m/60:null;
 }
 function sumRequiredHours(id,keys){
-  return (keys||[]).reduce((sum,k)=>sum+requiredHoursOn(id,k),0);
+  return (keys||[]).reduce((sum,k)=>{const h=requiredHoursOn(id,k);return sum+(h==null?0:h);},0);
+}
+function missingScheduleDays(id,keys){
+  return (keys||[]).filter(k=>!shiftOn(id,k)).length;
 }
 // Current schedule helpers stay for live check-in/out behaviour.
-function empShift(id){const s=shiftOn(id,todayKey());return {start:s.start,end:s.end};}
-function requiredHours(empId){return requiredHoursOn(empId,todayKey());}
-function shiftStartDate(d,empId){const dd=new Date(d),t=shiftOn(empId,dateKeyOf(dd)).start.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
-function shiftEndDate(d,empId){const dd=new Date(d),t=shiftOn(empId,dateKeyOf(dd)).end.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
-function onEmpShiftInput(id){
-  const st=document.getElementById('shift-start-'+id),en=document.getElementById('shift-end-'+id);
-  const el=document.getElementById('shift-hours-'+id);
+function empShift(id){const s=shiftOn(id,todayKey())||{start:SHIFT_DEF.start,end:SHIFT_DEF.end};return {start:s.start,end:s.end};}
+function requiredHours(empId){const h=requiredHoursOn(empId,todayKey());if(h!=null)return h;const m=timeToMin(SHIFT_DEF.end)-timeToMin(SHIFT_DEF.start);return m>0?m/60:5;}
+function shiftStartDate(d,empId){const s=shiftOn(empId,dateKeyOf(d));if(!s)return null;const dd=new Date(d),t=s.start.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
+function shiftEndDate(d,empId){const s=shiftOn(empId,dateKeyOf(d));if(!s)return null;const dd=new Date(d),t=s.end.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
+function onPeriodTimesInput(id){
+  const st=document.getElementById('ap-start-'+id),en=document.getElementById('ap-end-'+id);
+  const el=document.getElementById('ap-hours-'+id);
   if(!st||!en||!el) return;
   if(!st.value||!en.value){el.textContent='--';return;}
   const m=timeToMin(en.value)-timeToMin(st.value);
   el.textContent=m>0?minToHM(m):'غير صالح';
 }
+function toggleAddPeriod(id){
+  const box=document.getElementById('add-period-'+id);
+  if(!box) return;
+  const open=box.style.display!=='block';
+  box.style.display=open?'block':'none';
+  if(open){
+    const cur=shiftOn(id,todayKey());
+    const st=document.getElementById('ap-start-'+id),en=document.getElementById('ap-end-'+id);
+    if(st&&!st.value) st.value=(cur&&cur.start)||SHIFT_DEF.start;
+    if(en&&!en.value) en.value=(cur&&cur.end)||SHIFT_DEF.end;
+    onPeriodTimesInput(id);
+    const f=document.getElementById('ap-from-'+id);
+    if(f&&f.focus) f.focus();
+  }
+}
+// Explicit periods only, newest last, each row: الفترة | الحضور | الانصراف | المطلوب
 function renderScheduleHistory(id){
   const el=document.getElementById('shift-history-'+id);
   if(!el) return;
-  const periods=schedulePeriods(id).slice().reverse();
-  el.innerHTML=periods.map(p=>{
-    const open=p.to==null;
-    const fromStr=p.from===SCHED_EPOCH?'البداية':fmtDMY(p.from);
-    return `<div class="shift-hist-row${open?' active':''}">`
-      +`<span class="shift-hist-dates">${fromStr} ← ${open?'الآن':fmtDMY(p.to)}</span>`
-      +`<span class="shift-hist-times" dir="ltr">${p.start}–${p.end}</span>`
-      +`<span class="shift-hist-hours">${minToHM(timeToMin(p.end)-timeToMin(p.start))}</span>`
-      +`</div>`;
-  }).join('');
+  const list=rawPeriods(id);
+  if(!list.length){
+    const s=shiftOn(id,todayKey());
+    el.innerHTML=`<div class="shift-hist-empty">لا توجد فترات محفوظة — الجدول الحالى ${t12(s.start)}–${t12(s.end)}</div>`;
+    return;
+  }
+  el.innerHTML=list.map(p=>`<div class="shift-hist-row${p.to==null?' active':''}">`
+    +`<span class="shift-hist-dates">${fmtDMY(p.from)} – ${p.to?fmtDMY(p.to):'مستمرة'}</span>`
+    +`<span class="shift-hist-times">${t12(p.start)}</span>`
+    +`<span class="shift-hist-times">${t12(p.end)}</span>`
+    +`<span class="shift-hist-hours">${minToHM(timeToMin(p.end)-timeToMin(p.start))}</span>`
+    +`</div>`).join('');
 }
-async function saveEmpShift(id){
-  const st=document.getElementById('shift-start-'+id),en=document.getElementById('shift-end-'+id);
-  const fd=document.getElementById('shift-from-'+id);
-  if(!st||!en||!st.value||!en.value){toast('⚠️ حدد موعد الحضور والانصراف');return;}
-  if(!fd||!/^\d{4}-\d{2}-\d{2}$/.test(fd.value||'')){toast('⚠️ حدد تاريخ سريان الفترة');return;}
-  const from=fd.value;
-  if(!parseDateKeyLocal(from)){toast('⚠️ تاريخ سريان غير صحيح');return;}
-  if(timeToMin(en.value)-timeToMin(st.value)<=0){toast('⚠️ موعد الانصراف يجب أن يكون بعد موعد الحضور');return;}
-  const list=schedulePeriods(id).slice();
-  const at=list.findIndex(p=>p.from===from);
-  if(at>=0) list[at]={from,to:null,start:st.value,end:en.value};
-  else list.push({from,to:null,start:st.value,end:en.value});
-  const chained=normalizePeriods(list);
+function addPeriodError(msg){toast('⚠️ '+msg);}
+async function saveSchedulePeriod(id){
+  const g=k=>document.getElementById(k+'-'+id);
+  const fEl=g('ap-from'),tEl=g('ap-to'),sEl=g('ap-start'),eEl=g('ap-end');
+  if(!fEl||!tEl||!sEl||!eEl) return;
+  const from=String(fEl.value||'').trim();
+  const to=String(tEl.value||'').trim();
+  const start=normTime(sEl.value),end=normTime(eEl.value);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(from)){addPeriodError('حدد تاريخ بداية الفترة');return;}
+  if(to && !/^\d{4}-\d{2}-\d{2}$/.test(to)){addPeriodError('تاريخ نهاية الفترة غير صحيح');return;}
+  if(to && to<from){addPeriodError('تاريخ النهاية لا يمكن أن يسبق تاريخ البداية');return;}
+  if(!start||!end){addPeriodError('حدد موعد الحضور وموعد الانصراف');return;}
+  if(timeToMin(end)-timeToMin(start)<=0){addPeriodError('موعد الانصراف يجب أن يكون بعد موعد الحضور');return;}
+  // Overlap validation against the saved periods. Nothing is rewritten silently:
+  // the only change ever offered is closing an open-ended period, and only after
+  // the administrator explicitly confirms it.
+  let list=rawPeriods(id);
+  const clash=list.find(p=>{
+    const pTo=p.to||SCHED_OPEN;
+    const nTo=to||SCHED_OPEN;
+    return from<=pTo && p.from<=nTo;
+  });
+  if(clash){
+    const closable=clash.to==null && from>clash.from;
+    if(!closable){
+      addPeriodError('الفترة تتداخل مع فترة محفوظة: '+fmtDMY(clash.from)+' – '+(clash.to?fmtDMY(clash.to):'مستمرة'));
+      return;
+    }
+    const newEnd=shiftDateKey(from,-1);
+    const ok=confirm('توجد فترة مستمرة تبدأ '+fmtDMY(clash.from)+' — سيتم إنهاؤها يوم '+fmtDMY(newEnd)+' وتبدأ الفترة الجديدة من '+fmtDMY(from)+'. هل تريد المتابعة؟');
+    if(!ok) return;
+    list=list.map(p=>p.from===clash.from?{...p,to:newEnd}:p);
+  }
+  const next=[...list,{from,to:to||null,start,end}]
+    .sort((a,b)=>a.from<b.from?-1:a.from>b.from?1:0);
   const prevSchedules=JSON.parse(JSON.stringify(CLINIC.schedules||{}));
   const prevShifts=JSON.parse(JSON.stringify(CLINIC.shifts||{}));
-  CLINIC.schedules={...(CLINIC.schedules||{}),[id]:chained};
-  // Keep the legacy mirror equal to the period that applies today.
+  CLINIC.schedules={...(CLINIC.schedules||{}),[id]:next};
   const active=shiftOn(id,todayKey());
-  CLINIC.shifts={...(CLINIC.shifts||{}),[id]:{start:active.start,end:active.end}};
+  if(active) CLINIC.shifts={...(CLINIC.shifts||{}),[id]:{start:active.start,end:active.end}};
   try{
     await PATCH('clinic_settings',{value:CLINIC},'?key=eq.clinic');
     renderScheduleHistory(id);
-    toast('✅ تم حفظ الفترة من '+fmtDMY(from));
+    fEl.value='';tEl.value='';
+    toggleAddPeriod(id);
+    toast('✅ تم حفظ الفترة');
+    if(typeof renderOwner==='function') renderOwner();
   }catch(e){
     CLINIC.schedules=prevSchedules;CLINIC.shifts=prevShifts;
     renderScheduleHistory(id);
-    toast('❌ '+(e.message||'فشل الحفظ').slice(0,50));
+    toast('❌ '+((e&&e.message)||'فشل الحفظ').slice(0,50));
   }
 }
 
@@ -1740,8 +1796,9 @@ function routePage(){
   }
   else if(h.startsWith('owner')){
     showPage('owner-page');
-    if(h.includes('report')) switchOwnerTab('sub-reports',1);
-    else if(h.includes('settings')) switchOwnerTab('sub-settings',2);
+    if(h.includes('report')) switchOwnerTab('sub-reports',3);
+    else if(h.includes('employee')) switchOwnerTab('sub-employees',2);
+    else if(h.includes('settings')) switchOwnerTab('sub-settings',1);
     else switchOwnerTab('sub-dash',0);
   }
   else { showPage('gate'); }
@@ -1988,7 +2045,7 @@ function renderEmpMonthlyReport(){
       <div class="emp-rep-col-day">${d}<div style="font-size:10px">${DAYS[new Date(y,m-1,d).getDay()]}</div></div>
       <div class="emp-rep-col-in"><span class="rep-time ${inL?'rep-time-in':'rep-time-none'}">${inL?ft(inL.ts):'--'}</span></div>
       <div class="emp-rep-col-out"><span class="rep-time ${outL?'rep-time-out':'rep-time-none'}">${outL?ft(outL.ts):'--'}</span></div>
-      <div class="emp-rep-col-h" style="color:${h>=requiredHoursOn(currentEmpId,key)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
+      <div class="emp-rep-col-h" style="color:${requiredHoursOn(currentEmpId,key)==null?'var(--muted)':(h>=requiredHoursOn(currentEmpId,key)?'var(--amber)':'var(--red)')};font-weight:900">${hm(h)}</div>
       <div style="min-width:32px;text-align:center;font-size:14px">${coatIcon}</div>
     </div>`;
   }).join('');
@@ -2034,29 +2091,50 @@ function renderOwner(){
   document.getElementById('msg-full-hours').value=MSGS.fullHours||'';
   document.getElementById('msg-late-in').value=MSGS.lateIn||'';
   document.getElementById('msg-ontime-in').value=MSGS.onTimeIn||'';
-document.getElementById('settings-emp-list').innerHTML=EMPLOYEES.map(e=>{
-    const sh=empShift(e.id);
-    return `<div class="shift-card">
-      <div class="shift-card-hd"><div class="shift-card-name">${e.name}</div><div class="shift-role">${e.role||''}</div>
-        <button class="shift-edit-btn" onclick="openEmpModal(${e.id})" title="تعديل بيانات الموظف">✎</button></div>
-      <div class="shift-inputs">
-        <div class="shift-row"><span>⏰ موعد الحضور الأساسي</span><input type="time" id="shift-start-${e.id}" value="${sh.start}" oninput="onEmpShiftInput(${e.id})"></div>
-        <div class="shift-row"><span>🏁 موعد الانصراف</span><input type="time" id="shift-end-${e.id}" value="${sh.end}" oninput="onEmpShiftInput(${e.id})"></div>
-        <div class="shift-row"><span>📅 سريان من</span><input type="date" id="shift-from-${e.id}" value="${todayKey()}"></div>
-      </div>
-      <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b id="shift-hours-${e.id}">${minToHM(requiredHours(e.id)*60)}</b></div>
-      <div class="shift-row" style="justify-content:space-between;margin-top:8px"><span>🕐 التسجيل اليدوي لهذا الموظف</span>
-        <button id="manual-perm-${e.id}" onclick="toggleEmpManualPerm(${e.id})" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted)">--</button></div>
-      <button class="shift-save" onclick="saveEmpShift(${e.id})">💾 حفظ الفترة لهذا الموظف</button>
-      <div class="shift-hist-title">📜 سجل الفترات</div>
-      <div class="shift-hist" id="shift-history-${e.id}"></div>
-    </div>`;
-  }).join('');
-  EMPLOYEES.forEach(e=>renderScheduleHistory(e.id));
+  renderEmployeesPage();
   renderPending();
   refreshManualUI();
   if(!repEmpId) repEmpId=EMPLOYEES[0]?.id;
   renderReport();
+}
+
+/* ══ EMPLOYEES PAGE (owner) ══ */
+function renderEmployeesPage(){
+  const list=document.getElementById('emp-cards-list');
+  if(!list) return;
+  list.innerHTML=EMPLOYEES.map(e=>{
+    const periods=rawPeriods(e.id);
+    const cur=shiftOn(e.id,todayKey());
+    const curTxt=cur?`${t12(cur.start)} – ${t12(cur.end)}`:'—';
+    const curHrs=cur?minToHM(timeToMin(cur.end)-timeToMin(cur.start)):'--';
+    const monthKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);const d=new Date();return l.emp_id===e.id&&y===d.getFullYear()&&m-1===d.getMonth();}).map(l=>l.date_key))];
+    const missing=missingScheduleDays(e.id,monthKeys);
+    return `<div class="shift-card">
+      <div class="shift-card-hd"><div class="shift-card-name">${e.name}</div><div class="shift-role">${e.role||''}</div>
+        <button class="shift-edit-btn" onclick="openEmpModal(${e.id})" title="تعديل بيانات الموظف">✎</button></div>
+      <div class="shift-row" style="justify-content:space-between"><span>الفترة الحالية</span><b style="color:var(--text);font-variant-numeric:tabular-nums" dir="ltr">${curTxt}</b></div>
+      <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b>${curHrs}</b></div>
+      ${missing>0?`<div class="shift-warn">⚠️ ${missing} يوم حضورى هذا الشهر بدون فترة محددة</div>`:''}
+      <div class="shift-row" style="justify-content:space-between;margin-top:8px"><span>🕐 التسجيل اليدوي لهذا الموظف</span>
+        <button id="manual-perm-${e.id}" onclick="toggleEmpManualPerm(${e.id})" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted)">--</button></div>
+      <button class="shift-add-btn" onclick="toggleAddPeriod(${e.id})">＋ إضافة فترة</button>
+      <div class="add-period" id="add-period-${e.id}" style="display:none">
+        <div class="shift-inputs">
+          <div class="shift-row"><span>📅 تاريخ بداية الفترة</span><input type="date" id="ap-from-${e.id}"></div>
+          <div class="shift-row"><span>📅 تاريخ نهاية الفترة</span><input type="date" id="ap-to-${e.id}"></div>
+          <div class="shift-row"><span>⏰ موعد الحضور</span><input type="time" id="ap-start-${e.id}" oninput="onPeriodTimesInput(${e.id})"></div>
+          <div class="shift-row"><span>🏁 موعد الانصراف</span><input type="time" id="ap-end-${e.id}" oninput="onPeriodTimesInput(${e.id})"></div>
+        </div>
+        <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b id="ap-hours-${e.id}">--</b></div>
+        <button class="shift-save" onclick="saveSchedulePeriod(${e.id})">💾 حفظ الفترة</button>
+      </div>
+      <div class="shift-hist-title">📜 سجل الفترات</div>
+      <div class="shift-hist" id="shift-history-${e.id}"></div>
+      ${periods.length?'':'<div class="shift-hist-note">لم تُسجَّل فترات مؤرَّخة لهذا الموظف بعد.</div>'}
+    </div>`;
+  }).join('');
+  EMPLOYEES.forEach(e=>renderScheduleHistory(e.id));
+  refreshManualUI();
 }
 
 function ownerChangeMonth(d){
@@ -2132,15 +2210,16 @@ function renderOwnerStats(){
 }
 
 function switchOwnerTab(subId,idx){
-  const target=idx===0?'#/owner':idx===1?'#/owner-reports':'#/owner-settings';
+  const target=idx===0?'#/owner':idx===1?'#/owner-settings':idx===2?'#/owner-employees':'#/owner-reports';
   if(location.hash!==target){location.hash=target;return;}
   document.querySelectorAll('.owner-sub').forEach(s=>s.classList.remove('show'));
   document.getElementById(subId).classList.add('show');
   document.querySelectorAll('.onav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));
-  document.getElementById('owner-topbar-right').textContent=idx===1?'📤':'🔗';
-  document.getElementById('owner-topbar-right').onclick=idx===1?(repEmpId==='all'?(repView==='monthly'?exportAllCSV:exportAllAnnualCSV):(repView==='monthly'?exportCSV:exportAnnualCSV)):openShareModal;
-  if(idx===1) renderReport();
-  if(idx===2) renderOwner();
+  const isReports=idx===3;
+  document.getElementById('owner-topbar-right').textContent=isReports?'📤':'🔗';
+  document.getElementById('owner-topbar-right').onclick=isReports?(repEmpId==='all'?(repView==='monthly'?exportAllCSV:exportAllAnnualCSV):(repView==='monthly'?exportCSV:exportAnnualCSV)):openShareModal;
+  if(idx===1||idx===2) renderOwner();
+  if(isReports) renderReport();
 }
 
 // All distinct date keys an employee has records for, within one year.
@@ -2157,12 +2236,15 @@ function calcLateStats(empId, dKeys){
     if(!inL) return;
     const checkIn=new Date(inL.ts);
     const shiftStart=shiftStartDate(checkIn,empId);
+    const reqH=requiredHoursOn(empId,key);
+    // No saved period covers this date → no lateness / overtime is fabricated.
+    if(!shiftStart||reqH==null) return;
     // late = mins after shift start (0 if on time or early)
     const lateMin=checkIn>shiftStart ? Math.floor((checkIn-shiftStart)/60000) : 0;
     if(lateMin>0) lateDays++;
     totalLateMinutes+=lateMin;
     // required end = checkin + required hours + late mins
-    const requiredEndMs=inL.ts + (requiredHoursOn(empId,key)*3600000) + (lateMin*60000);
+    const requiredEndMs=inL.ts + (reqH*3600000) + (lateMin*60000);
     // net = checkout - required end
     const endMs=outL ? outL.ts : Date.now();
     totalNetMinutes+=Math.floor((endMs - requiredEndMs)/60000);
@@ -2299,7 +2381,7 @@ function renderMonthly(){
       <div class="rep-col-day">${d}<div style="font-size:10px">${DAYS[new Date(y,m-1,d).getDay()]}</div></div>
       <div class="rep-col-in"><span class="rep-time ${inL?'rep-time-in':'rep-time-none'}">${inL?ft(inL.ts):'--'}</span></div>
       <div class="rep-col-out"><span class="rep-time ${outL?'rep-time-out':'rep-time-none'}">${outL?ft(outL.ts):'--'}</span></div>
-      <div class="rep-col-h" style="color:${h>=requiredHoursOn(repEmpId,key)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
+      <div class="rep-col-h" style="color:${requiredHoursOn(repEmpId,key)==null?'var(--muted)':(h>=requiredHoursOn(repEmpId,key)?'var(--amber)':'var(--red)')};font-weight:900">${hm(h)}</div>
       <div style="min-width:32px;text-align:center;font-size:14px">${coatIcon}</div>
       <div class="rep-col-del"><button class="del-log-btn" onclick="openDelLogsModal(${repEmpId},'${key}')">🗑️</button></div>
     </div>`;
