@@ -772,12 +772,19 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
 .shift-hist-dates{flex:1}
 .shift-hist-times{font-variant-numeric:tabular-nums;direction:ltr}
 .shift-hist-hours{min-width:52px;text-align:left;font-variant-numeric:tabular-nums}
-.shift-hist-row{display:grid;grid-template-columns:1.35fr .8fr .8fr .55fr;gap:6px;font-size:11px}
-.shift-hist-row .shift-hist-dates{flex:none;white-space:nowrap}
-.shift-hist-times{font-variant-numeric:tabular-nums;direction:ltr;text-align:center;white-space:nowrap}
+.shift-hist-row{display:grid;grid-template-columns:1fr auto;grid-template-areas:"dates hours" "times acts";gap:4px 8px;align-items:center;font-size:10.5px;padding:7px 9px}
+.shift-hist-row .shift-hist-dates{grid-area:dates;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shift-hist-hours{grid-area:hours;text-align:left;font-variant-numeric:tabular-nums}
+.shift-hist-times{grid-area:times;font-variant-numeric:tabular-nums;direction:ltr;text-align:right;white-space:nowrap}
+.shift-hist-acts{grid-area:acts;display:flex;gap:4px;justify-self:end}
+.shift-act-btn{width:28px;height:28px;padding:0;display:flex;align-items:center;justify-content:center;border-radius:9px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px;line-height:1;cursor:pointer;flex-shrink:0}
+.shift-act-btn:active{transform:scale(.94)}
+.shift-act-btn.danger{color:var(--red);border-color:var(--red-border);background:var(--red-l)}
+.pf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.modal-note{padding:12px 14px;border-radius:13px;background:var(--chip-off);color:var(--muted);font-size:12.5px;font-weight:600;line-height:1.8;margin-bottom:14px}
+.pf-hint{font-size:10.5px;color:var(--muted);font-weight:600;margin-top:-6px;margin-bottom:10px}
 .shift-add-btn{width:100%;margin-top:10px;padding:9px;background:var(--chip-off);color:var(--text);border:1px dashed var(--border);border-radius:11px;font-family:'Cairo',sans-serif;font-size:12.5px;font-weight:800;cursor:pointer}
 .shift-add-btn:active{transform:scale(.985)}
-.add-period{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
 .shift-warn{margin-top:8px;padding:8px 10px;border-radius:9px;background:var(--red-border);color:var(--red);font-size:11px;font-weight:700}
 .shift-hist-empty,.shift-hist-note{margin-top:6px;font-size:11px;color:var(--muted);font-weight:600}
 /* ━━ سجلي: expandable sections (stay inside the app's existing card look) ━━ */
@@ -1458,8 +1465,45 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
       <div class="form-group"><label class="form-label">الوظيفة</label><input class="form-input" id="me-role" placeholder="الوظيفة"></div>
       <div class="form-group"><label class="form-label">رقم الهاتف (اختياري)</label><input class="form-input" id="me-phone" type="tel"></div>
       <input type="hidden" id="me-id">
+      <div id="new-emp-sched" style="display:none">
+        <div class="form-label" style="font-size:13px;color:var(--text);font-weight:800;margin:6px 0 8px">فترات العمل</div>
+        <div class="shift-hist" id="new-emp-periods"></div>
+        <button class="shift-add-btn" onclick="openPeriodForm('draftAdd')">＋ إضافة فترة أخرى</button>
+      </div>
       <button class="save-btn" onclick="saveEmployee()">💾 حفظ</button>
       <button class="del-btn" id="emp-del-btn" onclick="deleteEmployee()" style="display:none">🗑️ حذف الموظف</button>
+    </div>
+  </div>
+</div>
+<!-- MODAL: Period (add / edit / new-employee draft) -->
+<div class="modal-backdrop" id="modal-period">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <button class="modal-close" onclick="closeModal('modal-period')">✕</button>
+    <div class="modal-hd" id="period-modal-title">الفترة الجديدة</div>
+    <div class="modal-body">
+      <div class="form-group"><label class="form-label">من</label><input class="form-input" type="date" id="pf-from"></div>
+      <div class="form-group"><label class="form-label">إلى</label><input class="form-input" type="date" id="pf-to"></div>
+      <div class="pf-hint">اتركه فارغاً لفترة مستمرة</div>
+      <div class="pf-grid">
+        <div class="form-group"><label class="form-label">بداية الحضور</label><input class="form-input" type="time" id="pf-start" oninput="updatePeriodFormHours()"></div>
+        <div class="form-group"><label class="form-label">بداية الانصراف</label><input class="form-input" type="time" id="pf-end" oninput="updatePeriodFormHours()"></div>
+      </div>
+      <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b id="pf-hours">--</b></div>
+      <div class="shift-warn" id="pf-err" style="display:none"></div>
+      <button class="save-btn" onclick="submitPeriodForm()">💾 حفظ الفترة</button>
+    </div>
+  </div>
+</div>
+<!-- MODAL: Confirm -->
+<div class="modal-backdrop" id="modal-confirm">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="modal-hd" id="cf-title">تأكيد</div>
+    <div class="modal-body">
+      <div class="modal-note" id="cf-text"></div>
+      <button class="del-btn" id="cf-ok" onclick="confirmResolve(true)">تأكيد</button>
+      <button class="save-btn" onclick="confirmResolve(false)" style="background:var(--chip-off);color:var(--text);box-shadow:none;margin-top:9px">إلغاء</button>
     </div>
   </div>
 </div>
@@ -1634,6 +1678,7 @@ function shiftOn(id,dateKey){
     // Employee ID + attendance date → the saved period that covers that date.
     return list.find(p=>p.from<=k && (!p.to || k<=p.to)) || null;
   }
+  if(CLINIC.schedules&&Object.prototype.hasOwnProperty.call(CLINIC.schedules,id)) return null;
   const s=CLINIC.shifts&&CLINIC.shifts[id];
   return {from:SCHED_EPOCH,to:null,start:(s&&normTime(s.start))||SHIFT_DEF.start,end:(s&&normTime(s.end))||SHIFT_DEF.end,legacy:true};
 }
@@ -1655,98 +1700,183 @@ function empShift(id){const s=shiftOn(id,todayKey())||{start:SHIFT_DEF.start,end
 function requiredHours(empId){const h=requiredHoursOn(empId,todayKey());if(h!=null)return h;const m=timeToMin(SHIFT_DEF.end)-timeToMin(SHIFT_DEF.start);return m>0?m/60:5;}
 function shiftStartDate(d,empId){const s=shiftOn(empId,dateKeyOf(d));if(!s)return null;const dd=new Date(d),t=s.start.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
 function shiftEndDate(d,empId){const s=shiftOn(empId,dateKeyOf(d));if(!s)return null;const dd=new Date(d),t=s.end.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
-function onPeriodTimesInput(id){
-  const st=document.getElementById('ap-start-'+id),en=document.getElementById('ap-end-'+id);
-  const el=document.getElementById('ap-hours-'+id);
-  if(!st||!en||!el) return;
-  if(!st.value||!en.value){el.textContent='--';return;}
-  const m=timeToMin(en.value)-timeToMin(st.value);
-  el.textContent=m>0?minToHM(m):'غير صالح';
+/* ── Period form: one implementation for add, edit and new-employee drafts ── */
+let periodForm={mode:null,empId:null,index:null};
+let newEmpPeriods=[];
+function periodDefaults(){
+  const cur=(periodForm.empId?shiftOn(periodForm.empId,todayKey()):null);
+  return {from:todayKey(),to:'',start:(cur&&cur.start)||SHIFT_DEF.start,end:(cur&&cur.end)||SHIFT_DEF.end};
 }
-function toggleAddPeriod(id){
-  const box=document.getElementById('add-period-'+id);
-  if(!box) return;
-  const open=box.style.display!=='block';
-  box.style.display=open?'block':'none';
-  if(open){
-    const cur=shiftOn(id,todayKey());
-    const st=document.getElementById('ap-start-'+id),en=document.getElementById('ap-end-'+id);
-    if(st&&!st.value) st.value=(cur&&cur.start)||SHIFT_DEF.start;
-    if(en&&!en.value) en.value=(cur&&cur.end)||SHIFT_DEF.end;
-    onPeriodTimesInput(id);
-    const f=document.getElementById('ap-from-'+id);
-    if(f&&f.focus) f.focus();
+function openPeriodForm(mode,empId,index){
+  periodForm={mode:mode,empId:(empId==null?null:empId),index:(index==null?null:index)};
+  let p=null;
+  if(mode==='edit') p=rawPeriods(empId)[index]||null;
+  if(mode==='draftEdit') p=newEmpPeriods[index]||null;
+  const d=periodDefaults();
+  document.getElementById('period-modal-title').textContent=(p?'تعديل الفترة':'الفترة الجديدة');
+  document.getElementById('pf-from').value=(p?p.from:d.from);
+  document.getElementById('pf-to').value=((p&&p.to)?p.to:'');
+  document.getElementById('pf-start').value=(p?p.start:d.start);
+  document.getElementById('pf-end').value=(p?p.end:d.end);
+  document.getElementById('pf-err').style.display='none';
+  updatePeriodFormHours();
+  openModal('modal-period');
+}
+function periodFormValues(){
+  const v=k=>String(document.getElementById(k).value||'').trim();
+  return {from:v('pf-from'),to:v('pf-to'),start:normTime(v('pf-start')),end:normTime(v('pf-end'))};
+}
+function updatePeriodFormHours(){
+  const el=document.getElementById('pf-hours');
+  if(!el) return;
+  const st=normTime(document.getElementById('pf-start').value),en=normTime(document.getElementById('pf-end').value);
+  if(!st||!en){el.textContent='--';return;}
+  const m=timeToMin(en)-timeToMin(st);
+  el.textContent=(m>0?minToHM(m):'غير صالح');
+}
+function periodErr(msg){const el=document.getElementById('pf-err');el.textContent='⚠️ '+msg;el.style.display='block';}
+// One validator for every entry point; `others` never contains the period being edited.
+function validatePeriod(p,others,label){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(p.from)) return 'حدد تاريخ بداية الفترة';
+  if(!parseDateKeyLocal(p.from)) return 'تاريخ البداية غير صحيح';
+  if(p.to && (!/^\d{4}-\d{2}-\d{2}$/.test(p.to)||!parseDateKeyLocal(p.to))) return 'تاريخ النهاية غير صحيح';
+  if(p.to && p.to<p.from) return 'تاريخ النهاية لا يمكن أن يسبق تاريخ البداية';
+  if(!p.start||!p.end) return 'حدد بداية الحضور وبداية الانصراف';
+  if(timeToMin(p.end)-timeToMin(p.start)<=0) return 'بداية الانصراف يجب أن تكون بعد بداية الحضور';
+  const list=others||[];
+  for(let i=0;i<list.length;i++){
+    const o=list[i];
+    const pTo=p.to||SCHED_OPEN,oTo=o.to||SCHED_OPEN;
+    if(p.from<=oTo && o.from<=pTo) return 'الفترة تتداخل مع فترة '+label+' '+fmtDMY(o.from)+' – '+(o.to?fmtDMY(o.to):'مستمرة')+' — عدّل الفترة القائمة أولاً';
+  }
+  return null;
+}
+function affectedRange(a,b){
+  const f=(a.from<b.from?a.from:b.from);
+  const aTo=a.to||todayKey(),bTo=b.to||todayKey();
+  const t=(aTo>bTo?aTo:bTo);
+  return fmtDMY(f)+' – '+fmtDMY(t);
+}
+// Writes the employee's period list; an explicit empty list keeps the employee
+// "explicit", so uncovered dates stay null instead of falling back to legacy shifts.
+async function savePeriodsForEmp(id,next){
+  const sorted=(next||[]).slice().sort((a,b)=>a.from<b.from?-1:(a.from>b.from?1:0));
+  const prevSchedules=JSON.parse(JSON.stringify(CLINIC.schedules||{}));
+  const prevShifts=JSON.parse(JSON.stringify(CLINIC.shifts||{}));
+  CLINIC.schedules={...(CLINIC.schedules||{})};
+  CLINIC.schedules[id]=sorted;
+  const active=sorted.length?shiftOn(id,todayKey()):null;
+  if(active) CLINIC.shifts={...(CLINIC.shifts||{}),[id]:{start:active.start,end:active.end}};
+  try{
+    await PATCH('clinic_settings',{value:CLINIC},'?key=eq.clinic');
+  }catch(e){
+    CLINIC.schedules=prevSchedules;CLINIC.shifts=prevShifts;
+    throw e;
   }
 }
-// Explicit periods only, newest last, each row: الفترة | الحضور | الانصراف | المطلوب
+async function submitPeriodForm(){
+  const p=periodFormValues();
+  const mode=periodForm.mode;
+  document.getElementById('pf-err').style.display='none';
+  if(mode==='draftAdd'||mode==='draftEdit'){
+    const others=newEmpPeriods.filter((_,i)=>i!==periodForm.index);
+    const err=validatePeriod(p,others,'مضافة');
+    if(err){periodErr(err);return;}
+    const rec={from:p.from,to:p.to||null,start:p.start,end:p.end};
+    if(mode==='draftAdd') newEmpPeriods.push(rec); else newEmpPeriods[periodForm.index]=rec;
+    newEmpPeriods.sort((a,b)=>a.from<b.from?-1:(a.from>b.from?1:0));
+    renderDraftPeriods();closeModal('modal-period');return;
+  }
+  const id=periodForm.empId;
+  const list=rawPeriods(id);
+  if(mode==='add'){
+    const err=validatePeriod(p,list,'محفوظة');
+    if(err){periodErr(err);return;}
+    try{
+      await savePeriodsForEmp(id,list.concat([{from:p.from,to:p.to||null,start:p.start,end:p.end}]));
+      closeModal('modal-period');renderEmployeesPage();toast('✅ تم حفظ الفترة');
+    }catch(e){periodErr('تعذّر الحفظ — '+((e&&e.message)||'خطأ').slice(0,40));}
+    return;
+  }
+  if(mode==='edit'){
+    const old=list[periodForm.index];
+    if(!old) return;
+    const others=list.filter((_,i)=>i!==periodForm.index);
+    const err=validatePeriod(p,others,'محفوظة');
+    if(err){periodErr(err);return;}
+    const rec={from:p.from,to:p.to||null,start:p.start,end:p.end};
+    const ok=await askConfirm({title:'تعديل فترة العمل',text:'سيتم تعديل الفترة ('+affectedRange(old,rec)+'). قد تتغير نتائج الحضور والتقارير المحسوبة خلال هذه المدة، والتواريخ التى لن تجد فترة مطابقة سترجع بدون جدول. هل تريد حفظ التعديل؟',okText:'حفظ التعديل'});
+    if(!ok) return;
+    try{
+      await savePeriodsForEmp(id,list.map((x,i)=>i===periodForm.index?rec:x));
+      closeModal('modal-period');renderEmployeesPage();toast('✅ تم تحديث الفترة');
+    }catch(e){periodErr('تعذّر الحفظ — '+((e&&e.message)||'خطأ').slice(0,40));}
+  }
+}
+async function deletePeriod(empId,index){
+  const list=rawPeriods(empId);
+  const p=list[index];
+  if(!p) return;
+  const ok=await askConfirm({title:'حذف فترة العمل',text:'هل أنت متأكد من حذف فترة العمل هذه ('+fmtDMY(p.from)+' – '+(p.to?fmtDMY(p.to):'مستمرة')+')؟ قد يؤثر الحذف على حسابات الحضور والتقارير خلال هذه الفترة، والتواريخ التى لن تجد فترة مطابقة سترجع بدون جدول.',okText:'حذف الفترة'});
+  if(!ok) return;
+  try{
+    await savePeriodsForEmp(empId,list.filter((_,i)=>i!==index));
+    renderEmployeesPage();toast('🗑️ تم حذف الفترة');
+  }catch(e){toast('❌ '+((e&&e.message)||'فشل الحذف').slice(0,50));}
+}
+function renderDraftPeriods(){
+  const box=document.getElementById('new-emp-periods');
+  if(!box) return;
+  if(!newEmpPeriods.length){box.innerHTML='<div class="shift-hist-empty">لم تُضف فترات بعد</div>';return;}
+  box.innerHTML=newEmpPeriods.map((p,i)=>`<div class="shift-hist-row">
+      <span class="shift-hist-dates">${fmtDMY(p.from)} – ${p.to?fmtDMY(p.to):'مستمرة'}</span>
+      <span class="shift-hist-hours">${minToHM(timeToMin(p.end)-timeToMin(p.start))}</span>
+      <span class="shift-hist-times">${t12(p.start)} – ${t12(p.end)}</span>
+      <span class="shift-hist-acts">
+        <button class="shift-act-btn" onclick="openPeriodForm('draftEdit',null,${i})" title="تعديل">✏️</button>
+        <button class="shift-act-btn danger" onclick="removeDraftPeriod(${i})" title="حذف">🗑️</button>
+      </span></div>`).join('');
+}
+function removeDraftPeriod(i){newEmpPeriods.splice(i,1);renderDraftPeriods();}
+/* ── Arabic confirm dialog (promise based) ── */
+let confirmResolver=null;
+function askConfirm(o){
+  return new Promise(resolve=>{
+    confirmResolver=resolve;
+    document.getElementById('cf-title').textContent=(o&&o.title)||'تأكيد';
+    document.getElementById('cf-text').textContent=(o&&o.text)||'';
+    document.getElementById('cf-ok').textContent=(o&&o.okText)||'تأكيد';
+    openModal('modal-confirm');
+  });
+}
+function confirmResolve(v){
+  const r=confirmResolver;
+  confirmResolver=null;
+  closeModal('modal-confirm');
+  if(r) r(v);
+}
+// Explicit periods only, sorted: الفترة | الحضور | الانصراف | المطلوب | تعديل/حذف
 function renderScheduleHistory(id){
   const el=document.getElementById('shift-history-'+id);
   if(!el) return;
   const list=rawPeriods(id);
   if(!list.length){
+    if(CLINIC.schedules&&Object.prototype.hasOwnProperty.call(CLINIC.schedules,id)){
+      el.innerHTML='<div class="shift-hist-empty">لا توجد فترات محفوظة — لا يُحتسب جدول حتى تُضاف فترة</div>';
+      return;
+    }
     const s=shiftOn(id,todayKey());
     el.innerHTML=`<div class="shift-hist-empty">لا توجد فترات محفوظة — الجدول الحالى ${t12(s.start)}–${t12(s.end)}</div>`;
     return;
   }
-  el.innerHTML=list.map(p=>`<div class="shift-hist-row${p.to==null?' active':''}">`
-    +`<span class="shift-hist-dates">${fmtDMY(p.from)} – ${p.to?fmtDMY(p.to):'مستمرة'}</span>`
-    +`<span class="shift-hist-times">${t12(p.start)}</span>`
-    +`<span class="shift-hist-times">${t12(p.end)}</span>`
-    +`<span class="shift-hist-hours">${minToHM(timeToMin(p.end)-timeToMin(p.start))}</span>`
-    +`</div>`).join('');
-}
-function addPeriodError(msg){toast('⚠️ '+msg);}
-async function saveSchedulePeriod(id){
-  const g=k=>document.getElementById(k+'-'+id);
-  const fEl=g('ap-from'),tEl=g('ap-to'),sEl=g('ap-start'),eEl=g('ap-end');
-  if(!fEl||!tEl||!sEl||!eEl) return;
-  const from=String(fEl.value||'').trim();
-  const to=String(tEl.value||'').trim();
-  const start=normTime(sEl.value),end=normTime(eEl.value);
-  if(!/^\d{4}-\d{2}-\d{2}$/.test(from)){addPeriodError('حدد تاريخ بداية الفترة');return;}
-  if(to && !/^\d{4}-\d{2}-\d{2}$/.test(to)){addPeriodError('تاريخ نهاية الفترة غير صحيح');return;}
-  if(to && to<from){addPeriodError('تاريخ النهاية لا يمكن أن يسبق تاريخ البداية');return;}
-  if(!start||!end){addPeriodError('حدد موعد الحضور وموعد الانصراف');return;}
-  if(timeToMin(end)-timeToMin(start)<=0){addPeriodError('موعد الانصراف يجب أن يكون بعد موعد الحضور');return;}
-  // Overlap validation against the saved periods. Nothing is rewritten silently:
-  // the only change ever offered is closing an open-ended period, and only after
-  // the administrator explicitly confirms it.
-  let list=rawPeriods(id);
-  const clash=list.find(p=>{
-    const pTo=p.to||SCHED_OPEN;
-    const nTo=to||SCHED_OPEN;
-    return from<=pTo && p.from<=nTo;
-  });
-  if(clash){
-    const closable=clash.to==null && from>clash.from;
-    if(!closable){
-      addPeriodError('الفترة تتداخل مع فترة محفوظة: '+fmtDMY(clash.from)+' – '+(clash.to?fmtDMY(clash.to):'مستمرة'));
-      return;
-    }
-    const newEnd=shiftDateKey(from,-1);
-    const ok=confirm('توجد فترة مستمرة تبدأ '+fmtDMY(clash.from)+' — سيتم إنهاؤها يوم '+fmtDMY(newEnd)+' وتبدأ الفترة الجديدة من '+fmtDMY(from)+'. هل تريد المتابعة؟');
-    if(!ok) return;
-    list=list.map(p=>p.from===clash.from?{...p,to:newEnd}:p);
-  }
-  const next=[...list,{from,to:to||null,start,end}]
-    .sort((a,b)=>a.from<b.from?-1:a.from>b.from?1:0);
-  const prevSchedules=JSON.parse(JSON.stringify(CLINIC.schedules||{}));
-  const prevShifts=JSON.parse(JSON.stringify(CLINIC.shifts||{}));
-  CLINIC.schedules={...(CLINIC.schedules||{}),[id]:next};
-  const active=shiftOn(id,todayKey());
-  if(active) CLINIC.shifts={...(CLINIC.shifts||{}),[id]:{start:active.start,end:active.end}};
-  try{
-    await PATCH('clinic_settings',{value:CLINIC},'?key=eq.clinic');
-    renderScheduleHistory(id);
-    fEl.value='';tEl.value='';
-    toggleAddPeriod(id);
-    toast('✅ تم حفظ الفترة');
-    if(typeof renderOwner==='function') renderOwner();
-  }catch(e){
-    CLINIC.schedules=prevSchedules;CLINIC.shifts=prevShifts;
-    renderScheduleHistory(id);
-    toast('❌ '+((e&&e.message)||'فشل الحفظ').slice(0,50));
-  }
+  el.innerHTML=list.map((p,i)=>`<div class="shift-hist-row${p.to==null?' active':''}">
+      <span class="shift-hist-dates">${fmtDMY(p.from)} – ${p.to?fmtDMY(p.to):'مستمرة'}</span>
+      <span class="shift-hist-hours">${minToHM(timeToMin(p.end)-timeToMin(p.start))}</span>
+      <span class="shift-hist-times">${t12(p.start)} – ${t12(p.end)}</span>
+      <span class="shift-hist-acts">
+        <button class="shift-act-btn" onclick="openPeriodForm('edit',${id},${i})" title="تعديل">✏️</button>
+        <button class="shift-act-btn danger" onclick="deletePeriod(${id},${i})" title="حذف">🗑️</button>
+      </span></div>`).join('');
 }
 
 /* ══ CLOCK ══ */
@@ -2117,17 +2247,7 @@ function renderEmployeesPage(){
       ${missing>0?`<div class="shift-warn">⚠️ ${missing} يوم حضورى هذا الشهر بدون فترة محددة</div>`:''}
       <div class="shift-row" style="justify-content:space-between;margin-top:8px"><span>🕐 التسجيل اليدوي لهذا الموظف</span>
         <button id="manual-perm-${e.id}" onclick="toggleEmpManualPerm(${e.id})" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted)">--</button></div>
-      <button class="shift-add-btn" onclick="toggleAddPeriod(${e.id})">＋ إضافة فترة</button>
-      <div class="add-period" id="add-period-${e.id}" style="display:none">
-        <div class="shift-inputs">
-          <div class="shift-row"><span>📅 تاريخ بداية الفترة</span><input type="date" id="ap-from-${e.id}"></div>
-          <div class="shift-row"><span>📅 تاريخ نهاية الفترة</span><input type="date" id="ap-to-${e.id}"></div>
-          <div class="shift-row"><span>⏰ موعد الحضور</span><input type="time" id="ap-start-${e.id}" oninput="onPeriodTimesInput(${e.id})"></div>
-          <div class="shift-row"><span>🏁 موعد الانصراف</span><input type="time" id="ap-end-${e.id}" oninput="onPeriodTimesInput(${e.id})"></div>
-        </div>
-        <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b id="ap-hours-${e.id}">--</b></div>
-        <button class="shift-save" onclick="saveSchedulePeriod(${e.id})">💾 حفظ الفترة</button>
-      </div>
+      <button class="shift-add-btn" onclick="openPeriodForm('add',${e.id})">＋ إضافة فترة</button>
       <div class="shift-hist-title">📜 سجل الفترات</div>
       <div class="shift-hist" id="shift-history-${e.id}"></div>
       ${periods.length?'':'<div class="shift-hist-note">لم تُسجَّل فترات مؤرَّخة لهذا الموظف بعد.</div>'}
@@ -2544,10 +2664,23 @@ async function saveEmployee(){
     if(id){
       await PATCH('clinic_employees',{name,role,phone},`?id=eq.${id}`);
       const e=empById(+id);e.name=name;e.role=role;e.phone=phone;
-    }else{
-      const [ne]=await POST('clinic_employees',{name,role,phone});
-      EMPLOYEES.push(ne);
+      closeModal('modal-emp');renderOwner();toast('✅ تم الحفظ');
+      return;
     }
+    if(!newEmpPeriods.length){toast('⚠️ أضف فترة عمل واحدة على الأقل');return;}
+    for(let i=0;i<newEmpPeriods.length;i++){
+      const err=validatePeriod(newEmpPeriods[i],newEmpPeriods.filter((_,j)=>j!==i),'مضافة');
+      if(err){toast('⚠️ '+err);return;}
+    }
+    const [ne]=await POST('clinic_employees',{name,role,phone});
+    try{
+      await savePeriodsForEmp(ne.id,newEmpPeriods);
+    }catch(err){
+      try{await DEL('clinic_employees',`?id=eq.${ne.id}`);}catch(_){}
+      throw new Error('تعذّر حفظ فترات العمل — لم يُضف الموظف');
+    }
+    EMPLOYEES.push(ne);
+    newEmpPeriods=[];
     closeModal('modal-emp');renderOwner();toast('✅ تم الحفظ');
   }catch(e){toast('❌ '+e.message.slice(0,60));}
 }
@@ -2574,6 +2707,9 @@ function openEmpModal(id){
   document.getElementById('me-phone').value=e?.phone||'';
   document.getElementById('me-id').value=id||'';
   document.getElementById('emp-del-btn').style.display=e?'block':'none';
+  newEmpPeriods=[];
+  document.getElementById('new-emp-sched').style.display=e?'none':'block';
+  if(!e) renderDraftPeriods();
   openModal('modal-emp');
 }
 
