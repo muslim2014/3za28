@@ -759,9 +759,27 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
 .shift-row span{flex:1}
 .shift-row input[type=time]{flex:1;max-width:132px;background:var(--field-bg);border:1.5px solid var(--border);border-radius:11px;padding:9px 11px;font-family:'Cairo',sans-serif;font-size:13px;color:var(--text);outline:none;direction:ltr}
 .shift-row input[type=time]:focus{border-color:var(--p2);box-shadow:0 0 0 3px rgba(62,205,214,.13)}
+.shift-row input[type=date]{flex:1;max-width:132px;background:var(--field-bg);border:1.5px solid var(--border);border-radius:11px;padding:9px 11px;font-family:'Cairo',sans-serif;font-size:13px;color:var(--text);outline:none;direction:ltr;color-scheme:dark}
+.shift-row input[type=date]:focus{border-color:var(--p2);box-shadow:0 0 0 3px rgba(62,205,214,.13)}
+[data-theme="light"] .shift-row input[type=date]{color-scheme:light}
 .shift-hours-badge{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding:10px 12px;border-radius:11px;background:var(--chip-off);font-size:12px;color:var(--muted);font-weight:600}
 .shift-hours-badge b{color:var(--amber);font-size:14px;font-weight:900;font-variant-numeric:tabular-nums}
 .shift-save{width:100%;margin-top:10px;padding:10px;background:var(--btn-grad);color:#fff;border:none;border-radius:11px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:800;cursor:pointer}
+.shift-hist-title{font-size:11.5px;font-weight:700;color:var(--muted);margin-top:12px}
+.shift-hist{display:flex;flex-direction:column;gap:4px;margin-top:6px}
+.shift-hist-row{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);font-weight:600;padding:6px 9px;border-radius:9px;background:var(--chip-off)}
+.shift-hist-row.active{color:var(--text);background:var(--chip-on)}
+.shift-hist-dates{flex:1}
+.shift-hist-times{font-variant-numeric:tabular-nums;direction:ltr}
+.shift-hist-hours{min-width:52px;text-align:left;font-variant-numeric:tabular-nums}
+/* ━━ سجلي: expandable sections (stay inside the app's existing card look) ━━ */
+.acc-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:11px;box-shadow:none}
+.acc-hd{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;padding:14px 16px;background:var(--header-bg);border:none;font-family:'Cairo',sans-serif;font-size:14px;font-weight:800;color:var(--text);cursor:pointer;text-align:right}
+.acc-title{flex:1;text-align:right}
+.acc-arrow{font-size:10px;color:var(--muted);transition:transform .18s ease;flex-shrink:0}
+.acc-card.open .acc-arrow{transform:rotate(180deg)}
+.acc-body{display:none;border-top:1px solid var(--border)}
+.acc-card.open .acc-body{display:block}
 .owner-bottom-nav{
   position:fixed;z-index:90;display:none;
   left:50%;transform:translateX(-50%);
@@ -1006,7 +1024,13 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
         <div style="font-size:16px;font-weight:700;flex:1" id="emp-rep-title">سجلي الشهري</div>
         <button style="background:var(--card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;color:var(--text)" onclick="hideEmpReport()">← رجوع</button>
       </div>
-      <div style="background:var(--card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;box-shadow:none">
+      <!-- SECTION 1 — current month and year -->
+      <div class="acc-card open" id="emp-acc-1">
+        <button class="acc-hd" type="button" onclick="toggleEmpAcc(1)" aria-expanded="true" aria-controls="emp-acc-1-body">
+          <span class="acc-title" id="emp-acc-1-title">--</span>
+          <span class="acc-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="acc-body" id="emp-acc-1-body">
         <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--header-bg);border-bottom:1px solid var(--border)">
           <button class="mnav-btn" onclick="empRepChangeMonth(-1)" style="padding:5px 10px;font-size:12px">▶</button>
           <div style="font-size:14px;font-weight:700" id="emp-rep-month-lbl">--</div>
@@ -1018,7 +1042,7 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
           <div><div style="font-size:18px;font-weight:900;color:var(--amber)" id="emp-rep-hours">--</div><div style="font-size:11px;color:var(--muted)">الساعات الفعلية</div></div>
         </div>
         <!-- 3-col: late days | late hours | net diff -->
-        <div id="emp-rep-diff-row" style="padding:10px 12px;border-bottom:1px solid var(--border);display:none">
+        <div id="emp-rep-diff-row" style="padding:10px 12px">
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
             <div style="text-align:center">
               <div id="emp-rep-late-days" style="font-size:17px;font-weight:900;color:var(--red)">0</div>
@@ -1034,15 +1058,35 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
             </div>
           </div>
         </div>
-        <div style="display:flex;padding:8px 14px;background:var(--header-bg);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted)">
-          <span style="width:52px">Day</span><span style="flex:1;text-align:center">In</span><span style="flex:1;text-align:center">Out</span>
-          <span style="min-width:46px;text-align:left">Hours</span><span style="min-width:32px;text-align:center">🥼</span>
         </div>
-        <div id="emp-rep-rows"></div>
-        <div style="padding:12px 14px">
-          <div class="dashcal-sub" id="emp-cal-sub"></div>
-          <div class="dashcal-grid" id="emp-cal-grid" dir="ltr"></div>
+      </div>
+
+      <!-- SECTION 2 — attendance days (existing table + calendar) -->
+      <div class="acc-card open" id="emp-acc-2">
+        <button class="acc-hd" type="button" onclick="toggleEmpAcc(2)" aria-expanded="true" aria-controls="emp-acc-2-body">
+          <span class="acc-title">أيام الحضور</span>
+          <span class="acc-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="acc-body" id="emp-acc-2-body">
+          <div style="display:flex;padding:8px 14px;background:var(--header-bg);border-bottom:1px solid var(--border);font-size:11px;font-weight:700;color:var(--muted)">
+            <span style="width:52px">Day</span><span style="flex:1;text-align:center">In</span><span style="flex:1;text-align:center">Out</span>
+            <span style="min-width:46px;text-align:left">Hours</span><span style="min-width:32px;text-align:center">🥼</span>
+          </div>
+          <div id="emp-rep-rows"></div>
+          <div style="padding:12px 14px">
+            <div class="dashcal-sub" id="emp-cal-sub"></div>
+            <div class="dashcal-grid" id="emp-cal-grid" dir="ltr"></div>
+          </div>
         </div>
+      </div>
+
+      <!-- SECTION 3 — working hours for the effective schedule period -->
+      <div class="acc-card open" id="emp-acc-3">
+        <button class="acc-hd" type="button" onclick="toggleEmpAcc(3)" aria-expanded="true" aria-controls="emp-hours-body">
+          <span class="acc-title">ساعات العمل</span>
+          <span class="acc-arrow" aria-hidden="true">▼</span>
+        </button>
+        <div class="acc-body" id="emp-hours-body"></div>
       </div>
     </div>
 
@@ -1546,17 +1590,55 @@ function monthData(id,mo,yr){
 function fmtMsg(str,name){return str.replace(/\{name\}/g,name);}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.className='toast show';setTimeout(()=>t.classList.remove('show'),2800);}
 
-/* ══ EMPLOYEE SHIFT ══ */
+/* ══ EMPLOYEE WORK SCHEDULE — effective-dated history ══ */
 let SHIFT_DEF={start:'17:00',end:'22:00'};
-function empShift(id){
-  const s=CLINIC.shifts&&CLINIC.shifts[id];
-  return {start:(s&&s.start)||SHIFT_DEF.start,end:(s&&s.end)||SHIFT_DEF.end};
-}
+const SCHED_EPOCH='1970-01-01';
 function timeToMin(t){const a=String(t||'0:0').split(':');return ((+a[0])||0)*60+((+a[1])||0);}
 function minToHM(m){m=Math.round(m);return Math.floor(m/60)+'h '+String(m%60).padStart(2,'0')+'m';}
-function requiredHours(empId){const m=timeToMin(empShift(empId).end)-timeToMin(empShift(empId).start);return m>0?m/60:5;}
-function shiftStartDate(d,empId){const dd=new Date(d),t=empShift(empId).start.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
-function shiftEndDate(d,empId){const dd=new Date(d),t=empShift(empId).end.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
+function fmtDMY(k){const p=String(k||'').split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:String(k||'--');}
+
+// Periods are always chained by effective date: each period ends the day before
+// the next one starts, so two periods for one employee can never overlap.
+function normalizePeriods(list){
+  const arr=(Array.isArray(list)?list:[])
+    .filter(p=>p&&/^\d{4}-\d{2}-\d{2}$/.test(String(p.from||''))&&/^\d{1,2}:\d{2}$/.test(String(p.start||''))&&/^\d{1,2}:\d{2}$/.test(String(p.end||'')))
+    .map(p=>({from:p.from,to:p.to||null,start:p.start,end:p.end}))
+    .sort((a,b)=>a.from<b.from?-1:a.from>b.from?1:0);
+  arr.forEach((p,i)=>{p.to=(i<arr.length-1)?shiftDateKey(arr[i+1].from,-1):null;});
+  return arr;
+}
+
+// Every employee has a list of schedule periods. The legacy single schedule
+// (CLINIC.shifts) is read as one open-ended period, so nothing changes for
+// employees whose history has not been dated yet.
+function schedulePeriods(id){
+  const arr=normalizePeriods(CLINIC.schedules&&CLINIC.schedules[id]);
+  if(arr.length) return arr;
+  const s=CLINIC.shifts&&CLINIC.shifts[id];
+  return [{from:SCHED_EPOCH,to:null,start:(s&&s.start)||SHIFT_DEF.start,end:(s&&s.end)||SHIFT_DEF.end}];
+}
+
+// Employee ID + attendance date → the schedule that applied on that date.
+function shiftOn(id,dateKey){
+  const periods=schedulePeriods(id);
+  const k=String(dateKey||todayKey());
+  let chosen=periods[0];
+  for(const p of periods){ if(p.from<=k) chosen=p; else break; }
+  return chosen;
+}
+function requiredHoursOn(id,dateKey){
+  const s=shiftOn(id,dateKey);
+  const m=timeToMin(s.end)-timeToMin(s.start);
+  return m>0?m/60:5;
+}
+function sumRequiredHours(id,keys){
+  return (keys||[]).reduce((sum,k)=>sum+requiredHoursOn(id,k),0);
+}
+// Current schedule helpers stay for live check-in/out behaviour.
+function empShift(id){const s=shiftOn(id,todayKey());return {start:s.start,end:s.end};}
+function requiredHours(empId){return requiredHoursOn(empId,todayKey());}
+function shiftStartDate(d,empId){const dd=new Date(d),t=shiftOn(empId,dateKeyOf(dd)).start.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
+function shiftEndDate(d,empId){const dd=new Date(d),t=shiftOn(empId,dateKeyOf(dd)).end.split(':');dd.setHours(+t[0],+t[1],0,0);return dd;}
 function onEmpShiftInput(id){
   const st=document.getElementById('shift-start-'+id),en=document.getElementById('shift-end-'+id);
   const el=document.getElementById('shift-hours-'+id);
@@ -1565,15 +1647,48 @@ function onEmpShiftInput(id){
   const m=timeToMin(en.value)-timeToMin(st.value);
   el.textContent=m>0?minToHM(m):'غير صالح';
 }
+function renderScheduleHistory(id){
+  const el=document.getElementById('shift-history-'+id);
+  if(!el) return;
+  const periods=schedulePeriods(id).slice().reverse();
+  el.innerHTML=periods.map(p=>{
+    const open=p.to==null;
+    const fromStr=p.from===SCHED_EPOCH?'البداية':fmtDMY(p.from);
+    return `<div class="shift-hist-row${open?' active':''}">`
+      +`<span class="shift-hist-dates">${fromStr} ← ${open?'الآن':fmtDMY(p.to)}</span>`
+      +`<span class="shift-hist-times" dir="ltr">${p.start}–${p.end}</span>`
+      +`<span class="shift-hist-hours">${minToHM(timeToMin(p.end)-timeToMin(p.start))}</span>`
+      +`</div>`;
+  }).join('');
+}
 async function saveEmpShift(id){
   const st=document.getElementById('shift-start-'+id),en=document.getElementById('shift-end-'+id);
+  const fd=document.getElementById('shift-from-'+id);
   if(!st||!en||!st.value||!en.value){toast('⚠️ حدد موعد الحضور والانصراف');return;}
+  if(!fd||!/^\d{4}-\d{2}-\d{2}$/.test(fd.value||'')){toast('⚠️ حدد تاريخ سريان الفترة');return;}
+  const from=fd.value;
+  if(!parseDateKeyLocal(from)){toast('⚠️ تاريخ سريان غير صحيح');return;}
+  if(timeToMin(en.value)-timeToMin(st.value)<=0){toast('⚠️ موعد الانصراف يجب أن يكون بعد موعد الحضور');return;}
+  const list=schedulePeriods(id).slice();
+  const at=list.findIndex(p=>p.from===from);
+  if(at>=0) list[at]={from,to:null,start:st.value,end:en.value};
+  else list.push({from,to:null,start:st.value,end:en.value});
+  const chained=normalizePeriods(list);
+  const prevSchedules=JSON.parse(JSON.stringify(CLINIC.schedules||{}));
+  const prevShifts=JSON.parse(JSON.stringify(CLINIC.shifts||{}));
+  CLINIC.schedules={...(CLINIC.schedules||{}),[id]:chained};
+  // Keep the legacy mirror equal to the period that applies today.
+  const active=shiftOn(id,todayKey());
+  CLINIC.shifts={...(CLINIC.shifts||{}),[id]:{start:active.start,end:active.end}};
   try{
-    CLINIC.shifts=CLINIC.shifts||{};
-    CLINIC.shifts[id]={start:st.value,end:en.value};
     await PATCH('clinic_settings',{value:CLINIC},'?key=eq.clinic');
-    toast('✅ تم حفظ فترة '+(empById(id)?.name||'الموظف'));
-  }catch(e){toast('❌ '+e.message.slice(0,50));}
+    renderScheduleHistory(id);
+    toast('✅ تم حفظ الفترة من '+fmtDMY(from));
+  }catch(e){
+    CLINIC.schedules=prevSchedules;CLINIC.shifts=prevShifts;
+    renderScheduleHistory(id);
+    toast('❌ '+(e.message||'فشل الحفظ').slice(0,50));
+  }
 }
 
 /* ══ CLOCK ══ */
@@ -1812,19 +1927,59 @@ async function saveEmpSelf(){
 function showEmpReport(){goHash('#/emp/report');}
 function hideEmpReport(){goHash('#/emp/action');}
 function empRepChangeMonth(d){empRepMonth+=d;if(empRepMonth<0){empRepMonth=11;empRepYear--;}if(empRepMonth>11){empRepMonth=0;empRepYear++;}renderEmpMonthlyReport();}
+const AR_MONTHS=['ناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+function empMonthKeys(id,mo,yr){
+  return [...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===id&&y===yr&&m-1===mo;}).map(l=>l.date_key))].sort();
+}
+function toggleEmpAcc(n){
+  const card=document.getElementById('emp-acc-'+n);
+  if(!card) return;
+  const open=!card.classList.contains('open');
+  card.classList.toggle('open',open);
+  const hd=card.querySelector('.acc-hd');
+  if(hd) hd.setAttribute('aria-expanded',open?'true':'false');
+}
+// Section 3 — the schedule period that applies today, plus this month's hours.
+function renderEmpHoursSection(dKeys){
+  const el=document.getElementById('emp-hours-body');
+  if(!el||!currentEmpId) return;
+  const s=shiftOn(currentEmpId,todayKey());
+  const keys=Array.isArray(dKeys)?dKeys:empMonthKeys(currentEmpId,empRepMonth,empRepYear);
+  const perDay=requiredHoursOn(currentEmpId,todayKey());
+  const expected=sumRequiredHours(currentEmpId,keys);
+  const actual=keys.reduce((sum,k)=>sum+dayHours(currentEmpId,k),0);
+  el.innerHTML=`
+    <div style="padding:12px 14px">
+      <div class="shift-inputs">
+        <div class="shift-row"><span>⏰ موعد الحضور الأساسي</span><b style="color:var(--text);font-variant-numeric:tabular-nums" dir="ltr">${s.start}</b></div>
+        <div class="shift-row"><span>🏁 موعد الانصراف</span><b style="color:var(--text);font-variant-numeric:tabular-nums" dir="ltr">${s.end}</b></div>
+      </div>
+      <div class="shift-hours-badge"><span>ساعات العمل المطلوبة يومياً</span><b>${minToHM(perDay*60)}</b></div>
+      <div class="shift-hours-badge" style="margin-top:8px"><span>الساعات المطلوبة لهذا الشهر</span><b>${minToHM(expected*60)}</b></div>
+      <div class="shift-hours-badge" style="margin-top:8px"><span>الساعات الفعلية لهذا الشهر</span><b>${minToHM(actual*60)}</b></div>
+      ${s.from!==SCHED_EPOCH?`<div style="margin-top:10px;font-size:11.5px;font-weight:600;color:var(--muted)">سارية من ${fmtDMY(s.from)}</div>`:''}
+    </div>`;
+}
 function renderEmpMonthlyReport(){
   if(!currentEmpId) return;
   const e=empById(currentEmpId);
   document.getElementById('emp-rep-title').textContent=`سجل ${e.name}`;
   document.getElementById('emp-rep-month-lbl').textContent=`${MONTHS[empRepMonth]} ${empRepYear}`;
+  const t1=document.getElementById('emp-acc-1-title');
+  if(t1) t1.textContent=`${AR_MONTHS[empRepMonth]} ${empRepYear}`;
   renderEmpCal();
-  const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===currentEmpId&&y===empRepYear&&m-1===empRepMonth;}).map(l=>l.date_key))].sort();
+  const dKeys=empMonthKeys(currentEmpId,empRepMonth,empRepYear);
+  renderEmpHoursSection(dKeys);
   if(!dKeys.length){
     document.getElementById('emp-rep-rows').innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:var(--muted)">No records this month</div>';
     document.getElementById('emp-rep-days').textContent='0';
-    document.getElementById('emp-rep-hours').textContent='--';
-    document.getElementById('emp-rep-expected').textContent='--';
-    document.getElementById('emp-rep-diff-row').style.display='none';
+    document.getElementById('emp-rep-hours').textContent=hm(0);
+    document.getElementById('emp-rep-expected').textContent=hm(0);
+    document.getElementById('emp-rep-late-days').textContent='0';
+    document.getElementById('emp-rep-late-hours').textContent=hm(0);
+    document.getElementById('emp-rep-diff-val').textContent='+'+hm(0);
+    document.getElementById('emp-rep-diff-val').style.color='var(--amber)';
+    document.getElementById('emp-rep-diff-row').style.display='block';
     return;
   }
   let totalH=0;
@@ -1837,19 +1992,19 @@ function renderEmpMonthlyReport(){
       <div class="emp-rep-col-day">${d}<div style="font-size:10px">${DAYS[new Date(y,m-1,d).getDay()]}</div></div>
       <div class="emp-rep-col-in"><span class="rep-time ${inL?'rep-time-in':'rep-time-none'}">${inL?ft(inL.ts):'--'}</span></div>
       <div class="emp-rep-col-out"><span class="rep-time ${outL?'rep-time-out':'rep-time-none'}">${outL?ft(outL.ts):'--'}</span></div>
-      <div class="emp-rep-col-h" style="color:${h>=requiredHours(currentEmpId)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
+      <div class="emp-rep-col-h" style="color:${h>=requiredHoursOn(currentEmpId,key)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
       <div style="min-width:32px;text-align:center;font-size:14px">${coatIcon}</div>
     </div>`;
   }).join('');
-const days=dKeys.length;
-  const expectedH=days*requiredHours(currentEmpId);
+  const days=dKeys.length;
+  const expectedH=sumRequiredHours(currentEmpId,dKeys);
   const {lateDays, lateHours, netHours}=calcLateStats(currentEmpId, dKeys);
   const netStr=netHours>=0?`+${hm(netHours)}`:`-${hm(Math.abs(netHours))}`;
   document.getElementById('emp-rep-days').textContent=days;
   document.getElementById('emp-rep-hours').textContent=hm(totalH);
   document.getElementById('emp-rep-expected').textContent=hm(expectedH);
   document.getElementById('emp-rep-late-days').textContent=lateDays;
-  document.getElementById('emp-rep-late-hours').textContent=lateDays>0?hm(lateHours):'--';
+  document.getElementById('emp-rep-late-hours').textContent=lateDays>0?hm(lateHours):hm(0);
   document.getElementById('emp-rep-diff-val').textContent=netStr;
   document.getElementById('emp-rep-diff-val').style.color=netHours>=0?'var(--amber)':'var(--red)';
   document.getElementById('emp-rep-diff-row').style.display='block';
@@ -1891,13 +2046,17 @@ document.getElementById('settings-emp-list').innerHTML=EMPLOYEES.map(e=>{
       <div class="shift-inputs">
         <div class="shift-row"><span>⏰ موعد الحضور الأساسي</span><input type="time" id="shift-start-${e.id}" value="${sh.start}" oninput="onEmpShiftInput(${e.id})"></div>
         <div class="shift-row"><span>🏁 موعد الانصراف</span><input type="time" id="shift-end-${e.id}" value="${sh.end}" oninput="onEmpShiftInput(${e.id})"></div>
+        <div class="shift-row"><span>📅 سريان من</span><input type="date" id="shift-from-${e.id}" value="${todayKey()}"></div>
       </div>
       <div class="shift-hours-badge"><span>ساعات العمل المطلوبة</span><b id="shift-hours-${e.id}">${minToHM(requiredHours(e.id)*60)}</b></div>
       <div class="shift-row" style="justify-content:space-between;margin-top:8px"><span>🕐 التسجيل اليدوي لهذا الموظف</span>
         <button id="manual-perm-${e.id}" onclick="toggleEmpManualPerm(${e.id})" style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:5px 10px;font-family:'Cairo',sans-serif;font-size:12px;font-weight:700;cursor:pointer;color:var(--muted)">--</button></div>
       <button class="shift-save" onclick="saveEmpShift(${e.id})">💾 حفظ الفترة لهذا الموظف</button>
+      <div class="shift-hist-title">📜 سجل الفترات</div>
+      <div class="shift-hist" id="shift-history-${e.id}"></div>
     </div>`;
   }).join('');
+  EMPLOYEES.forEach(e=>renderScheduleHistory(e.id));
   renderPending();
   refreshManualUI();
   if(!repEmpId) repEmpId=EMPLOYEES[0]?.id;
@@ -1958,9 +2117,8 @@ function renderOwnerStats(){
   EMPLOYEES.forEach(e=>{
     const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===e.id&&y===yr&&m-1===mo;}).map(l=>l.date_key))].sort();
     if(!dKeys.length) return;
-    const req=requiredHours(e.id);
     sumDays+=dKeys.length;
-    sumExpected+=dKeys.length*req;
+    sumExpected+=sumRequiredHours(e.id,dKeys);
     sumActual+=monthData(e.id,mo,yr).hours;
     const ls=calcLateStats(e.id,dKeys);
     sumLateDays+=ls.lateDays;
@@ -2008,7 +2166,7 @@ function calcLateStats(empId, dKeys){
     if(lateMin>0) lateDays++;
     totalLateMinutes+=lateMin;
     // required end = checkin + required hours + late mins
-    const requiredEndMs=inL.ts + (requiredHours(empId)*3600000) + (lateMin*60000);
+    const requiredEndMs=inL.ts + (requiredHoursOn(empId,key)*3600000) + (lateMin*60000);
     // net = checkout - required end
     const endMs=outL ? outL.ts : Date.now();
     totalNetMinutes+=Math.floor((endMs - requiredEndMs)/60000);
@@ -2051,7 +2209,7 @@ function renderAllMonthly(){
   const rows=EMPLOYEES.map(e=>{
     const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===e.id&&y===yr&&m-1===mo;}).map(l=>l.date_key))].sort();
     const actual=dKeys.reduce((s,k)=>s+dayHours(e.id,k),0);
-    const expected=dKeys.length*requiredHours(e.id);
+    const expected=sumRequiredHours(e.id,dKeys);
     const ls=calcLateStats(e.id,dKeys);
     sumDays+=dKeys.length;sumActual+=actual;sumExpected+=expected;
     sumLateDays+=ls.lateDays;sumLateHours+=ls.lateHours;sumNet+=ls.netHours;
@@ -2092,7 +2250,7 @@ function renderAllAnnual(){
     let h=0,d=0,act=0;
     Array.from({length:12},(_,mo)=>{const md=monthData(e.id,mo,yr);h+=md.hours;d+=md.days;if(md.hours>0)act++;});
     const eKeys=yearKeys(e.id,yr);
-    totalExpected+=eKeys.length*requiredHours(e.id);
+    totalExpected+=sumRequiredHours(e.id,eKeys);
     const ls=calcLateStats(e.id,eKeys);
     totalLateDays+=ls.lateDays;totalLateHours+=ls.lateHours;totalNet+=ls.netHours;
     totalH+=h;totalDays+=d;totalActive+=act;
@@ -2145,13 +2303,13 @@ function renderMonthly(){
       <div class="rep-col-day">${d}<div style="font-size:10px">${DAYS[new Date(y,m-1,d).getDay()]}</div></div>
       <div class="rep-col-in"><span class="rep-time ${inL?'rep-time-in':'rep-time-none'}">${inL?ft(inL.ts):'--'}</span></div>
       <div class="rep-col-out"><span class="rep-time ${outL?'rep-time-out':'rep-time-none'}">${outL?ft(outL.ts):'--'}</span></div>
-      <div class="rep-col-h" style="color:${h>=requiredHours(repEmpId)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
+      <div class="rep-col-h" style="color:${h>=requiredHoursOn(repEmpId,key)?'var(--amber)':'var(--red)'};font-weight:900">${hm(h)}</div>
       <div style="min-width:32px;text-align:center;font-size:14px">${coatIcon}</div>
       <div class="rep-col-del"><button class="del-log-btn" onclick="openDelLogsModal(${repEmpId},'${key}')">🗑️</button></div>
     </div>`;
   }).join('');
 const days=dKeys.length;
-  const expectedH=days*requiredHours(repEmpId);
+  const expectedH=sumRequiredHours(repEmpId,dKeys);
   const {lateDays, lateHours, netHours}=calcLateStats(repEmpId, dKeys);
   const netStr=netHours>=0?`+${hm(netHours)}`:`-${hm(Math.abs(netHours))}`;
   document.getElementById('rep-days').textContent=days;
@@ -2179,7 +2337,7 @@ function renderAnnual(){
   }).join('');
   // The six annual boxes mirror the monthly report, aggregated over the whole year.
   const dKeys=yearKeys(repEmpId,repYear);
-  const expectedH=dKeys.length*requiredHours(repEmpId);
+  const expectedH=sumRequiredHours(repEmpId,dKeys);
   const ls=calcLateStats(repEmpId,dKeys);
   const netStr=ls.netHours>=0?`+${hm(ls.netHours)}`:`-${hm(Math.abs(ls.netHours))}`;
   document.getElementById('ann-days').textContent=totalDays;
@@ -2264,6 +2422,7 @@ async function saveClinicSettings(){
     logo:CLINIC.logo||null,
     logoWidth:parseInt(document.getElementById('set-logo-width').value,10)||64,
     shifts:CLINIC.shifts||{},
+    schedules:CLINIC.schedules||{},
     manualReg:CLINIC.manualReg||{},
     manualPerm:CLINIC.manualPerm||{},
     sub:document.getElementById('set-clinic-sub').value.trim(),
@@ -2365,7 +2524,7 @@ function exportCSV(){
     const[y,m,d]=key.split('-').map(Number);
     rows.push([key,DAYS[new Date(y,m-1,d).getDay()],inL?ft(inL.ts):'--',outL?ft(outL.ts):'--',hm(h),outL&&outL.coat!=null?(outL.coat?'Yes':'No'):'--']);
   });
-  const expH=dKeys.length*requiredHours(repEmpId);
+  const expH=sumRequiredHours(repEmpId,dKeys);
   const diffH=totalH-expH;
   rows.push([]);
   rows.push(['Total Days','Expected Hours','Actual Hours','Difference']);
@@ -2387,7 +2546,7 @@ function exportAllCSV(){
   EMPLOYEES.forEach(e=>{
     const dKeys=[...new Set(LOGS.filter(l=>{const[y,m]=l.date_key.split('-').map(Number);return l.emp_id===e.id&&y===yr&&m-1===mo;}).map(l=>l.date_key))].sort();
     const actual=dKeys.reduce((s,k)=>s+dayHours(e.id,k),0);
-    const expected=dKeys.length*requiredHours(e.id);
+    const expected=sumRequiredHours(e.id,dKeys);
     const ls=calcLateStats(e.id,dKeys);
     TD+=dKeys.length;TA+=actual;TE+=expected;TLD+=ls.lateDays;TLH+=ls.lateHours;TN+=ls.netHours;
     rows.push([e.name,dKeys.length,actual>0?hm(actual):'--',expected>0?hm(expected):'--',ls.lateDays,ls.lateDays>0?hm(ls.lateHours):'--',(ls.netHours>=0?'+':'')+hm(Math.abs(ls.netHours))]);
