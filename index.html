@@ -1448,9 +1448,9 @@ textarea.form-input{resize:vertical;min-height:64px;line-height:1.7}
 
   <div class="owner-bottom-nav">
     <button class="onav-item active" id="nav-0" onclick="switchOwnerTab('sub-dash',0)"><span class="onav-icon">🏠</span>الرئيسية</button>
-    <button class="onav-item" id="nav-1" onclick="switchOwnerTab('sub-settings',1)"><span class="onav-icon">⚙️</span>الإعدادات</button>
+    <button class="onav-item" id="nav-1" onclick="switchOwnerTab('sub-reports',1)"><span class="onav-icon">📊</span>التقارير</button>
     <button class="onav-item" id="nav-2" onclick="switchOwnerTab('sub-employees',2)"><span class="onav-icon">👥</span>الموظفون</button>
-    <button class="onav-item" id="nav-3" onclick="switchOwnerTab('sub-reports',3)"><span class="onav-icon">📊</span>التقارير</button>
+    <button class="onav-item" id="nav-3" onclick="switchOwnerTab('sub-settings',3)"><span class="onav-icon">⚙️</span>الإعدادات</button>
   </div>
 </div>
 
@@ -1926,9 +1926,9 @@ function routePage(){
   }
   else if(h.startsWith('owner')){
     showPage('owner-page');
-    if(h.includes('report')) switchOwnerTab('sub-reports',3);
+    if(h.includes('report')) switchOwnerTab('sub-reports',1);
     else if(h.includes('employee')) switchOwnerTab('sub-employees',2);
-    else if(h.includes('settings')) switchOwnerTab('sub-settings',1);
+    else if(h.includes('settings')) switchOwnerTab('sub-settings',3);
     else switchOwnerTab('sub-dash',0);
   }
   else { showPage('gate'); }
@@ -2330,15 +2330,15 @@ function renderOwnerStats(){
 }
 
 function switchOwnerTab(subId,idx){
-  const target=idx===0?'#/owner':idx===1?'#/owner-settings':idx===2?'#/owner-employees':'#/owner-reports';
+  const target=idx===0?'#/owner':idx===1?'#/owner-reports':idx===2?'#/owner-employees':'#/owner-settings';
   if(location.hash!==target){location.hash=target;return;}
   document.querySelectorAll('.owner-sub').forEach(s=>s.classList.remove('show'));
   document.getElementById(subId).classList.add('show');
   document.querySelectorAll('.onav-item').forEach((n,i)=>n.classList.toggle('active',i===idx));
-  const isReports=idx===3;
+  const isReports=idx===1;
   document.getElementById('owner-topbar-right').textContent=isReports?'📤':'🔗';
   document.getElementById('owner-topbar-right').onclick=isReports?(repEmpId==='all'?(repView==='monthly'?exportAllCSV:exportAllAnnualCSV):(repView==='monthly'?exportCSV:exportAnnualCSV)):openShareModal;
-  if(idx===1||idx===2) renderOwner();
+  if(idx===2||idx===3) renderOwner();
   if(isReports) renderReport();
 }
 
